@@ -2,10 +2,10 @@
 # libgdx-common
 Biblioteca utilizada nos jogos criados pela kendao games.
 
-## Requisitos
+## Pré-requisitos
 - Java 8
 - Gradle 6.7.1
-- IntelliJ
+- LibGDX 1.9.14
 
 ## Inicialização
 ```bash
