@@ -7,7 +7,6 @@ import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomSkin;
 import com.kendao.libgdx.screen.base.CustomScreenManager;
-import com.kendao.libgdx.screen.main.CustomMainScreen;
 import com.kendao.libgdx.screen.splash.CustomSplashScreen;
 import com.kendao.libgdx.storage.CustomPreferences;
 
