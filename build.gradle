@@ -64,7 +64,7 @@ project(":core") {
             maven(MavenPublication) {
                 groupId = 'com.github.kendaozinho'
                 artifactId = 'libgdx-common'
-                version = "0.0.2-SNAPSHOT"
+                version = "0.0.3-SNAPSHOT"
 
                 from components.java
 
@@ -83,7 +83,7 @@ project(":core") {
                 }
 
                 url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                // or "https://s01.oss.sonatype.org/content/repositories/releases/"
+                // url = "https://s01.oss.sonatype.org/content/repositories/releases/"
             }
         }
     }

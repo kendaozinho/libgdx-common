@@ -26,22 +26,22 @@ project(":core") {
 
         // ...
 
-        implementation "com.github.kendaozinho:libgdx-common:0.0.2"
+        implementation "com.github.kendaozinho:libgdx-common:0.0.3"
     }
 }
 ```
 
-Adicione a pasta [ui](./core/assets/ui) e a pasta [audio](./core/assets/audio) dentro dos assets do seu projeto android (ou projeto core, caso não exista o projeto android).
+Adicione a pasta [ui](./core/assets/ui) e a pasta [audio](./core/assets/audio) dentro dos assets do seu projeto android (ou projeto core, caso não exista).
 
 ## Publicação
-Local:
+Maven Local:
 
 ```
 rm -rf $HOME/.m2/repository/com/kendao/libgdx/libgdx-common/
 gradle publishToMavenLocal
 ```
 
-Público:
+Mavel Central:
 ```
 gradle publish
 ```
