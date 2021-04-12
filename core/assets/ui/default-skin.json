@@ -185,5 +185,13 @@
       "hScrollKnob": "light-gray-tinted-drawable",
       "background": "gray-tinted-drawable"
     }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+    "default": {
+      "fontColorUnselected": "white-color",
+      "selection": "light-gray-tinted-drawable",
+      "fontColorSelected": "white-color",
+      "font": "default-bitmap-font"
+    }
   }
 }
