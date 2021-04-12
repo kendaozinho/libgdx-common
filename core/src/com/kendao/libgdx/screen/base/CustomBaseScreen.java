@@ -2,23 +2,19 @@ package com.kendao.libgdx.screen.base;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.kendao.libgdx.listener.CustomGameListener;
+import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
 public abstract class CustomBaseScreen {
-  private Stage hudStage;
-  private Stage landscapeStage;
-  private Stage mainStage;
-  private Stage backgroundStage;
+  private CustomStage hudStage;
+  private CustomStage landscapeStage;
+  private CustomStage mainStage;
+  private CustomStage backgroundStage;
 
   protected CustomBaseScreen() {
-    this.hudStage = new Stage(new StretchViewport(((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()));
-    this.landscapeStage = new Stage(new StretchViewport(((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()));
-    this.mainStage = new Stage(new StretchViewport(((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()));
-    this.backgroundStage = new Stage(new StretchViewport(((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()));
+    this.hudStage = new CustomStage(false);
+    this.landscapeStage = new CustomStage(false);
+    this.mainStage = new CustomStage(true);
+    this.backgroundStage = new CustomStage(false);
 
     InputMultiplexer multiplexer = new InputMultiplexer();
 
@@ -44,55 +40,19 @@ public abstract class CustomBaseScreen {
 
   protected abstract void dispose();
 
-  public void removeActorsFromMainStage() {
-    if (this.mainStage != null) {
-      Array<Actor> actors = this.mainStage.getActors();
-      for (int i = (actors.size - 1); i >= 0; i--) {
-        actors.get(i).remove();
-      }
-    }
-  }
-
-  public void removeActorsFromHudStage() {
-    if (this.hudStage != null) {
-      Array<Actor> actors = this.hudStage.getActors();
-      for (int i = (actors.size - 1); i >= 0; i--) {
-        actors.get(i).remove();
-      }
-    }
-  }
-
-  public void removeActorsFromBackgroundStage() {
-    if (this.backgroundStage != null) {
-      Array<Actor> actors = this.backgroundStage.getActors();
-      for (int i = (actors.size - 1); i >= 0; i--) {
-        actors.get(i).remove();
-      }
-    }
-  }
-
-  public void removeActorsFromLandscapeStage() {
-    if (this.landscapeStage != null) {
-      Array<Actor> actors = this.landscapeStage.getActors();
-      for (int i = (actors.size - 1); i >= 0; i--) {
-        actors.get(i).remove();
-      }
-    }
-  }
-
-  public Stage getHudStage() {
+  public CustomStage getHudStage() {
     return this.hudStage;
   }
 
-  public Stage getMainStage() {
+  public CustomStage getMainStage() {
     return this.mainStage;
   }
 
-  public Stage getBackgroundStage() {
+  public CustomStage getBackgroundStage() {
     return this.backgroundStage;
   }
 
-  public Stage getLandscapeStage() {
+  public CustomStage getLandscapeStage() {
     return this.landscapeStage;
   }
 }

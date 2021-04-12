@@ -45,8 +45,3 @@ Mavel Central:
 ```
 gradle publish
 ```
-
-## Atualizar dependências do Gradle
-```
-gradle build --refresh-dependencies
-```
