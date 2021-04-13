@@ -11,19 +11,20 @@ import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomTextButton extends TextButton {
+  private boolean enableSound = true;
   private final Color defaultColor = Color.ROYAL;
 
   public CustomTextButton(String text, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setColor(this.defaultColor);
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomTextButton(String text, int x, int y, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setPosition(x, y);
     super.setColor(this.defaultColor);
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomTextButton(String text, int x, int y, float width, float height, EventListener listener) {
@@ -31,7 +32,7 @@ public class CustomTextButton extends TextButton {
     super.setPosition(x, y);
     super.setSize(width, height);
     super.setColor(this.defaultColor);
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomTextButton(String text, int x, int y, float width, float height, Color color, EventListener listener) {
@@ -39,15 +40,7 @@ public class CustomTextButton extends TextButton {
     super.setPosition(x, y);
     super.setSize(width, height);
     super.setColor(color);
-    this.addListeners(listener, true);
-  }
-
-  public CustomTextButton(String text, int x, int y, float width, float height, Color color, Boolean enableSound, EventListener listener) {
-    super(text, CustomSkin.getInstance());
-    super.setPosition(x, y);
-    super.setSize(width, height);
-    super.setColor(color);
-    this.addListeners(listener, enableSound);
+    this.addListeners(listener);
   }
 
   @Override
@@ -69,7 +62,7 @@ public class CustomTextButton extends TextButton {
     return super.getText().toString();
   }
 
-  private void addListeners(EventListener newListener, final Boolean enableSound) {
+  private void addListeners(EventListener newListener) {
     super.addListener(new ClickListener() {
       @Override
       public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -115,5 +108,9 @@ public class CustomTextButton extends TextButton {
     if (tooltipText != null && !tooltipText.trim().isEmpty()) {
       super.addListener(new CustomTooltip(tooltipText));
     }
+  }
+
+  public void setEnableSound(boolean enableSound) {
+    this.enableSound = enableSound;
   }
 }
