@@ -10,6 +10,14 @@ public class CustomTable extends Table {
     super();
   }
 
+  public CustomTable(boolean debug) {
+    super();
+
+    if (debug) {
+      super.debug();
+    }
+  }
+
   public void addRow() {
     this.addRow(new CustomLabel());
   }
@@ -20,21 +28,39 @@ public class CustomTable extends Table {
     super.row();
   }
 
+  public void addRow(Actor actor, int width, int height) {
+    super.add(actor).center().pad(this.padding).width(width).height(height).colspan(2);
+
+    super.row();
+  }
+
   public void addRow(Actor firstActor, Actor secondActor) {
     if (firstActor instanceof CustomLabel && secondActor instanceof CustomLabel) {
-      super.add(firstActor).center().pad(this.padding);
-      super.add(secondActor).center().pad(this.padding);
+      super.add(firstActor).center().pad(this.padding).fill();
+      super.add(secondActor).center().pad(this.padding).fill();
     } else {
-      super.add(firstActor).right().pad(this.padding);
-      super.add(secondActor).left().pad(this.padding);
+      super.add(firstActor).right().pad(this.padding).fill();
+      super.add(secondActor).left().pad(this.padding).fill();
     }
 
     super.row();
   }
 
-  public void addRow(int actorWidth, int actorHeight, Actor... actors) {
+  public void addRow(Actor firstActor, Actor secondActor, int width, int height) {
+    if (firstActor instanceof CustomLabel && secondActor instanceof CustomLabel) {
+      super.add(firstActor).center().pad(this.padding).width(width).height(height);
+      super.add(secondActor).center().pad(this.padding).width(width).height(height);
+    } else {
+      super.add(firstActor).right().pad(this.padding).width(width).height(height);
+      super.add(secondActor).left().pad(this.padding).width(width).height(height);
+    }
+
+    super.row();
+  }
+
+  public void addRow(int width, int height, Actor... actors) {
     for (Actor actor : actors) {
-      super.add(actor).center().pad(this.padding).width(actorWidth).height(actorHeight);
+      super.add(actor).center().pad(this.padding).width(width).height(height);
     }
 
     super.row();
