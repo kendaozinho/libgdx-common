@@ -193,5 +193,15 @@
       "fontColorSelected": "white-color",
       "font": "default-bitmap-font"
     }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+    "default": {
+      "label": {
+        "font": "default-bitmap-font",
+        "fontColor": "white-color"
+      },
+      "background": "gray-tinted-drawable",
+      "wrapWidth": 400
+    }
   }
 }

@@ -13,8 +13,8 @@ drawable
 default-window
   rotate: false
   xy: 1, 0
-  size: 4, 20
-  split: 1, 1, 1, 1
+  size: 4, 70
+  split: 1, 1, 64, 1
   pad: 0, 0, 0, 0
   orig: 4, 20
   offset: 0, 0
