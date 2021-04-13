@@ -26,6 +26,10 @@ public abstract class CustomBaseScreen {
     Gdx.input.setInputProcessor(multiplexer);
   }
 
+  public static CustomBaseScreen getInstance() {
+    return CustomScreenManager.getInstance().getScreen();
+  }
+
   protected abstract void load();
 
   protected abstract void handleInput();
