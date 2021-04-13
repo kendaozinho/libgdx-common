@@ -13,9 +13,11 @@ import com.kendao.libgdx.graphics.CustomColor;
 import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomImageButton extends ImageButton {
+  private boolean enableSound = true;
+
   public CustomImageButton(Image image, EventListener listener) {
     super(image.getDrawable());
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(Image image, int x, int y, EventListener listener) {
@@ -23,7 +25,7 @@ public class CustomImageButton extends ImageButton {
 
     super.setPosition(x, y);
 
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(Image image, int x, int y, float width, float height, EventListener listener) {
@@ -35,19 +37,19 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(Texture texture, EventListener listener) {
     super(new Image(texture).getDrawable());
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(Texture texture, int x, int y, EventListener listener) {
     super(new Image(texture).getDrawable());
 
     super.setPosition(x, y);
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(Texture texture, int x, int y, float width, float height, EventListener listener) {
@@ -59,19 +61,7 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
-    this.addListeners(listener, true);
-  }
-
-  public CustomImageButton(Texture texture, int x, int y, float width, float height, boolean enableSound, EventListener listener) {
-    super(new Image(texture).getDrawable());
-
-    super.setPosition(x, y);
-
-    if (width > 0 && height > 0) {
-      super.setSize(width, height);
-    }
-
-    this.addListeners(listener, enableSound);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(Texture firstTexture, Texture secondTexture, int x, int y, float width, float height, EventListener listener) {
@@ -87,28 +77,12 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
-    this.addListeners(listener, true);
-  }
-
-  public CustomImageButton(Texture firstTexture, Texture secondTexture, int x, int y, float width, float height, boolean enableSound, EventListener listener) {
-    super(
-        new Image(firstTexture).getDrawable(),
-        null,
-        new Image(secondTexture).getDrawable()
-    );
-
-    super.setPosition(x, y);
-
-    if (width > 0 && height > 0) {
-      super.setSize(width, height);
-    }
-
-    this.addListeners(listener, enableSound);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(TextureRegion textureRegion, EventListener listener) {
     super(new Image(textureRegion).getDrawable());
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(TextureRegion textureRegion, int x, int y, EventListener listener) {
@@ -116,7 +90,7 @@ public class CustomImageButton extends ImageButton {
 
     super.setPosition(x, y);
 
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(TextureRegion textureRegion, int x, int y, float width, float height, EventListener listener) {
@@ -128,19 +102,7 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
-    this.addListeners(listener, true);
-  }
-
-  public CustomImageButton(TextureRegion textureRegion, int x, int y, float width, float height, boolean enableSound, EventListener listener) {
-    super(new Image(textureRegion).getDrawable());
-
-    super.setPosition(x, y);
-
-    if (width > 0 && height > 0) {
-      super.setSize(width, height);
-    }
-
-    this.addListeners(listener, enableSound);
+    this.addListeners(listener);
   }
 
   public CustomImageButton(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion, int x, int y, float width, float height, EventListener listener) {
@@ -156,26 +118,10 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
-    this.addListeners(listener, true);
+    this.addListeners(listener);
   }
 
-  public CustomImageButton(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion, int x, int y, float width, float height, boolean enableSound, EventListener listener) {
-    super(
-        new Image(firstTextureRegion).getDrawable(),
-        null,
-        new Image(secondTextureRegion).getDrawable()
-    );
-
-    super.setPosition(x, y);
-
-    if (width > 0 && height > 0) {
-      super.setSize(width, height);
-    }
-
-    this.addListeners(listener, enableSound);
-  }
-
-  private void addListeners(EventListener newListener, final Boolean enableSound) {
+  private void addListeners(EventListener newListener) {
     super.addListener(new ClickListener() {
       @Override
       public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -227,5 +173,9 @@ public class CustomImageButton extends ImageButton {
     if (tooltipText != null && !tooltipText.trim().isEmpty()) {
       super.addListener(new CustomTooltip(tooltipText));
     }
+  }
+
+  public void setEnableSound(boolean enableSound) {
+    this.enableSound = enableSound;
   }
 }
