@@ -19,62 +19,61 @@ import java.util.AbstractMap;
 import java.util.Map;
 
 public class CustomDialog extends Dialog {
-  private final int defaultWidth = 380;
-  private final int defaultHeight = 300;
-
   private final Color defaultRedColor = Color.SCARLET;
   private final Color defaultGreenColor = Color.LIME;
   private final Color defaultBlueColor = Color.ROYAL;
 
-  public CustomDialog(String title, String message, boolean twoButtons) {
+  public CustomDialog(String title, String message, boolean twoButtons, int width, int height) {
     super("\n\n" + title.toUpperCase(), CustomSkin.getInstance());
 
     this.load(
         new CustomLabel(message),
         CustomDialog.createButton("OK", twoButtons ? this.defaultGreenColor : this.defaultBlueColor),
-        twoButtons ? CustomDialog.createButton("CANCEL", this.defaultRedColor) : null
+        twoButtons ? CustomDialog.createButton("CANCEL", this.defaultRedColor) : null,
+        width, height
     );
   }
 
-  public CustomDialog(String title, String message, Map.Entry<String, Color> button) {
+  public CustomDialog(String title, String message, Map.Entry<String, Color> button, int width, int height) {
     super("\n\n" + title.toUpperCase(), CustomSkin.getInstance());
 
-    this.load(new CustomLabel(message), button, null);
+    this.load(new CustomLabel(message), button, null, width, height);
   }
 
-  public CustomDialog(String title, String message, Map.Entry<String, Color> firstButton, Map.Entry<String, Color> secondButton) {
+  public CustomDialog(String title, String message, Map.Entry<String, Color> firstButton, Map.Entry<String, Color> secondButton, int width, int height) {
     super("\n\n" + title.toUpperCase(), CustomSkin.getInstance());
 
-    this.load(new CustomLabel(message), firstButton, secondButton);
+    this.load(new CustomLabel(message), firstButton, secondButton, width, height);
   }
 
-  public CustomDialog(String title, CustomTable table, boolean twoButtons) {
+  public CustomDialog(String title, CustomTable table, boolean twoButtons, int width, int height) {
     super("\n\n" + title.toUpperCase(), CustomSkin.getInstance());
 
     this.load(
         table,
         CustomDialog.createButton("OK", twoButtons ? this.defaultGreenColor : this.defaultBlueColor),
-        twoButtons ? CustomDialog.createButton("CANCEL", this.defaultRedColor) : null
+        twoButtons ? CustomDialog.createButton("CANCEL", this.defaultRedColor) : null,
+        width, height
     );
   }
 
-  public CustomDialog(String title, CustomTable table, Map.Entry<String, Color> button) {
+  public CustomDialog(String title, CustomTable table, Map.Entry<String, Color> button, int width, int height) {
     super("\n\n" + title.toUpperCase(), CustomSkin.getInstance());
 
-    this.load(table, button, null);
+    this.load(table, button, null, width, height);
   }
 
-  public CustomDialog(String title, CustomTable table, Map.Entry<String, Color> firstButton, Map.Entry<String, Color> secondButton) {
+  public CustomDialog(String title, CustomTable table, Map.Entry<String, Color> firstButton, Map.Entry<String, Color> secondButton, int width, int height) {
     super("\n\n" + title.toUpperCase(), CustomSkin.getInstance());
 
-    this.load(table, firstButton, secondButton);
+    this.load(table, firstButton, secondButton, width, height);
   }
 
   public static Map.Entry<String, Color> createButton(String text, Color color) {
     return new AbstractMap.SimpleEntry<>(text, color);
   }
 
-  private void load(Actor actor, Map.Entry<String, Color> firstButton, Map.Entry<String, Color> secondButton) {
+  private void load(Actor actor, Map.Entry<String, Color> firstButton, Map.Entry<String, Color> secondButton, int width, int height) {
     // super.debug();
 
     super.getTitleLabel().setAlignment(Align.center);
@@ -83,7 +82,7 @@ public class CustomDialog extends Dialog {
     super.getContentTable().row();
     super.getContentTable().add(actor);
 
-    int buttonWidth = (int) (this.defaultWidth / 2);
+    int buttonWidth = (int) (width / 2);
     int buttonHeight = 60;
 
     super.button(firstButton.getKey(), true, this.getTextButtonStyle(buttonWidth, buttonHeight, firstButton.getValue())).pad(5); // sends "true" as the result
@@ -94,7 +93,7 @@ public class CustomDialog extends Dialog {
       // super.key(Keys.ESCAPE, false); // sends "false" when the ESCAPE key is pressed
     }
 
-    super.setSize(this.defaultWidth, this.defaultHeight);
+    super.setSize(width, height);
 
     super.setModal(true);
     super.setMovable(false);
