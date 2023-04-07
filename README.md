@@ -31,6 +31,8 @@ project(":core") {
 
 Adicione a pasta [ui](./core/assets/ui) e a pasta [audio](./core/assets/audio) dentro dos assets do seu projeto android (ou projeto core, caso não exista).
 
+Importe as [libs](https://github.com/libgdx/gdx-pay) de pagamento junto com as [libs](https://github.com/libgdx/gdx-pay/tree/master/gdx-pay-android-googlebilling) do smartphone, caso necessário.
+
 ## Publicação
 Maven Local:
 
