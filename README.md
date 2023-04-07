@@ -3,9 +3,8 @@
 Biblioteca utilizada nos jogos criados pela kendao games.
 
 ## Pré-requisitos
-- Java 8
-- Gradle 6.7.1
-- LibGDX 1.9.14
+- Java 11.0.2
+- LibGDX 1.11.0
 
 ## Inicialização
 ```bash
@@ -13,9 +12,8 @@ gradle desktop:run
 ```
 
 ## Instalação
-Faça o clone deste projeto na máquina e execute o comando de publicação no seu maven local.
 
-Adicione a biblioteca no projeto core, dentro do arquivo build.gradle na pasta raiz do seu projeto:
+Adicione a biblioteca no projeto core, dentro do arquivo build.gradle da pasta raiz do seu projeto:
 
 ```js
 project(":core") {
@@ -26,7 +24,7 @@ project(":core") {
 
         // ...
 
-        implementation "com.github.kendaozinho:libgdx-common:0.0.5"
+        implementation "com.github.kendaozinho:libgdx-common:0.0.6" // <-- add this
     }
 }
 ```
