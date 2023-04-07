@@ -64,7 +64,9 @@ project(":core") {
             maven(MavenPublication) {
                 groupId = 'com.github.kendaozinho'
                 artifactId = 'libgdx-common'
+
                 version = "0.0.6-SNAPSHOT"
+                // version = "0.0.6"
 
                 from components.java
 
