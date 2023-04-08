@@ -12,7 +12,7 @@ public class CustomApi {
   private final String appVersion;
   private final Gson gson;
 
-  public CustomApi(String baseUrl, String deviceId, String secretKey, String appVersion) {
+  protected CustomApi(String baseUrl, String deviceId, String secretKey, String appVersion) {
     this.baseUrl = baseUrl;
     this.deviceId = deviceId;
     this.secretKey = secretKey;
@@ -86,5 +86,17 @@ public class CustomApi {
         }
       }
     }
+  }
+
+  protected String toStringJson(Object object) {
+    return this.gson.toJson(object);
+  }
+
+  protected String getBaseUrl() {
+    return this.baseUrl;
+  }
+
+  protected String getDeviceId() {
+    return this.deviceId;
   }
 }
