@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.graphics.CustomPixmap;
 import com.kendao.libgdx.listener.CustomGameListener;
 
@@ -113,5 +114,15 @@ public class CustomImage extends Image {
     if (tooltipText != null && !tooltipText.trim().isEmpty()) {
       super.addListener(new CustomTooltip(tooltipText));
     }
+  }
+
+  public void setRotation(float amountInDegrees, int align) {
+    super.setOrigin(align);
+    super.setRotation(amountInDegrees);
+  }
+
+  public void rotateBy(float amountInDegrees, int align) {
+    super.setOrigin(align);
+    super.rotateBy(amountInDegrees);
   }
 }

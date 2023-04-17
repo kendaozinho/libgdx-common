@@ -2,6 +2,7 @@ package com.kendao.libgdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 
 public class CustomLabel extends Label {
   public CustomLabel() {
@@ -72,6 +73,16 @@ public class CustomLabel extends Label {
 
   public void show() {
     super.getColor().a = 1f;
+  }
+
+  public void setRotation(float amountInDegrees, int align) {
+    super.setOrigin(align);
+    super.setRotation(amountInDegrees);
+  }
+
+  public void rotateBy(float amountInDegrees, int align) {
+    super.setOrigin(align);
+    super.rotateBy(amountInDegrees);
   }
 
   public enum Sizes {

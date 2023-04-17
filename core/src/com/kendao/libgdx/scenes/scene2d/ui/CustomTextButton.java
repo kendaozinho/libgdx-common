@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
 
@@ -112,5 +113,15 @@ public class CustomTextButton extends TextButton {
 
   public void setEnableSound(boolean enableSound) {
     this.enableSound = enableSound;
+  }
+
+  public void setRotation(float amountInDegrees, int align) {
+    super.setOrigin(align);
+    super.setRotation(amountInDegrees);
+  }
+
+  public void rotateBy(float amountInDegrees, int align) {
+    super.setOrigin(align);
+    super.rotateBy(amountInDegrees);
   }
 }
