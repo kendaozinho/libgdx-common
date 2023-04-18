@@ -34,7 +34,7 @@ public abstract class CustomBaseScreen {
 
   protected abstract void handleInput();
 
-  protected abstract void update();
+  protected abstract void update(float deltaTime);
 
   protected abstract void render();
 

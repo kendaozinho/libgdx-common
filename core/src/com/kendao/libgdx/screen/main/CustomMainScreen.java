@@ -34,7 +34,7 @@ public class CustomMainScreen extends CustomBaseScreen {
   }
 
   @Override
-  public void update() {
+  public void update(float deltaTime) {
   }
 
   @Override

@@ -6,8 +6,6 @@ import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.listener.CustomGameListener;
 
 public class CustomScreenManager {
-  private Float currentDeltaTime = 0f;
-  private Float maximumDeltaTime = 0.05f;
   private CustomBaseScreen screen;
 
   public CustomScreenManager() {
@@ -35,14 +33,7 @@ public class CustomScreenManager {
 
   private void update(float deltaTime) {
     if (this.screen != null) {
-      this.currentDeltaTime += deltaTime;
-      if (this.currentDeltaTime < this.maximumDeltaTime) {
-        return;
-      } else {
-        this.currentDeltaTime = 0f;
-      }
-
-      this.screen.update();
+      this.screen.update(deltaTime);
     }
   }
 
@@ -152,14 +143,6 @@ public class CustomScreenManager {
         this.screen.getHudStage().dispose();
       }
     }
-  }
-
-  public Float getCurrentDeltaTime() {
-    return this.currentDeltaTime;
-  }
-
-  public Float getMaximumDeltaTime() {
-    return this.maximumDeltaTime;
   }
 
   // returns the current screen

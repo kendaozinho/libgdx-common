@@ -47,7 +47,7 @@ public class CustomSplashScreen extends CustomBaseScreen {
   }
 
   @Override
-  public void update() {
+  public void update(float deltaTime) {
   }
 
   @Override
