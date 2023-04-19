@@ -1,8 +1,8 @@
 package com.kendao.libgdx.screen.base.dto;
 
 public class CustomDeltaTimeValidator {
-  private float currentDeltaTime;
   private final float maximumDeltaTime;
+  private float currentDeltaTime;
 
   public CustomDeltaTimeValidator(float maximumDeltaTime) {
     this.currentDeltaTime = 0f;

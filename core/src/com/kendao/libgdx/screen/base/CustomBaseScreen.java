@@ -44,6 +44,13 @@ public abstract class CustomBaseScreen {
 
   protected abstract void dispose();
 
+  public void removeActorsFromAllStages() {
+    this.getBackgroundStage().removeActors();
+    this.getMainStage().removeActors();
+    this.getLandscapeStage().removeActors();
+    this.getHudStage().removeActors();
+  }
+
   public CustomStage getHudStage() {
     return this.hudStage;
   }

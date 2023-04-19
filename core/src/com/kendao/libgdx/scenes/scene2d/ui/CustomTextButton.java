@@ -7,13 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomTextButton extends TextButton {
-  private boolean enableSound = true;
   private final Color defaultColor = Color.ROYAL;
+  private boolean enableSound = true;
 
   public CustomTextButton(String text, EventListener listener) {
     super(text, CustomSkin.getInstance());

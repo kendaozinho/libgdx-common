@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.graphics.CustomColor;
 import com.kendao.libgdx.storage.CustomPreferences;

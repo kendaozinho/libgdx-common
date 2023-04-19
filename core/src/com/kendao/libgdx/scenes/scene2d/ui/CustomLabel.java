@@ -2,7 +2,6 @@ package com.kendao.libgdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Align;
 
 public class CustomLabel extends Label {
   public CustomLabel() {
