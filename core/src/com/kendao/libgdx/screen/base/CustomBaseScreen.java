@@ -6,19 +6,17 @@ import com.kendao.libgdx.input.CustomDirectionGestureDetector;
 import com.kendao.libgdx.listener.CustomDirectionListener;
 import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
-public abstract class CustomBaseScreen {
+public abstract class CustomBaseScreen implements CustomDirectionListener {
   private CustomStage hudStage;
   private CustomStage landscapeStage;
   private CustomStage mainStage;
   private CustomStage backgroundStage;
-  private CustomDirectionGestureDetector gestureDetector;
 
   protected CustomBaseScreen() {
     this.hudStage = new CustomStage(false);
     this.landscapeStage = new CustomStage(false);
     this.mainStage = new CustomStage(false);
     this.backgroundStage = new CustomStage(false);
-    this.gestureDetector = null;
 
     this.setInputMultiplexerProcessor();
   }
@@ -28,18 +26,6 @@ public abstract class CustomBaseScreen {
     this.landscapeStage = new CustomStage(false);
     this.mainStage = new CustomStage(isMainStageScrollable);
     this.backgroundStage = new CustomStage(false);
-    this.gestureDetector = null;
-
-    this.setInputMultiplexerProcessor();
-  }
-
-  protected CustomBaseScreen(Boolean isMainStageScrollable, CustomDirectionListener directionListener) {
-    this.hudStage = new CustomStage(false);
-    this.landscapeStage = new CustomStage(false);
-    this.mainStage = new CustomStage(isMainStageScrollable);
-    this.backgroundStage = new CustomStage(false);
-    this.gestureDetector =
-        (directionListener == null) ? null : new CustomDirectionGestureDetector(directionListener);
 
     this.setInputMultiplexerProcessor();
   }
@@ -55,9 +41,7 @@ public abstract class CustomBaseScreen {
     multiplexer.addProcessor(this.landscapeStage);
     multiplexer.addProcessor(this.mainStage);
     multiplexer.addProcessor(this.backgroundStage);
-    if (this.gestureDetector != null) {
-      multiplexer.addProcessor(this.gestureDetector);
-    }
+    multiplexer.addProcessor(new CustomDirectionGestureDetector(this));
 
     Gdx.input.setInputProcessor(multiplexer);
   }
@@ -97,9 +81,5 @@ public abstract class CustomBaseScreen {
 
   public CustomStage getLandscapeStage() {
     return this.landscapeStage;
-  }
-
-  public CustomDirectionGestureDetector getGestureDetector() {
-    return this.gestureDetector;
   }
 }

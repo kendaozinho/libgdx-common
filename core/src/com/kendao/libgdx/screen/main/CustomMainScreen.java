@@ -52,4 +52,20 @@ public class CustomMainScreen extends CustomBaseScreen {
   @Override
   protected void dispose() {
   }
+
+  @Override
+  public void swipeLeft() {
+  }
+
+  @Override
+  public void swipeRight() {
+  }
+
+  @Override
+  public void swipeUp() {
+  }
+
+  @Override
+  public void swipeDown() {
+  }
 }

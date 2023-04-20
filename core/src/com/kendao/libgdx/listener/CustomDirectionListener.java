@@ -1,11 +1,11 @@
 package com.kendao.libgdx.listener;
 
 public interface CustomDirectionListener {
-  void onLeft();
+  void swipeLeft();
 
-  void onRight();
+  void swipeRight();
 
-  void onUp();
+  void swipeUp();
 
-  void onDown();
+  void swipeDown();
 }

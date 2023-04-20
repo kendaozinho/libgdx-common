@@ -19,15 +19,15 @@ public class CustomDirectionGestureDetector extends GestureDetector {
     public boolean fling(float velocityX, float velocityY, int button) {
       if (Math.abs(velocityX) > Math.abs(velocityY)) {
         if (velocityX > 0) {
-          directionListener.onRight();
+          this.directionListener.swipeRight();
         } else {
-          directionListener.onLeft();
+          this.directionListener.swipeLeft();
         }
       } else {
         if (velocityY > 0) {
-          directionListener.onDown();
+          this.directionListener.swipeDown();
         } else {
-          directionListener.onUp();
+          this.directionListener.swipeUp();
         }
       }
       return super.fling(velocityX, velocityY, button);
