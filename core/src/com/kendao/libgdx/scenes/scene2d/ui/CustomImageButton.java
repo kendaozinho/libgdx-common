@@ -13,6 +13,7 @@ import com.kendao.libgdx.graphics.CustomColor;
 import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomImageButton extends ImageButton {
+  private long customX = 0, customY = 0, customZ = 0;
   private boolean enableSound = true;
 
   public CustomImageButton(Image image, EventListener listener) {
@@ -187,5 +188,40 @@ public class CustomImageButton extends ImageButton {
   public void rotateBy(float amountInDegrees, int align) {
     super.setOrigin(align);
     super.rotateBy(amountInDegrees);
+  }
+
+  public long getCustomX() {
+    return this.customX;
+  }
+
+  public void setCustomX(long customX) {
+    this.customX = customX;
+  }
+
+  public long getCustomY() {
+    return this.customY;
+  }
+
+  public void setCustomY(long customY) {
+    this.customY = customY;
+  }
+
+  public long getCustomZ() {
+    return this.customZ;
+  }
+
+  public void setCustomZ(long customZ) {
+    this.customZ = customZ;
+  }
+
+  public void setCustomPosition(long customX, long customY) {
+    this.customX = customX;
+    this.customY = customY;
+  }
+
+  public void setCustomPosition(long customX, long customY, long customZ) {
+    this.customX = customX;
+    this.customY = customY;
+    this.customZ = customZ;
   }
 }

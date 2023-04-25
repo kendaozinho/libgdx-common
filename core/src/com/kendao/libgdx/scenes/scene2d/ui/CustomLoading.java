@@ -7,8 +7,8 @@ import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.screen.base.CustomScreenManager;
 
 public class CustomLoading {
-  private CustomImage background;
-  private CustomLabel label;
+  private final CustomImage background;
+  private final CustomLabel label;
 
   public CustomLoading() {
     this.background = new CustomImage(Color.BLACK) {{
