@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.graphics.CustomColor;
 import com.kendao.libgdx.storage.CustomPreferences;
+import com.kendao.libgdx.util.CustomCoordinatesUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImageButton extends ImageButton {
@@ -227,7 +228,7 @@ public class CustomImageButton extends ImageButton {
   }
 
   public CustomPair<Long, Long> getCustomImagePositionByBlockSize(long blockWidth, long blockHeight) {
-    return new CustomPair<>((long) (super.getX() / blockWidth), (long) (super.getY() / blockHeight));
+    return CustomCoordinatesUtil.getCustomPositionByBlockSize(super.getX(), super.getY(), blockWidth, blockHeight);
   }
 
   public void setCustomImagePositionByBlockSize(long blockWidth, long blockHeight) {

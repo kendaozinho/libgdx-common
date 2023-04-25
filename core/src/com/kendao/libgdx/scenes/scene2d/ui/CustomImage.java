@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.kendao.libgdx.graphics.CustomPixmap;
 import com.kendao.libgdx.listener.CustomGameListener;
+import com.kendao.libgdx.util.CustomCoordinatesUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImage extends Image {
@@ -164,7 +165,7 @@ public class CustomImage extends Image {
   }
 
   public CustomPair<Long, Long> getCustomImagePositionByBlockSize(long blockWidth, long blockHeight) {
-    return new CustomPair<>((long) (super.getX() / blockWidth), (long) (super.getY() / blockHeight));
+    return CustomCoordinatesUtil.getCustomPositionByBlockSize(super.getX(), super.getY(), blockWidth, blockHeight);
   }
 
   public void setCustomImagePositionByBlockSize(long blockWidth, long blockHeight) {
