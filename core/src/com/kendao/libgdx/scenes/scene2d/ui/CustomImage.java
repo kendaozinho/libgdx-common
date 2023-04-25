@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.kendao.libgdx.graphics.CustomPixmap;
@@ -13,19 +14,23 @@ import com.kendao.libgdx.util.CustomCoordinatesUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImage extends Image {
+  private String texturePath = null;
   private long customX = 0, customY = 0, customZ = 0;
 
   public CustomImage(Texture texture) {
     super(texture);
+    this.updateTexturePath(texture);
   }
 
   public CustomImage(Texture texture, float x, float y) {
     super(texture);
+    this.updateTexturePath(texture);
     super.setPosition(x, y);
   }
 
   public CustomImage(Texture texture, float x, float y, float width, float height) {
     super(texture);
+    this.updateTexturePath(texture);
 
     super.setPosition(x, y);
 
@@ -75,6 +80,7 @@ public class CustomImage extends Image {
             )
         )
     );
+    this.updateTexturePath(texture);
   }
 
   public void updateDrawable(TextureRegion textureRegion) {
@@ -85,12 +91,14 @@ public class CustomImage extends Image {
             )
         )
     );
+    this.updateTexturePath(null);
   }
 
   public void updateDrawable(Image image) {
     super.setDrawable(
         image.getDrawable()
     );
+    this.updateTexturePath(null);
   }
 
   public void show() {
@@ -173,5 +181,17 @@ public class CustomImage extends Image {
   public void updateCustomImagePositionBySize() {
     CustomPair<Long, Long> position = this.getCustomImagePositionBySize();
     this.setCustomPosition(position.getFirstValue(), position.getSecondValue());
+  }
+
+  private void updateTexturePath(Texture texture) {
+    if (texture != null && texture.getTextureData() instanceof FileTextureData) {
+      this.texturePath = ((FileTextureData)texture.getTextureData()).getFileHandle().path();
+    } else {
+      this.texturePath = null;
+    }
+  }
+
+  public String getTexturePath() {
+    return this.texturePath;
   }
 }
