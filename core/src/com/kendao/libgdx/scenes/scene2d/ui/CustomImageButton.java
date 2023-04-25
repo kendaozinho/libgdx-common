@@ -227,12 +227,14 @@ public class CustomImageButton extends ImageButton {
     this.customZ = customZ;
   }
 
-  public CustomPair<Long, Long> getCustomImagePositionByBlockSize(long blockWidth, long blockHeight) {
-    return CustomCoordinatesUtil.getCustomPositionByBlockSize(super.getX(), super.getY(), blockWidth, blockHeight);
+  public CustomPair<Long, Long> getCustomImagePositionBySize() {
+    return CustomCoordinatesUtil.getCustomPositionByBlockSize(
+        super.getX(), super.getY(), (long) super.getWidth(), (long) super.getHeight()
+    );
   }
 
-  public void setCustomImagePositionByBlockSize(long blockWidth, long blockHeight) {
-    CustomPair<Long, Long> position = this.getCustomImagePositionByBlockSize(blockWidth, blockHeight);
+  public void updateCustomImagePositionBySize() {
+    CustomPair<Long, Long> position = this.getCustomImagePositionBySize();
     this.setCustomPosition(position.getFirstValue(), position.getSecondValue());
   }
 }
