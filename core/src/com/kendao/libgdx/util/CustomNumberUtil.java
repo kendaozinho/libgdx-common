@@ -3,8 +3,8 @@ package com.kendao.libgdx.util;
 import java.math.BigDecimal;
 import java.util.Random;
 
-public final class RandomNumberUtil {
-  private RandomNumberUtil() {
+public final class CustomNumberUtil {
+  private CustomNumberUtil() {
   }
 
   /***

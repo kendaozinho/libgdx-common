@@ -185,7 +185,7 @@ public class CustomImage extends Image {
 
   private void updateTexturePath(Texture texture) {
     if (texture != null && texture.getTextureData() instanceof FileTextureData) {
-      this.texturePath = ((FileTextureData)texture.getTextureData()).getFileHandle().path();
+      this.texturePath = ((FileTextureData) texture.getTextureData()).getFileHandle().path();
     } else {
       this.texturePath = null;
     }
