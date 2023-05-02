@@ -101,6 +101,10 @@ public class CustomPreferences {
     return LocalDate.parse(this.preferences.getString(key, this.formatter.format(defaultValue)));
   }
 
+  public LocalDate getPropertyAsLocalDate(String key, String defaultValue) {
+    return LocalDate.parse(this.preferences.getString(key, defaultValue));
+  }
+
   public void setPropertyAsLocalDate(String key, LocalDate value) {
     this.preferences.putString(key, this.formatter.format(value));
     this.preferences.flush();
