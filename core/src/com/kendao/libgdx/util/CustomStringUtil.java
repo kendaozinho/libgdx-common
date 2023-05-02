@@ -19,6 +19,10 @@ public final class CustomStringUtil {
       }
     }
 
+    if (response.toString().endsWith("\n")) {
+      response = new StringBuilder(response.substring(0, response.length() - 1));
+    }
+
     return response.toString();
   }
 }
