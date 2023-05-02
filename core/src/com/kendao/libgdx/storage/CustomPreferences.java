@@ -4,9 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.kendao.libgdx.listener.CustomGameListener;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class CustomPreferences {
   // for Mobile
   private final Preferences preferences;
+  private final DateTimeFormatter formatter;
 
   // for Desktop
   // private final String configurationFileName = "config.ini";
@@ -25,6 +29,7 @@ public class CustomPreferences {
     this.preferences = Gdx.app.getPreferences(id);
     //  this.properties = null;
     //}
+    this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   }
 
   public static CustomPreferences getInstance() {
@@ -89,6 +94,15 @@ public class CustomPreferences {
 
   public void setPropertyAsBoolean(String key, Boolean value) {
     this.preferences.putBoolean(key, value);
+    this.preferences.flush();
+  }
+
+  public LocalDate getPropertyAsLocalDate(String key, LocalDate defaultValue) {
+    return LocalDate.parse(this.preferences.getString(key, this.formatter.format(defaultValue)));
+  }
+
+  public void setPropertyAsLocalDate(String key, LocalDate value) {
+    this.preferences.putString(key, this.formatter.format(value));
     this.preferences.flush();
   }
 
