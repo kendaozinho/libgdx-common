@@ -10,11 +10,15 @@ import java.time.format.DateTimeFormatter;
 public class CustomPreferences {
   // for Mobile
   private final Preferences preferences;
-  private final DateTimeFormatter formatter;
+  private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   // for Desktop
   // private final String configurationFileName = "config.ini";
   // private final Properties properties;
+
+  public CustomPreferences() {
+    this.preferences = Gdx.app.getPreferences("my-gdx-game");
+  }
 
   public CustomPreferences(String id) {
     //if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
@@ -29,7 +33,6 @@ public class CustomPreferences {
     this.preferences = Gdx.app.getPreferences(id);
     //  this.properties = null;
     //}
-    this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   }
 
   public static CustomPreferences getInstance() {
