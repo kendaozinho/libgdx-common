@@ -9,12 +9,13 @@ public final class CustomStringUtil {
 
     byte count = 0;
     for (String word : phrase.split(" ")) {
-      response.append(word).append(" ");
+      response.append(word);
 
       if (count == (wordsPerLine - 1)) {
-        count = 0;
         response.append("\n");
+        count = 0;
       } else {
+        response.append(" ");
         count++;
       }
     }
