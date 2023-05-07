@@ -20,7 +20,7 @@ public final class CustomStringUtil {
       }
     }
 
-    if (response.toString().endsWith("\n")) {
+    if (response.toString().endsWith("\n") || response.toString().endsWith(" ")) {
       response = new StringBuilder(response.substring(0, response.length() - 1));
     }
 
