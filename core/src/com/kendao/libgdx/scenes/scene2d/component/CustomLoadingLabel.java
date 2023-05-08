@@ -1,16 +1,18 @@
-package com.kendao.libgdx.scenes.scene2d.ui;
+package com.kendao.libgdx.scenes.scene2d.component;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.listener.CustomGameListener;
+import com.kendao.libgdx.scenes.scene2d.ui.CustomImage;
+import com.kendao.libgdx.scenes.scene2d.ui.CustomLabel;
 import com.kendao.libgdx.screen.base.CustomScreenManager;
 
-public class CustomLoading {
+public class CustomLoadingLabel {
   private final CustomImage background;
   private final CustomLabel label;
 
-  public CustomLoading() {
+  public CustomLoadingLabel() {
     this.background = new CustomImage(Color.BLACK) {{
       super.setOpacity(0.80f);
     }};

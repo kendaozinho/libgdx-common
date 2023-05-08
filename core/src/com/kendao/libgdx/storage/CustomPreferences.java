@@ -120,4 +120,12 @@ public class CustomPreferences {
   public void setAudioEnabled(Boolean value) {
     this.setPropertyAsBoolean("audio-enabled", value);
   }
+
+  public Boolean isAgreementsAccepted() {
+    return this.getPropertyAsBoolean("agreements-accepted", false);
+  }
+
+  public void setAgreementsAccepted(Boolean value) {
+    this.setPropertyAsBoolean("agreements-accepted", value);
+  }
 }
