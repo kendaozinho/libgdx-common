@@ -15,7 +15,6 @@ import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomAgreementsDialog {
   private final CustomDialog dialog;
-  private final Runnable callback;
 
   public CustomAgreementsDialog(String termsAndConditionsUrl, String privacyPolicyUrl, Runnable callback) {
     CustomLabel label = new CustomLabel(
@@ -57,8 +56,6 @@ public class CustomAgreementsDialog {
         remove();
       }
     };
-
-    this.callback = callback;
   }
 
   /***
@@ -69,7 +66,6 @@ public class CustomAgreementsDialog {
       CustomScreenManager.getInstance().getScreen().getHudStage().addActor(this.dialog);
       return true;
     } else {
-      this.callback.run();
       return false;
     }
   }
