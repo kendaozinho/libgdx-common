@@ -61,11 +61,16 @@ public class CustomAgreementsDialog {
     this.callback = callback;
   }
 
-  public void validate() {
+  /***
+   * @return if dialog was opened.
+   */
+  public boolean validate() {
     if (!CustomPreferences.getInstance().isAgreementsAccepted()) {
       CustomScreenManager.getInstance().getScreen().getHudStage().addActor(this.dialog);
+      return true;
     } else {
       this.callback.run();
+      return false;
     }
   }
 }
