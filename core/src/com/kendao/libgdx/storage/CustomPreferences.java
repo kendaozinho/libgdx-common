@@ -113,6 +113,11 @@ public class CustomPreferences {
     this.preferences.flush();
   }
 
+  public void clear() {
+    this.preferences.clear();
+    this.preferences.flush();
+  }
+
   public Boolean isAudioEnabled() {
     return this.getPropertyAsBoolean("audio-enabled", true);
   }

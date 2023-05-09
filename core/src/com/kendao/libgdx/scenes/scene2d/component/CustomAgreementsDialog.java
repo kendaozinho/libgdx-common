@@ -45,7 +45,7 @@ public class CustomAgreementsDialog {
         }},
         CustomDialog.createButton("ACCEPT", Color.LIME),
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth() - 100,
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight() - 100
+        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight() - 250
     ) {
       @Override
       public void result(Object response) {
