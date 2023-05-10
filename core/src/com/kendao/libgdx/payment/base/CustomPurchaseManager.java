@@ -59,7 +59,7 @@ public class CustomPurchaseManager {
    * @return If method was executed.
    */
   public Boolean purchase(String identifier) {
-    if (this.purchaseManager != null) {
+    if (this.installed()) {
       this.purchaseManager.purchase(identifier);
       return true;
     }
@@ -69,8 +69,8 @@ public class CustomPurchaseManager {
   /***
    * @return If method was executed.
    */
-  public Boolean purchaseRestore() {
-    if (this.purchaseManager != null) {
+  public Boolean restorePurchases() {
+    if (this.installed()) {
       this.purchaseManager.purchaseRestore();
       return true;
     }
