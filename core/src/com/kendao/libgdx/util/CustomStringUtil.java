@@ -4,7 +4,7 @@ public final class CustomStringUtil {
   private CustomStringUtil() {
   }
 
-  public static String breakPhraseInLines(String phrase, byte wordsPerLine) {
+  public static String breakPhraseInLines(String phrase, int wordsPerLine) {
     StringBuilder response = new StringBuilder();
 
     byte count = 0;

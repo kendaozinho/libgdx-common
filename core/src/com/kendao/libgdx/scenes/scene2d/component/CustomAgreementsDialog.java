@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomDialog;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomLabel;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomTable;
@@ -16,7 +15,7 @@ import com.kendao.libgdx.storage.CustomPreferences;
 public class CustomAgreementsDialog {
   private final CustomDialog dialog;
 
-  public CustomAgreementsDialog(String termsAndConditionsUrl, String privacyPolicyUrl, Runnable callback) {
+  public CustomAgreementsDialog(String termsAndConditionsUrl, String privacyPolicyUrl, Runnable callback, int width, int height) {
     CustomLabel label = new CustomLabel(
         "FIRST OF ALL, YOU NEED TO\nACCEPT OUR TERMS OF SERVICE AND\nREAD OUR PRIVACY POLICY.",
         CustomLabel.Sizes.EXTRA_SMALL
@@ -44,8 +43,7 @@ public class CustomAgreementsDialog {
           super.addRow(privacyPolicy);
         }},
         CustomDialog.createButton("ACCEPT", Color.LIME),
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth() - 100,
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight() - 250
+        width, height
     ) {
       @Override
       public void result(Object response) {

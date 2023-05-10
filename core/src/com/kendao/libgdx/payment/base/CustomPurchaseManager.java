@@ -22,14 +22,19 @@ public class CustomPurchaseManager {
     return ((CustomGameListener) Gdx.app.getApplicationListener()).getInstanceOf(CustomPurchaseManager.class);
   }
 
-  public void install(PurchaseObserver purchaseObserver, HashMap<OfferType, String> offers) {
+  /***
+   * @return If method was executed.
+   */
+  public Boolean install(PurchaseObserver purchaseObserver, HashMap<OfferType, String> offers) {
     if (this.purchaseManager != null) {
       this.purchaseManager.install(
           purchaseObserver,
           this.getPurchaseManagerConfig(offers),
           true
       );
+      return true;
     }
+    return false;
   }
 
   private PurchaseManagerConfig getPurchaseManagerConfig(HashMap<OfferType, String> offers) {
@@ -50,16 +55,26 @@ public class CustomPurchaseManager {
     return false;
   }
 
-  public void purchase(String identifier) {
+  /***
+   * @return If method was executed.
+   */
+  public Boolean purchase(String identifier) {
     if (this.purchaseManager != null) {
       this.purchaseManager.purchase(identifier);
+      return true;
     }
+    return false;
   }
 
-  public void purchaseRestore() {
+  /***
+   * @return If method was executed.
+   */
+  public Boolean purchaseRestore() {
     if (this.purchaseManager != null) {
       this.purchaseManager.purchaseRestore();
+      return true;
     }
+    return false;
   }
 
   public String storeName() {
@@ -70,9 +85,14 @@ public class CustomPurchaseManager {
     return null;
   }
 
-  public void dispose() {
+  /***
+   * @return If method was executed.
+   */
+  public Boolean dispose() {
     if (this.purchaseManager != null) {
       this.purchaseManager.dispose();
+      return true;
     }
+    return false;
   }
 }
