@@ -100,6 +100,11 @@ public class CustomToast {
   }
 
   public static void alert(String message) {
+    CustomToast.alert(message, null);
+  }
+
+  public static void alert(String message, Throwable t) {
+    System.out.println(message + (t == null ? "" : (" ->\n" + t)));
     showToast(message, NotificationTypes.ALERT);
   }
 
@@ -108,7 +113,8 @@ public class CustomToast {
   }
 
   public static void error(String message, Throwable t) {
-    showToast(message + (t == null ? "" : (": " + t)), NotificationTypes.ERROR);
+    System.err.println(message + (t == null ? "" : (" ->\n" + t)));
+    showToast(message, NotificationTypes.ERROR);
   }
 
   public enum NotificationTypes {
