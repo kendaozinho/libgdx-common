@@ -1,7 +1,15 @@
 package com.kendao.libgdx.util;
 
+import java.text.Normalizer;
+
 public final class CustomStringUtil {
   private CustomStringUtil() {
+  }
+
+  public static String removeAccents(String value) {
+    return Normalizer
+        .normalize(value, Normalizer.Form.NFD)
+        .replaceAll("[^\\p{ASCII}]", "");
   }
 
   public static boolean hasValue(String value) {
