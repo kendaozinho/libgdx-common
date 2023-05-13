@@ -4,6 +4,10 @@ public final class CustomStringUtil {
   private CustomStringUtil() {
   }
 
+  public static boolean hasValue(String value) {
+    return (value != null && !value.trim().isEmpty());
+  }
+
   public static String breakPhraseInLines(String phrase, int wordsPerLine) {
     StringBuilder response = new StringBuilder();
 
