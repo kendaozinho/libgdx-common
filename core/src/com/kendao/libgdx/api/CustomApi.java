@@ -31,11 +31,11 @@ public class CustomApi {
     return 0;
   }
 
-  protected <T> T callApi(String method, String path, String requestBody, Class<T> clazz) throws Throwable {
+  protected <T> T callApi(String method, String path, Object requestBody, Class<T> clazz) throws Throwable {
     Net.HttpRequest httpRequest = new Net.HttpRequest(method);
     httpRequest.setUrl(this.baseUrl + path);
     if (requestBody != null) {
-      httpRequest.setContent(requestBody);
+      httpRequest.setContent(this.gson.toJson(requestBody));
     }
     httpRequest.setHeader("Authorization", this.secretKey);
     httpRequest.setHeader("X-Client-ID", this.deviceId);
