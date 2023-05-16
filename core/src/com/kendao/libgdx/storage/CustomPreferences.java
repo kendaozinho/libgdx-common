@@ -5,12 +5,14 @@ import com.badlogic.gdx.Preferences;
 import com.kendao.libgdx.listener.CustomGameListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CustomPreferences {
   // for Mobile
   private final Preferences preferences;
-  private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  private final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  private final DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   // for Desktop
   // private final String configurationFileName = "config.ini";
@@ -101,7 +103,7 @@ public class CustomPreferences {
   }
 
   public LocalDate getPropertyAsLocalDate(String key, LocalDate defaultValue) {
-    return LocalDate.parse(this.preferences.getString(key, this.formatter.format(defaultValue)));
+    return LocalDate.parse(this.preferences.getString(key, this.localDateFormatter.format(defaultValue)));
   }
 
   public LocalDate getPropertyAsLocalDate(String key, String defaultValue) {
@@ -109,7 +111,20 @@ public class CustomPreferences {
   }
 
   public void setPropertyAsLocalDate(String key, LocalDate value) {
-    this.preferences.putString(key, this.formatter.format(value));
+    this.preferences.putString(key, this.localDateFormatter.format(value));
+    this.preferences.flush();
+  }
+
+  public LocalDateTime getPropertyAsLocalDateTime(String key, LocalDate defaultValue) {
+    return LocalDateTime.parse(this.preferences.getString(key, this.localDateTimeFormatter.format(defaultValue)));
+  }
+
+  public LocalDateTime getPropertyAsLocalDateTime(String key, String defaultValue) {
+    return LocalDateTime.parse(this.preferences.getString(key, defaultValue));
+  }
+
+  public void setPropertyAsLocalDateTime(String key, LocalDate value) {
+    this.preferences.putString(key, this.localDateTimeFormatter.format(value));
     this.preferences.flush();
   }
 

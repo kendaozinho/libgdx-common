@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.google.gson.Gson;
 import com.kendao.libgdx.api.dto.CustomApiResponse;
+import com.kendao.libgdx.util.CustomGsonUtil;
 
 public class CustomApi {
   private final String baseUrl;
@@ -17,7 +18,7 @@ public class CustomApi {
     this.deviceId = deviceId;
     this.secretKey = secretKey;
     this.appVersion = appVersion;
-    this.gson = new Gson();
+    this.gson = CustomGsonUtil.getGson();
   }
 
   public static Integer getThrowableStatus(Throwable t) {
@@ -78,7 +79,7 @@ public class CustomApi {
             return ((T) response.getContent());
           } else {
             try {
-              return ((T) this.gson.fromJson(response.getContent(), clazz));
+              return this.gson.fromJson(response.getContent(), clazz);
             } catch (Throwable t) {
               throw new RuntimeException("0 | " + t);
             }
