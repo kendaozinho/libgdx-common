@@ -26,7 +26,7 @@ project(":core") {
 
         // ...
 
-        implementation "com.github.kendaozinho:libgdx-common:0.0.39" // <-- add this
+        implementation "com.github.kendaozinho:libgdx-common:0.0.40" // <-- add this
     }
 }
 ```
@@ -42,8 +42,7 @@ as [libs](https://github.com/libgdx/gdx-pay/tree/master/gdx-pay-android-googlebi
 Maven Local:
 
 ```
-rm -rf $HOME/.m2/repository/com/kendao/libgdx/libgdx-common/
-gradle publishToMavenLocal
+rm -rf $HOME/.m2/repository/com/kendao/libgdx/libgdx-common/ && gradle publishToMavenLocal
 ```
 
 Mavel Central:

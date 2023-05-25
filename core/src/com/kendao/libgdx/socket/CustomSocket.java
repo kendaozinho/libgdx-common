@@ -8,6 +8,7 @@ import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.Logger;
 import com.google.gson.Gson;
 import com.kendao.libgdx.security.CustomAES;
+import com.kendao.libgdx.socket.exception.CustomSocketException;
 import com.kendao.libgdx.util.CustomGsonUtil;
 
 import java.io.PrintStream;
@@ -121,7 +122,7 @@ public class CustomSocket {
       return response;
     } catch (Throwable t) {
       this.logger.error(errorMessage, t);
-      return null;
+      throw new CustomSocketException(errorMessage);
     } finally {
       if (disconnect) {
         this.disconnect();
