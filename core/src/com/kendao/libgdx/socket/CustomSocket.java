@@ -12,6 +12,7 @@ import com.kendao.libgdx.socket.exception.CustomSocketException;
 import com.kendao.libgdx.util.CustomGsonUtil;
 
 import java.io.PrintStream;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class CustomSocket {
@@ -86,16 +87,16 @@ public class CustomSocket {
   }
 
   protected <REQ> Boolean onlySendMessageToServer(REQ request, final boolean disconnect) {
-    return Boolean.TRUE.equals(this.sendMessageToServer(request, Boolean.class, disconnect));
+    return this.sendMessageToServer(request, Boolean.class, disconnect).orElse(Boolean.FALSE);
   }
 
-  protected <REQ, RES> RES sendMessageToServerAndWaitForResponse(REQ request, Class<RES> responseClass, final boolean disconnect) {
+  protected <REQ, RES> Optional<RES> sendMessageToServerAndWaitForResponse(REQ request, Class<RES> responseClass, final boolean disconnect) {
     return this.sendMessageToServer(request, responseClass, disconnect);
   }
 
-  private <REQ, RES> RES sendMessageToServer(REQ request, Class<RES> responseClass, final boolean disconnect) {
+  private <REQ, RES> Optional<RES> sendMessageToServer(REQ request, Class<RES> responseClass, final boolean disconnect) {
     if (this.isBlocked()) {
-      return null;
+      return Optional.empty();
     }
     this.setBlocked(true);
 
@@ -106,16 +107,16 @@ public class CustomSocket {
       errorMessage = "Unable to send message to server";
       this.output.println(this.customAES.encrypt(this.gson.toJson(request)));
 
-      RES response = null;
+      Optional<RES> response = Optional.empty();
 
       if (Boolean.class.isAssignableFrom(responseClass)) {
-        response = (RES) Boolean.TRUE;
+        response = Optional.of((RES) Boolean.TRUE);
       } else {
         errorMessage = "Unable to receive message from server";
 
         if (this.input.hasNext()) {
           String line = this.customAES.decrypt(this.input.nextLine());
-          response = this.gson.fromJson(line, responseClass);
+          response = Optional.of(this.gson.fromJson(line, responseClass));
         }
       }
 
