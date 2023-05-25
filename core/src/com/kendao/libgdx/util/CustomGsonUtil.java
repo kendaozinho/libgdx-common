@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Objects;
 
 public final class CustomGsonUtil {
   private static final DateTimeFormatter LOCAL_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -23,11 +24,11 @@ public final class CustomGsonUtil {
   }
 
   public static String objectToString(Object object) {
-    return CustomGsonUtil.getGson().toJson(object);
+    return Objects.isNull(object) ? null : CustomGsonUtil.getGson().toJson(object);
   }
 
   public static <T> T stringToObject(String value, Class<T> clazz) {
-    return CustomGsonUtil.getGson().fromJson(value, clazz);
+    return CustomStringUtil.hasValue(value) ? CustomGsonUtil.getGson().fromJson(value, clazz) : null;
   }
 
   private static class LocalDateSerializer implements JsonSerializer<LocalDate> {
