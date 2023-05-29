@@ -1,14 +1,14 @@
 package com.kendao.libgdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.List;
 
-public class CustomRadioButton extends CustomTable {
+public class CustomRadioButton extends CustomTable{
+  private final List<CustomCheckBox> checkBoxes;
+
   public CustomRadioButton(List<CustomCheckBox> checkBoxes) {
     if (checkBoxes.stream().filter(Button::isChecked).count() != 1) {
       for (int i = 0; i < checkBoxes.size(); i++) {
@@ -20,13 +20,25 @@ public class CustomRadioButton extends CustomTable {
       @Override
       public void changed(ChangeEvent event, Actor actor) {
         if (cb.isChecked()) {
-          checkBoxes.stream().filter(cbx -> !cbx.equals(cb)).forEach(cbx -> cbx.setChecked(false));
+          checkBoxes.stream().filter(cb2 -> !cb2.equals(cb)).forEach(cb2 -> cb2.setChecked(false));
+        }
+
+        if (checkBoxes.stream().noneMatch(Button::isChecked)) {
+          cb.setChecked(true);
         }
       }
     }));
 
-    for (int i = 0; i < checkBoxes.size(); i++) {
-      super.addRow(checkBoxes.get(i));
+    if (checkBoxes.size() == 2) {
+      super.addRow(checkBoxes.get(0), checkBoxes.get(1));
+    } else {
+      checkBoxes.forEach(super::addRow);
     }
+
+    this.checkBoxes = checkBoxes;
+  }
+
+  public List<CustomCheckBox> getCheckBoxes() {
+    return this.checkBoxes;
   }
 }
