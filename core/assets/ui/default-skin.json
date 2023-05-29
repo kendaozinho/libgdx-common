@@ -203,5 +203,14 @@
       "background": "gray-tinted-drawable",
       "wrapWidth": 400
     }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+    "default": {
+      "font": "default-bitmap-font",
+      "fontColor": "white-color",
+      "disabledFontColor": "light-gray-color",
+      "checkboxOn": "checkbox-on",
+      "checkboxOff": "checkbox-off"
+    }
   }
 }

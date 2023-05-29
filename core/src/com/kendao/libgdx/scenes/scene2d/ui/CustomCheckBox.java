@@ -1,0 +1,33 @@
+package com.kendao.libgdx.scenes.scene2d.ui;
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.kendao.libgdx.assets.CustomAssetManager;
+import com.kendao.libgdx.storage.CustomPreferences;
+
+public class CustomCheckBox extends CheckBox {
+  private boolean enableSound = true;
+
+  public CustomCheckBox(String text, boolean checked) {
+    super(" " + text.toUpperCase(), CustomSkin.getInstance());
+    super.getCells().get(0).size(25, 25);
+    super.setChecked(checked);
+
+    super.addListener(new ClickListener() {
+      @Override
+      public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        if (!isDisabled()) {
+          if (enableSound && CustomPreferences.getInstance().isAudioEnabled()) {
+            CustomAssetManager.getInstance().getConfirmSound().play();
+          }
+        }
+        return true;
+      }
+    });
+  }
+
+  public void setEnableSound(boolean enableSound) {
+    this.enableSound = enableSound;
+  }
+}

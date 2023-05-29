@@ -82,7 +82,7 @@ public class CustomDialog extends Dialog {
     super.getContentTable().row();
     super.getContentTable().add(actor);
 
-    int buttonWidth = (int) (width / 2);
+    int buttonWidth = width / 2;
     int buttonHeight = 54;
 
     super.button(firstButton.getKey(), true, this.getTextButtonStyle(buttonWidth, buttonHeight, firstButton.getValue())).pad(5); // sends "true" as the result
