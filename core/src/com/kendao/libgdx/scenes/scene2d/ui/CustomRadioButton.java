@@ -41,4 +41,8 @@ public class CustomRadioButton extends CustomTable{
   public List<CustomCheckBox> getCheckBoxes() {
     return this.checkBoxes;
   }
+
+  public CustomCheckBox getCheckedBox() {
+    return this.checkBoxes.stream().filter(Button::isChecked).findFirst().orElse(null);
+  }
 }

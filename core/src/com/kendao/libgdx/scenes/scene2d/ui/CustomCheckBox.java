@@ -7,14 +7,14 @@ import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomCheckBox extends CheckBox {
-  private final Object id;
+  private final Object value;
   private boolean enableSound = true;
 
   public CustomCheckBox(String text, boolean checked) {
     super(" " + text.toUpperCase(), CustomSkin.getInstance());
     super.getCells().get(0).size(25, 25);
     super.setChecked(checked);
-    this.id = null;
+    this.value = null;
     this.addListeners();
   }
 
@@ -22,7 +22,7 @@ public class CustomCheckBox extends CheckBox {
     super(" " + text.toUpperCase(), CustomSkin.getInstance());
     super.getCells().get(0).size(25, 25);
     super.setChecked(checked);
-    this.id = id;
+    this.value = id;
     this.addListeners();
   }
 
@@ -44,7 +44,7 @@ public class CustomCheckBox extends CheckBox {
     this.enableSound = enableSound;
   }
 
-  public Object getId() {
-    return this.id;
+  public Object getValue() {
+    return this.value;
   }
 }
