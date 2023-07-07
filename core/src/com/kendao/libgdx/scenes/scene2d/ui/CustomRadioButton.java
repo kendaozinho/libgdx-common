@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.util.List;
 
-public class CustomRadioButton extends CustomTable{
+public class CustomRadioButton extends CustomTable {
   private final List<CustomCheckBox> checkBoxes;
 
   public CustomRadioButton(List<CustomCheckBox> checkBoxes) {
@@ -32,7 +32,7 @@ public class CustomRadioButton extends CustomTable{
     if (checkBoxes.size() == 2) {
       super.addRow(checkBoxes.get(0), checkBoxes.get(1));
     } else {
-      checkBoxes.forEach(super::addRow);
+      checkBoxes.forEach(cb -> super.addRow(cb, ALIGNMENT.LEFT));
     }
 
     this.checkBoxes = checkBoxes;

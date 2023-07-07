@@ -6,7 +6,8 @@ import io.sentry.Sentry;
 import java.util.Arrays;
 
 public final class SentryLog {
-  private SentryLog() {}
+  private SentryLog() {
+  }
 
   public static void initialize(String dsn) {
     Sentry.init(options -> {

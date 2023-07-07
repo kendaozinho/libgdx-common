@@ -23,13 +23,41 @@ public class CustomTable extends Table {
   }
 
   public void addRow(Actor actor) {
-    super.add(actor).center().pad(this.padding).fill().colspan(2);
+    this.addRow(actor, ALIGNMENT.CENTER);
+  }
+
+  public void addRow(Actor actor, ALIGNMENT alignment) {
+    switch (alignment) {
+      case LEFT:
+        super.add(actor).left().pad(this.padding).fill().colspan(2);
+        break;
+      case RIGHT:
+        super.add(actor).right().pad(this.padding).fill().colspan(2);
+        break;
+      default:
+        super.add(actor).center().pad(this.padding).fill().colspan(2);
+        break;
+    }
 
     super.row();
   }
 
   public void addRow(Actor actor, int width, int height) {
-    super.add(actor).center().pad(this.padding).width(width).height(height).colspan(2);
+    this.addRow(actor, width, height, ALIGNMENT.CENTER);
+  }
+
+  public void addRow(Actor actor, int width, int height, ALIGNMENT alignment) {
+    switch (alignment) {
+      case LEFT:
+        super.add(actor).left().pad(this.padding).width(width).height(height).colspan(2);
+        break;
+      case RIGHT:
+        super.add(actor).right().pad(this.padding).width(width).height(height).colspan(2);
+        break;
+      default:
+        super.add(actor).center().pad(this.padding).width(width).height(height).colspan(2);
+        break;
+    }
 
     super.row();
   }
@@ -59,10 +87,26 @@ public class CustomTable extends Table {
   }
 
   public void addRow(int width, int height, Actor... actors) {
+    this.addRow(width, height, ALIGNMENT.CENTER, actors);
+  }
+
+  public void addRow(int width, int height, ALIGNMENT alignment, Actor... actors) {
     for (Actor actor : actors) {
-      super.add(actor).center().pad(this.padding).width(width).height(height);
+      switch (alignment) {
+        case LEFT:
+          super.add(actor).left().pad(this.padding).width(width).height(height);
+          break;
+        case RIGHT:
+          super.add(actor).right().pad(this.padding).width(width).height(height);
+          break;
+        default:
+          super.add(actor).center().pad(this.padding).width(width).height(height);
+          break;
+      }
     }
 
     super.row();
   }
+
+  public enum ALIGNMENT {LEFT, CENTER, RIGHT}
 }
