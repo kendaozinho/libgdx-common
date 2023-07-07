@@ -7,13 +7,26 @@ import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
 
 public class CustomCheckBox extends CheckBox {
+  private final Object id;
   private boolean enableSound = true;
 
   public CustomCheckBox(String text, boolean checked) {
     super(" " + text.toUpperCase(), CustomSkin.getInstance());
     super.getCells().get(0).size(25, 25);
     super.setChecked(checked);
+    this.id = null;
+    this.addListeners();
+  }
 
+  public CustomCheckBox(String text, boolean checked, Object id) {
+    super(" " + text.toUpperCase(), CustomSkin.getInstance());
+    super.getCells().get(0).size(25, 25);
+    super.setChecked(checked);
+    this.id = id;
+    this.addListeners();
+  }
+
+  private void addListeners() {
     super.addListener(new ClickListener() {
       @Override
       public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -29,5 +42,9 @@ public class CustomCheckBox extends CheckBox {
 
   public void setEnableSound(boolean enableSound) {
     this.enableSound = enableSound;
+  }
+
+  public Object getId() {
+    return this.id;
   }
 }
