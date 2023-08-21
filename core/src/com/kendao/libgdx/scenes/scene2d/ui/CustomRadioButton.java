@@ -32,7 +32,7 @@ public class CustomRadioButton extends CustomTable {
     if (checkBoxes.size() == 2) {
       super.addRow(checkBoxes.get(0), checkBoxes.get(1));
     } else {
-      checkBoxes.forEach(cb -> super.addRow(cb, ALIGNMENT.LEFT));
+      checkBoxes.forEach(super::addRow);
     }
 
     this.checkBoxes = checkBoxes;

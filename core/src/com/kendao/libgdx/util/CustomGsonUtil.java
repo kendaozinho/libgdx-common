@@ -31,6 +31,10 @@ public final class CustomGsonUtil {
     return CustomStringUtil.hasValue(value) ? CustomGsonUtil.getGson().fromJson(value, clazz) : null;
   }
 
+  public static <T> T cloneObject(Object object, Class<T> clazz) {
+    return CustomGsonUtil.stringToObject(CustomGsonUtil.objectToString(object), clazz);
+  }
+
   private static class LocalDateSerializer implements JsonSerializer<LocalDate> {
     @Override
     public JsonElement serialize(LocalDate localDate, Type srcType, JsonSerializationContext context) {
