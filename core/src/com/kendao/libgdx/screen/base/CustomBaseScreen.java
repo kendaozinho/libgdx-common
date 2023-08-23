@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.kendao.libgdx.input.CustomDirectionGestureDetector;
 import com.kendao.libgdx.listener.CustomDirectionListener;
 import com.kendao.libgdx.scenes.scene2d.CustomStage;
+import com.kendao.libgdx.screen.main.CustomMainScreen;
 
 public abstract class CustomBaseScreen implements CustomDirectionListener {
   private CustomStage hudStage;
@@ -34,7 +35,7 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
     return CustomScreenManager.getInstance().getScreen();
   }
 
-  public static <T> T getInstanceAs(T clazz) {
+  public static <T> T getInstanceAs(Class<T> clazz) {
     return (T) CustomBaseScreen.getInstance();
   }
 
