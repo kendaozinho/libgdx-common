@@ -34,6 +34,10 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
     return CustomScreenManager.getInstance().getScreen();
   }
 
+  public static <T> T getInstanceAs(T clazz) {
+    return (T) CustomBaseScreen.getInstance();
+  }
+
   private void setInputMultiplexerProcessor() {
     InputMultiplexer multiplexer = new InputMultiplexer();
 
