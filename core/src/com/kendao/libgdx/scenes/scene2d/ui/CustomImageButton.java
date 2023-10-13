@@ -12,6 +12,7 @@ import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.graphics.CustomColor;
 import com.kendao.libgdx.storage.CustomPreferences;
 import com.kendao.libgdx.util.CustomCoordinatesUtil;
+import com.kendao.libgdx.util.CustomStringUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImageButton extends ImageButton {
@@ -173,7 +174,7 @@ public class CustomImageButton extends ImageButton {
   }
 
   public void addTooltip(String tooltipText) {
-    if (tooltipText != null && !tooltipText.trim().isEmpty()) {
+    if (CustomStringUtil.hasValue(tooltipText)) {
       super.addListener(new CustomTooltip(tooltipText));
     }
   }

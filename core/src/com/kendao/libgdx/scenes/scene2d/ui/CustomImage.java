@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.kendao.libgdx.graphics.CustomPixmap;
 import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.util.CustomCoordinatesUtil;
+import com.kendao.libgdx.util.CustomStringUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImage extends Image {
@@ -122,7 +123,7 @@ public class CustomImage extends Image {
   }
 
   public void addTooltip(String tooltipText) {
-    if (tooltipText != null && !tooltipText.trim().isEmpty()) {
+    if (CustomStringUtil.hasValue(tooltipText)) {
       super.addListener(new CustomTooltip(tooltipText));
     }
   }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
+import com.kendao.libgdx.util.CustomStringUtil;
 
 public class CustomTextButton extends TextButton {
   private final Color defaultColor = Color.ROYAL;
@@ -105,7 +106,7 @@ public class CustomTextButton extends TextButton {
   }
 
   public void addTooltip(String tooltipText) {
-    if (tooltipText != null && !tooltipText.trim().isEmpty()) {
+    if (CustomStringUtil.hasValue(tooltipText)) {
       super.addListener(new CustomTooltip(tooltipText));
     }
   }
