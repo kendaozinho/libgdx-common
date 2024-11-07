@@ -18,7 +18,7 @@ public class CustomSplashScreen extends CustomBaseScreen {
 
   @Override
   protected void load() {
-    CustomLabel label = new CustomLabel("libgdx-common\n\ndeveloped by\nkendao games", Color.WHITE, CustomLabel.Sizes.LARGE);
+    CustomLabel label = new CustomLabel("libgdx-common\n\ndeveloped by\nlunar bits", Color.WHITE, CustomLabel.Sizes.LARGE);
     label.setPosition((((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth() / 2) - (label.getWidth() / 2), (((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight() / 2) - (label.getHeight() / 2));
     label.setAlignment(Align.center);
     label.hide();

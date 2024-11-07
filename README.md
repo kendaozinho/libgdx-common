@@ -1,6 +1,6 @@
 # libgdx-common
 
-Biblioteca utilizada nos jogos criados pela kendao games.
+Biblioteca utilizada nos jogos criados pela lunar bits.
 
 ## Pré-requisitos
 

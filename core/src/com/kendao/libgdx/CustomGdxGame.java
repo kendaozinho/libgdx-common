@@ -3,6 +3,7 @@ package com.kendao.libgdx;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomSkin;
@@ -25,7 +26,7 @@ public class CustomGdxGame extends ApplicationAdapter implements CustomGameListe
     Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
     // Disable hardware back button
-    Gdx.input.setCatchBackKey(true);
+    Gdx.input.setCatchKey(Input.Keys.BACK, true);
 
     // Load asset manager
     this.instances.put(CustomAssetManager.class, new CustomAssetManager());

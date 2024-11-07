@@ -14,8 +14,8 @@ import com.kendao.libgdx.storage.CustomStorage;
 public class CustomAssetManager extends AssetManager {
   private final Logger logger = new Logger(this.toString(), Application.LOG_DEBUG);
 
-  private String confirmSoundPath = "audio/sounds/confirm.mp3";
-  private String cancelSoundPath = "audio/sounds/cancel.mp3";
+  private String confirmSoundPath = "audio/sound/confirm.mp3";
+  private String cancelSoundPath = "audio/sound/cancel.mp3";
 
   public CustomAssetManager() {
     super();
@@ -73,6 +73,10 @@ public class CustomAssetManager extends AssetManager {
         }
       }
     }
+  }
+
+  public boolean exists(String fileName) {
+    return super.isLoaded(fileName);
   }
 
   public Texture getTexture(String fileName) {
