@@ -67,8 +67,8 @@ project(":core") {
                 groupId = 'com.github.kendaozinho'
                 artifactId = 'libgdx-common'
 
-                // version = "0.0.51-SNAPSHOT"
                 version = "0.0.51"
+                // version = "0.0.51-SNAPSHOT"
 
                 from components.java
 
@@ -82,8 +82,8 @@ project(":core") {
         repositories {
             maven {
                 credentials {
-                    username = "$System.env.MAVEN_USERNAME"
-                    password = "$System.env.MAVEN_PASSWORD"
+                    username = "$System.env.MAVEN_USERNAME_2"
+                    password = "$System.env.MAVEN_PASSWORD_2"
                 }
 
                 // url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
