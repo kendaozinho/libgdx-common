@@ -33,13 +33,6 @@ public class CustomStage extends Stage {
     }
   }
 
-  public void removeActors() {
-    Array<Actor> actors = super.getActors();
-    for (int i = (actors.size - 1); i >= 0; i--) {
-      actors.get(i).remove();
-    }
-  }
-
   @Override
   public boolean scrolled(float amountX, float amountY) {
     boolean response = super.scrolled(amountX, amountY);

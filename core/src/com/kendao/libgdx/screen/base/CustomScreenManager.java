@@ -121,25 +121,25 @@ public class CustomScreenManager {
 
       // Remove actors and dispose background stage
       if (this.screen.getBackgroundStage() != null) {
-        this.screen.getBackgroundStage().removeActors();
+        this.screen.getBackgroundStage().clear();
         this.screen.getBackgroundStage().dispose();
       }
 
       // Remove actors and dispose main stage
       if (this.screen.getMainStage() != null) {
-        this.screen.getMainStage().removeActors();
+        this.screen.getMainStage().clear();
         this.screen.getMainStage().dispose();
       }
 
       // Remove actors and dispose landscape stage
       if (this.screen.getLandscapeStage() != null) {
-        this.screen.getLandscapeStage().removeActors();
+        this.screen.getLandscapeStage().clear();
         this.screen.getLandscapeStage().dispose();
       }
 
       // Remove actors and dispose hud stage
       if (this.screen.getHudStage() != null) {
-        this.screen.getHudStage().removeActors();
+        this.screen.getHudStage().clear();
         this.screen.getHudStage().dispose();
       }
     }

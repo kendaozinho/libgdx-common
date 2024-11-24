@@ -5,19 +5,20 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.kendao.libgdx.input.CustomDirectionGestureDetector;
 import com.kendao.libgdx.listener.CustomDirectionListener;
 import com.kendao.libgdx.scenes.scene2d.CustomStage;
-import com.kendao.libgdx.screen.main.CustomMainScreen;
 
 public abstract class CustomBaseScreen implements CustomDirectionListener {
   private CustomStage hudStage;
   private CustomStage landscapeStage;
   private CustomStage mainStage;
   private CustomStage backgroundStage;
+  private Boolean processing;
 
   protected CustomBaseScreen() {
     this.hudStage = new CustomStage(false);
     this.landscapeStage = new CustomStage(false);
     this.mainStage = new CustomStage(false);
     this.backgroundStage = new CustomStage(false);
+    this.processing = false;
 
     this.setInputMultiplexerProcessor();
   }
@@ -27,6 +28,7 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
     this.landscapeStage = new CustomStage(false);
     this.mainStage = new CustomStage(isMainStageScrollable);
     this.backgroundStage = new CustomStage(false);
+    this.processing = false;
 
     this.setInputMultiplexerProcessor();
   }
@@ -66,10 +68,10 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
   protected abstract void dispose();
 
   public void removeActorsFromAllStages() {
-    this.getBackgroundStage().removeActors();
-    this.getMainStage().removeActors();
-    this.getLandscapeStage().removeActors();
-    this.getHudStage().removeActors();
+    this.getBackgroundStage().clear();
+    this.getMainStage().clear();
+    this.getLandscapeStage().clear();
+    this.getHudStage().clear();
   }
 
   public CustomStage getHudStage() {
@@ -86,5 +88,13 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
 
   public CustomStage getLandscapeStage() {
     return this.landscapeStage;
+  }
+
+  public Boolean isProcessing() {
+    return this.processing;
+  }
+
+  public void setProcessing(Boolean processing) {
+    this.processing = processing;
   }
 }
