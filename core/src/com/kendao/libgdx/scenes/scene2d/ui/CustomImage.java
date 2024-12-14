@@ -40,6 +40,19 @@ public class CustomImage extends Image {
     }
   }
 
+  public CustomImage(Texture texture, float x, float y, float width, float height, int originAlignment) {
+    super(texture);
+    this.updateTexturePath(texture);
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
+  }
+
   public CustomImage(TextureRegion textureRegion) {
     super(textureRegion);
   }
@@ -59,6 +72,18 @@ public class CustomImage extends Image {
     }
   }
 
+  public CustomImage(TextureRegion textureRegion, float x, float y, float width, float height, int originAlignment) {
+    super(textureRegion);
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
+  }
+
   public CustomImage(Color color) {
     super(new Texture(new CustomPixmap(color, ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight())));
   }
@@ -71,6 +96,12 @@ public class CustomImage extends Image {
   public CustomImage(Color color, float x, float y, int width, int height) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
+  }
+
+  public CustomImage(Color color, float x, float y, int width, int height, int originAlignment) {
+    super(new Texture(new CustomPixmap(color, width, height)));
+    super.setPosition(x, y);
+    super.setOrigin(originAlignment);
   }
 
   public void updateDrawable(Texture texture) {

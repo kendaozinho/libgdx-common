@@ -44,6 +44,20 @@ public class CustomImageButton extends ImageButton {
     this.addListeners(listener);
   }
 
+  public CustomImageButton(Image image, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+    super(image.getDrawable());
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
+
+    this.addListeners(listener);
+  }
+
   public CustomImageButton(Texture texture, EventListener listener) {
     super(new Image(texture).getDrawable());
     this.addListeners(listener);
@@ -68,6 +82,20 @@ public class CustomImageButton extends ImageButton {
     this.addListeners(listener);
   }
 
+  public CustomImageButton(Texture texture, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+    super(new Image(texture).getDrawable());
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
+
+    this.addListeners(listener);
+  }
+
   public CustomImageButton(Texture firstTexture, Texture secondTexture, int x, int y, float width, float height, EventListener listener) {
     super(
         new Image(firstTexture).getDrawable(),
@@ -80,6 +108,24 @@ public class CustomImageButton extends ImageButton {
     if (width > 0 && height > 0) {
       super.setSize(width, height);
     }
+
+    this.addListeners(listener);
+  }
+
+  public CustomImageButton(Texture firstTexture, Texture secondTexture, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+    super(
+        new Image(firstTexture).getDrawable(),
+        null,
+        new Image(secondTexture).getDrawable()
+    );
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
 
     this.addListeners(listener);
   }
@@ -109,6 +155,20 @@ public class CustomImageButton extends ImageButton {
     this.addListeners(listener);
   }
 
+  public CustomImageButton(TextureRegion textureRegion, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+    super(new Image(textureRegion).getDrawable());
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
+
+    this.addListeners(listener);
+  }
+
   public CustomImageButton(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion, int x, int y, float width, float height, EventListener listener) {
     super(
         new Image(firstTextureRegion).getDrawable(),
@@ -121,6 +181,24 @@ public class CustomImageButton extends ImageButton {
     if (width > 0 && height > 0) {
       super.setSize(width, height);
     }
+
+    this.addListeners(listener);
+  }
+
+  public CustomImageButton(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+    super(
+        new Image(firstTextureRegion).getDrawable(),
+        null,
+        new Image(secondTextureRegion).getDrawable()
+    );
+
+    super.setPosition(x, y);
+
+    if (width > 0 && height > 0) {
+      super.setSize(width, height);
+    }
+
+    super.setOrigin(originAlignment);
 
     this.addListeners(listener);
   }

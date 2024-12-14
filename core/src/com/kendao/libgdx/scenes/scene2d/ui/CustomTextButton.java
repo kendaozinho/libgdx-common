@@ -44,6 +44,15 @@ public class CustomTextButton extends TextButton {
     this.addListeners(listener);
   }
 
+  public CustomTextButton(String text, int x, int y, float width, float height, Color color, int originAlignment, EventListener listener) {
+    super(text, CustomSkin.getInstance());
+    super.setPosition(x, y);
+    super.setSize(width, height);
+    super.setColor(color);
+    super.setOrigin(originAlignment);
+    this.addListeners(listener);
+  }
+
   @Override
   public void setDisabled(boolean isDisabled) {
     super.setDisabled(isDisabled);

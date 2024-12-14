@@ -67,7 +67,7 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
 
   protected abstract void dispose();
 
-  public void removeActorsFromAllStages() {
+  public void clearAllStages() {
     this.getBackgroundStage().clear();
     this.getMainStage().clear();
     this.getLandscapeStage().clear();

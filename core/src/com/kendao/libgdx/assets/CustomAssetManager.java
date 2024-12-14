@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Logger;
 import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.storage.CustomStorage;
@@ -81,6 +82,16 @@ public class CustomAssetManager extends AssetManager {
 
   public Texture getTexture(String fileName) {
     return super.get(fileName, Texture.class);
+  }
+
+  public TextureRegion getTextureRegion(String fileName) {
+    return new TextureRegion(this.getTexture(fileName));
+  }
+
+  public TextureRegion getTextureRegion(String fileName, boolean flipX, boolean flipY) {
+    TextureRegion textureRegion = this.getTextureRegion(fileName);
+    textureRegion.flip(flipX, flipY);
+    return textureRegion;
   }
 
   public Sound getSound(String fileName) {
