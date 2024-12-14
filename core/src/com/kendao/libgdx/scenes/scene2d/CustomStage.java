@@ -8,8 +8,9 @@ import com.kendao.libgdx.listener.CustomGameListener;
 
 public class CustomStage extends Stage {
   private final Boolean isScrollable;
+  private final Float minZoomValue, maxZoomValue;
 
-  public CustomStage(Boolean isScrollable) {
+  public CustomStage(Boolean isScrollable, Float minZoomValue, Float maxZoomValue) {
     super(new StretchViewport(
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight(),
@@ -19,6 +20,8 @@ public class CustomStage extends Stage {
         )
     ));
     this.isScrollable = isScrollable;
+    this.minZoomValue = minZoomValue;
+    this.maxZoomValue = maxZoomValue;
   }
 
   public void updateCameraPosition(float x, float y, float z) {
@@ -30,25 +33,33 @@ public class CustomStage extends Stage {
   public boolean scrolled(float amountX, float amountY) {
     boolean response = super.scrolled(amountX, amountY);
 
-    if (this.isScrollable) {
+    if (Boolean.TRUE.equals(isScrollable)) {
       if (amountX == -1 || amountY == -1) {
-        this.zoomIn(0.25f, 0.50f);
+        this.zoomIn();
       } else if (amountX == 1 || amountY == 1) {
-        this.zoomOut(0.25f, 2.50f);
+        this.zoomOut();
       }
     }
 
     return response;
   }
 
-  public void zoomIn(float quantity, float minValue) {
-    if (((OrthographicCamera) super.getViewport().getCamera()).zoom > minValue /* 1.0f is default */) {
+  public void zoomIn() {
+    this.zoomIn(0.25f);
+  }
+
+  public void zoomIn(float quantity) {
+    if (this.minZoomValue != null && ((OrthographicCamera) super.getViewport().getCamera()).zoom > this.minZoomValue /* 1.0f is default */) {
       ((OrthographicCamera) super.getViewport().getCamera()).zoom -= quantity;
     }
   }
 
-  public void zoomOut(float quantity, float maxValue) {
-    if (((OrthographicCamera) super.getViewport().getCamera()).zoom < maxValue /* 1.0f is default */) {
+  public void zoomOut() {
+    this.zoomOut(0.25f);
+  }
+
+  public void zoomOut(float quantity) {
+    if (this.maxZoomValue != null && ((OrthographicCamera) super.getViewport().getCamera()).zoom < this.maxZoomValue /* 1.0f is default */) {
       ((OrthographicCamera) super.getViewport().getCamera()).zoom += quantity;
     }
   }

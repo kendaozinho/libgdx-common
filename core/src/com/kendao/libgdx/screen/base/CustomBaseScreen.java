@@ -14,20 +14,20 @@ public abstract class CustomBaseScreen implements CustomDirectionListener {
   private Boolean processing;
 
   protected CustomBaseScreen() {
-    this.hudStage = new CustomStage(false);
-    this.landscapeStage = new CustomStage(false);
-    this.mainStage = new CustomStage(false);
-    this.backgroundStage = new CustomStage(false);
+    this.hudStage = new CustomStage(false, null, null);
+    this.landscapeStage = new CustomStage(false, null, null);
+    this.mainStage = new CustomStage(false, 0.50f, 2.50f);
+    this.backgroundStage = new CustomStage(false, null, null);
     this.processing = false;
 
     this.setInputMultiplexerProcessor();
   }
 
-  protected CustomBaseScreen(Boolean isMainStageScrollable) {
-    this.hudStage = new CustomStage(false);
-    this.landscapeStage = new CustomStage(false);
-    this.mainStage = new CustomStage(isMainStageScrollable);
-    this.backgroundStage = new CustomStage(false);
+  protected CustomBaseScreen(Boolean isMainStageScrollable, Float mainStageMinZoomValue, Float mainStageMaxZoomValue) {
+    this.hudStage = new CustomStage(false, null, null);
+    this.landscapeStage = new CustomStage(false, null, null);
+    this.mainStage = new CustomStage(isMainStageScrollable, mainStageMinZoomValue, mainStageMaxZoomValue);
+    this.backgroundStage = new CustomStage(false, null, null);
     this.processing = false;
 
     this.setInputMultiplexerProcessor();
