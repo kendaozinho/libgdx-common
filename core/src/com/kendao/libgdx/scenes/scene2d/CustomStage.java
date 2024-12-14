@@ -12,41 +12,44 @@ public class CustomStage extends Stage {
   public CustomStage(Boolean isScrollable) {
     super(new StretchViewport(
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
+        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight(),
+        new OrthographicCamera(
+            ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
+            ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
+        )
     ));
     this.isScrollable = isScrollable;
   }
 
-  public void addCamera() {
-    super.getViewport().setCamera(new OrthographicCamera(
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
-    ));
-  }
-
   public void updateCameraPosition(float x, float y, float z) {
-    if (super.getViewport().getCamera() != null) {
-      super.getViewport().getCamera().position.set(x, y, z);
-      super.getViewport().getCamera().update();
-    }
+    super.getViewport().getCamera().position.set(x, y, z);
+    super.getViewport().getCamera().update();
   }
 
   @Override
   public boolean scrolled(float amountX, float amountY) {
     boolean response = super.scrolled(amountX, amountY);
 
-    if (this.isScrollable && super.getViewport().getCamera() != null) {
-      if (amountX == -1 || amountY == -1) { // + zoom
-        if (((OrthographicCamera) super.getViewport().getCamera()).zoom > 0.5f /* 1.0f is default */) {
-          ((OrthographicCamera) super.getViewport().getCamera()).zoom -= 0.25;
-        }
-      } else if (amountX == 1 || amountY == 1) { // - zoom
-        if (((OrthographicCamera) super.getViewport().getCamera()).zoom < 2.5f) {
-          ((OrthographicCamera) super.getViewport().getCamera()).zoom += 0.25;
-        }
+    if (this.isScrollable) {
+      if (amountX == -1 || amountY == -1) {
+        this.zoomIn(0.25f, 0.50f);
+      } else if (amountX == 1 || amountY == 1) {
+        this.zoomOut(0.25f, 2.50f);
       }
     }
 
     return response;
+  }
+
+  public void zoomIn(float quantity, float minValue) {
+    if (((OrthographicCamera) super.getViewport().getCamera()).zoom > minValue /* 1.0f is default */) {
+      ((OrthographicCamera) super.getViewport().getCamera()).zoom -= quantity;
+    }
+  }
+
+  public void zoomOut(float quantity, float maxValue) {
+    if (((OrthographicCamera) super.getViewport().getCamera()).zoom < maxValue /* 1.0f is default */) {
+      ((OrthographicCamera) super.getViewport().getCamera()).zoom += quantity;
+    }
   }
 }
