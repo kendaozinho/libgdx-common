@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.graphics.CustomPixmap;
 import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.util.CustomCoordinatesUtil;
@@ -21,12 +22,14 @@ public class CustomImage extends Image {
   public CustomImage(Texture texture) {
     super(texture);
     this.updateTexturePath(texture);
+    super.setOrigin(Align.center);
   }
 
   public CustomImage(Texture texture, float x, float y) {
     super(texture);
     this.updateTexturePath(texture);
     super.setPosition(x, y);
+    super.setOrigin(Align.center);
   }
 
   public CustomImage(Texture texture, float x, float y, float width, float height) {
@@ -38,9 +41,11 @@ public class CustomImage extends Image {
     if (width > 0 && height > 0) {
       super.setSize(width, height);
     }
+
+    super.setOrigin(Align.center);
   }
 
-  public CustomImage(Texture texture, float x, float y, float width, float height, int originAlignment) {
+  public CustomImage(Texture texture, float x, float y, float width, float height, int originAlignment, float amountInDegrees) {
     super(texture);
     this.updateTexturePath(texture);
 
@@ -51,15 +56,18 @@ public class CustomImage extends Image {
     }
 
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
   }
 
   public CustomImage(TextureRegion textureRegion) {
     super(textureRegion);
+    super.setOrigin(Align.center);
   }
 
   public CustomImage(TextureRegion textureRegion, float x, float y) {
     super(textureRegion);
     super.setPosition(x, y);
+    super.setOrigin(Align.center);
   }
 
   public CustomImage(TextureRegion textureRegion, float x, float y, float width, float height) {
@@ -70,9 +78,11 @@ public class CustomImage extends Image {
     if (width > 0 && height > 0) {
       super.setSize(width, height);
     }
+
+    super.setOrigin(Align.center);
   }
 
-  public CustomImage(TextureRegion textureRegion, float x, float y, float width, float height, int originAlignment) {
+  public CustomImage(TextureRegion textureRegion, float x, float y, float width, float height, int originAlignment, float amountInDegrees) {
     super(textureRegion);
 
     super.setPosition(x, y);
@@ -82,26 +92,31 @@ public class CustomImage extends Image {
     }
 
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
   }
 
   public CustomImage(Color color) {
     super(new Texture(new CustomPixmap(color, ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight())));
+    super.setOrigin(Align.center);
   }
 
   public CustomImage(Color color, float x, float y) {
     super(new Texture(new CustomPixmap(color, ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight())));
     super.setPosition(x, y);
+    super.setOrigin(Align.center);
   }
 
   public CustomImage(Color color, float x, float y, int width, int height) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
+    super.setOrigin(Align.center);
   }
 
-  public CustomImage(Color color, float x, float y, int width, int height, int originAlignment) {
+  public CustomImage(Color color, float x, float y, int width, int height, int originAlignment, float amountInDegrees) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
   }
 
   public void updateDrawable(Texture texture) {

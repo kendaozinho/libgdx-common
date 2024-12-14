@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.graphics.CustomColor;
 import com.kendao.libgdx.storage.CustomPreferences;
@@ -21,6 +22,8 @@ public class CustomImageButton extends ImageButton {
 
   public CustomImageButton(Image image, EventListener listener) {
     super(image.getDrawable());
+    super.setTransform(true);
+    super.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -28,6 +31,9 @@ public class CustomImageButton extends ImageButton {
     super(image.getDrawable());
 
     super.setPosition(x, y);
+
+    super.setTransform(true);
+    super.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -41,10 +47,13 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
-  public CustomImageButton(Image image, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+  public CustomImageButton(Image image, int x, int y, float width, float height, int originAlignment, float amountInDegrees, EventListener listener) {
     super(image.getDrawable());
 
     super.setPosition(x, y);
@@ -53,13 +62,17 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
   }
 
   public CustomImageButton(Texture texture, EventListener listener) {
     super(new Image(texture).getDrawable());
+    super.setTransform(true);
+    super.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -67,6 +80,10 @@ public class CustomImageButton extends ImageButton {
     super(new Image(texture).getDrawable());
 
     super.setPosition(x, y);
+
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
@@ -79,10 +96,13 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
-  public CustomImageButton(Texture texture, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+  public CustomImageButton(Texture texture, int x, int y, float width, float height, int originAlignment, float amountInDegrees, EventListener listener) {
     super(new Image(texture).getDrawable());
 
     super.setPosition(x, y);
@@ -91,7 +111,9 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
   }
@@ -109,10 +131,13 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
-  public CustomImageButton(Texture firstTexture, Texture secondTexture, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+  public CustomImageButton(Texture firstTexture, Texture secondTexture, int x, int y, float width, float height, int originAlignment, float amountInDegrees, EventListener listener) {
     super(
         new Image(firstTexture).getDrawable(),
         null,
@@ -125,13 +150,19 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
   }
 
   public CustomImageButton(TextureRegion textureRegion, EventListener listener) {
     super(new Image(textureRegion).getDrawable());
+
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
@@ -139,6 +170,9 @@ public class CustomImageButton extends ImageButton {
     super(new Image(textureRegion).getDrawable());
 
     super.setPosition(x, y);
+
+    super.setTransform(true);
+    super.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -152,10 +186,13 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
-  public CustomImageButton(TextureRegion textureRegion, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+  public CustomImageButton(TextureRegion textureRegion, int x, int y, float width, float height, int originAlignment, float amountInDegrees, EventListener listener) {
     super(new Image(textureRegion).getDrawable());
 
     super.setPosition(x, y);
@@ -164,7 +201,9 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
   }
@@ -182,10 +221,13 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
+    super.setOrigin(Align.center);
+
     this.addListeners(listener);
   }
 
-  public CustomImageButton(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion, int x, int y, float width, float height, int originAlignment, EventListener listener) {
+  public CustomImageButton(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion, int x, int y, float width, float height, int originAlignment, float amountInDegrees, EventListener listener) {
     super(
         new Image(firstTextureRegion).getDrawable(),
         null,
@@ -198,7 +240,9 @@ public class CustomImageButton extends ImageButton {
       super.setSize(width, height);
     }
 
+    super.setTransform(true);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
   }

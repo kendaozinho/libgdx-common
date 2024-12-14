@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.storage.CustomPreferences;
 import com.kendao.libgdx.util.CustomStringUtil;
@@ -18,6 +19,8 @@ public class CustomTextButton extends TextButton {
   public CustomTextButton(String text, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setColor(this.defaultColor);
+    super.setTransform(true);
+    super.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -25,6 +28,8 @@ public class CustomTextButton extends TextButton {
     super(text, CustomSkin.getInstance());
     super.setPosition(x, y);
     super.setColor(this.defaultColor);
+    super.setTransform(true);
+    super.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -33,6 +38,8 @@ public class CustomTextButton extends TextButton {
     super.setPosition(x, y);
     super.setSize(width, height);
     super.setColor(this.defaultColor);
+    super.setTransform(true);
+    super.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -41,15 +48,19 @@ public class CustomTextButton extends TextButton {
     super.setPosition(x, y);
     super.setSize(width, height);
     super.setColor(color);
+    super.setTransform(true);
+    super.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
-  public CustomTextButton(String text, int x, int y, float width, float height, Color color, int originAlignment, EventListener listener) {
+  public CustomTextButton(String text, int x, int y, float width, float height, Color color, int originAlignment, float amountInDegrees, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setPosition(x, y);
     super.setSize(width, height);
     super.setColor(color);
+    super.setTransform(true);
     super.setOrigin(originAlignment);
+    super.rotateBy(amountInDegrees);
     this.addListeners(listener);
   }
 
