@@ -83,10 +83,10 @@ public class CustomSplashScreen extends CustomBaseScreen {
   }
 
   @Override
-  public void zoomIn() {
+  public void pinchOut() {
   }
 
   @Override
-  public void zoomOut() {
+  public void pinchIn() {
   }
 }

@@ -9,7 +9,7 @@ public interface CustomGestureListener {
 
   void swipeDown();
 
-  void zoomIn();
+  void pinchOut();
 
-  void zoomOut();
+  void pinchIn();
 }

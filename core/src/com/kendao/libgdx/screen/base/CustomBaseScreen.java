@@ -3,7 +3,6 @@ package com.kendao.libgdx.screen.base;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.kendao.libgdx.input.CustomGestureDetector;
-import com.kendao.libgdx.input.CustomTouchDraggedInputListener;
 import com.kendao.libgdx.listener.CustomGestureListener;
 import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
@@ -21,7 +20,6 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     this.backgroundStage = new CustomStage(false, null, null);
     this.processing = false;
 
-    this.setListeners(false);
     this.setInputMultiplexerProcessor();
   }
 
@@ -32,7 +30,6 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     this.backgroundStage = new CustomStage(false, null, null);
     this.processing = false;
 
-    this.setListeners(mainStageEnableCameraFeatures);
     this.setInputMultiplexerProcessor();
   }
 
@@ -42,12 +39,6 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
 
   public static <T> T getInstanceAs(Class<T> clazz) {
     return (T) CustomBaseScreen.getInstance();
-  }
-
-  private void setListeners(Boolean mainStageEnableCameraFeatures) {
-    if (mainStageEnableCameraFeatures) {
-      this.mainStage.addListener(new CustomTouchDraggedInputListener());
-    }
   }
 
   private void setInputMultiplexerProcessor() {

@@ -17,7 +17,7 @@ public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
   @Override
   public boolean touchDown(float x, float y, int pointer, int button) {
     this.initialZoom = ((OrthographicCamera) CustomBaseScreen.getInstance().getMainStage().getCamera()).zoom;
-    return true;
+    return super.touchDown(x, y, pointer, button);
   }
 
   @Override
@@ -29,12 +29,12 @@ public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
     }
 
     if (distance > initialDistance) {
-      this.directionListener.zoomOut();
+      this.directionListener.pinchIn();
     } else if (distance < initialDistance) {
-      this.directionListener.zoomIn();
+      this.directionListener.pinchOut();
     }
 
-    return true;
+    return super.zoom(initialDistance, distance);
   }
 
   @Override
