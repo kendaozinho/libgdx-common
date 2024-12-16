@@ -81,4 +81,12 @@ public class CustomSplashScreen extends CustomBaseScreen {
   @Override
   public void swipeDown() {
   }
+
+  @Override
+  public void zoomIn() {
+  }
+
+  @Override
+  public void zoomOut() {
+  }
 }

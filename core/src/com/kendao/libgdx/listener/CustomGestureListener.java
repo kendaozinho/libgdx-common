@@ -1,6 +1,6 @@
 package com.kendao.libgdx.listener;
 
-public interface CustomDirectionListener {
+public interface CustomGestureListener {
   void swipeLeft();
 
   void swipeRight();
@@ -8,4 +8,8 @@ public interface CustomDirectionListener {
   void swipeUp();
 
   void swipeDown();
+
+  void zoomIn();
+
+  void zoomOut();
 }

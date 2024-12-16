@@ -7,10 +7,10 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.kendao.libgdx.listener.CustomGameListener;
 
 public class CustomStage extends Stage {
-  private final Boolean isScrollable;
+  private final Boolean enableCameraFeatures;
   private final Float minZoomValue, maxZoomValue;
 
-  public CustomStage(Boolean isScrollable, Float minZoomValue, Float maxZoomValue) {
+  public CustomStage(Boolean enableCameraFeatures, Float minZoomValue, Float maxZoomValue) {
     super(new StretchViewport(
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight(),
@@ -19,7 +19,7 @@ public class CustomStage extends Stage {
             ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
         )
     ));
-    this.isScrollable = isScrollable;
+    this.enableCameraFeatures = enableCameraFeatures;
     this.minZoomValue = minZoomValue;
     this.maxZoomValue = maxZoomValue;
   }
@@ -33,7 +33,7 @@ public class CustomStage extends Stage {
   public boolean scrolled(float amountX, float amountY) {
     boolean response = super.scrolled(amountX, amountY);
 
-    if (Boolean.TRUE.equals(isScrollable)) {
+    if (Boolean.TRUE.equals(this.enableCameraFeatures)) {
       if (amountX == -1 || amountY == -1) {
         this.zoomIn();
       } else if (amountX == 1 || amountY == 1) {
@@ -62,5 +62,17 @@ public class CustomStage extends Stage {
     if (this.maxZoomValue != null && ((OrthographicCamera) super.getViewport().getCamera()).zoom < this.maxZoomValue /* 1.0f is default */) {
       ((OrthographicCamera) super.getViewport().getCamera()).zoom += quantity;
     }
+  }
+
+  public Boolean getEnableCameraFeatures() {
+    return this.enableCameraFeatures;
+  }
+
+  public Float getMinZoomValue() {
+    return this.minZoomValue;
+  }
+
+  public Float getMaxZoomValue() {
+    return this.maxZoomValue;
   }
 }
