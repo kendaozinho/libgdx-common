@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -236,6 +238,39 @@ public class CustomImage extends Image {
     } else {
       this.texturePath = null;
     }
+  }
+
+  public void startPulseAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.scaleTo(1.1f, 1.1f, 0.5f),
+            Actions.scaleTo(1.0f, 1.0f, 0.5f)
+        )
+    ));
+  }
+
+  public void startRotationAnimation() {
+    super.addAction(Actions.forever(
+        Actions.rotateBy(360, 2)
+    ));
+  }
+
+  public void startFadeAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.alpha(0.5f, 1f),
+            Actions.alpha(1f, 1f)
+        )
+    ));
+  }
+
+  public void startBounceAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.moveBy(0, 20, 0.3f),
+            Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
+        )
+    ));
   }
 
   public String getTexturePath() {

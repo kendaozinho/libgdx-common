@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -371,18 +373,34 @@ public class CustomImageButton extends ImageButton {
 
   public void updateImageDrawable(Texture texture) {
     super.getStyle().imageUp = new SpriteDrawable(
-        new Sprite(
-            texture
-        )
+        new Sprite(texture)
     );
     this.updateImageTexturePath(texture);
   }
 
+  public void updateImageDrawable(Texture firstTexture, Texture secondTexture) {
+    super.getStyle().imageUp = new SpriteDrawable(
+        new Sprite(firstTexture)
+    );
+    super.getStyle().imageChecked = new SpriteDrawable(
+        new Sprite(secondTexture)
+    );
+    this.updateImageTexturePath(firstTexture);
+  }
+
   public void updateImageDrawable(TextureRegion textureRegion) {
     super.getStyle().imageUp = new SpriteDrawable(
-        new Sprite(
-            textureRegion
-        )
+        new Sprite(textureRegion)
+    );
+    this.updateImageTexturePath(null);
+  }
+
+  public void updateImageDrawable(TextureRegion firstTextureRegion, TextureRegion secondTextureRegion) {
+    super.getStyle().imageUp = new SpriteDrawable(
+        new Sprite(firstTextureRegion)
+    );
+    super.getStyle().imageChecked = new SpriteDrawable(
+        new Sprite(secondTextureRegion)
     );
     this.updateImageTexturePath(null);
   }
@@ -392,12 +410,51 @@ public class CustomImageButton extends ImageButton {
     this.updateImageTexturePath(null);
   }
 
+  public void updateImageDrawable(Image firstImage, Image secondImage) {
+    super.getStyle().imageUp = firstImage.getDrawable();
+    super.getStyle().imageChecked = secondImage.getDrawable();
+    this.updateImageTexturePath(null);
+  }
+
   private void updateImageTexturePath(Texture texture) {
     if (texture != null && texture.getTextureData() instanceof FileTextureData) {
       this.imageTexturePath = ((FileTextureData) texture.getTextureData()).getFileHandle().path();
     } else {
       this.imageTexturePath = null;
     }
+  }
+
+  public void startPulseAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.scaleTo(1.1f, 1.1f, 0.5f),
+            Actions.scaleTo(1.0f, 1.0f, 0.5f)
+        )
+    ));
+  }
+
+  public void startRotationAnimation() {
+    super.addAction(Actions.forever(
+        Actions.rotateBy(360, 2)
+    ));
+  }
+
+  public void startFadeAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.alpha(0.5f, 1f),
+            Actions.alpha(1f, 1f)
+        )
+    ));
+  }
+
+  public void startBounceAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.moveBy(0, 20, 0.3f),
+            Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
+        )
+    ));
   }
 
   public String getImageTexturePath() {
