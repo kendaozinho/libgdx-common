@@ -84,7 +84,7 @@ public class CustomTextField extends TextField {
 
   @Override
   public void setText(String str) {
-    super.setText(this.isUpperCase ? str.toUpperCase() : str);
+    super.setText(str == null ? "" : (this.isUpperCase ? str.toUpperCase() : str));
     super.setCursorPosition(super.getText().length());
   }
 
@@ -143,6 +143,18 @@ public class CustomTextField extends TextField {
         return false;
       });
     }
+  }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
   }
 
   public enum CharTypes {ONLY_LETTERS, ONLY_NUMBERS, ONLY_LETTERS_WITH_SPACE, ONLY_LETTERS_AND_NUMBERS, ALL}

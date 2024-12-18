@@ -81,4 +81,16 @@ public class CustomTextArea extends ScrollPane {
         )
     );
   }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
 }

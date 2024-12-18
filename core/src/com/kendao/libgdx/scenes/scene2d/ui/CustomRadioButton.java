@@ -63,4 +63,16 @@ public class CustomRadioButton extends CustomTable {
   public CustomCheckBox getCheckedBox() {
     return this.checkBoxes.stream().filter(Button::isChecked).findFirst().orElse(null);
   }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
 }

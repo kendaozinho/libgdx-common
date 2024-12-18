@@ -144,4 +144,16 @@ public class CustomTextButton extends TextButton {
     super.setOrigin(align);
     super.rotateBy(amountInDegrees);
   }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
 }

@@ -11,7 +11,7 @@ public class CustomCheckBox extends CheckBox {
   private boolean enableSound = true;
 
   public CustomCheckBox(String text, boolean checked) {
-    super(" " + text.toUpperCase(), CustomSkin.getInstance());
+    super(" " + (text == null ? "" : text.toUpperCase()), CustomSkin.getInstance());
     super.getCells().get(0).size(25, 25);
     super.setChecked(checked);
     this.value = null;
@@ -19,7 +19,7 @@ public class CustomCheckBox extends CheckBox {
   }
 
   public CustomCheckBox(String text, boolean checked, Object id) {
-    super(" " + text.toUpperCase(), CustomSkin.getInstance());
+    super(" " + (text == null ? "" : text.toUpperCase()), CustomSkin.getInstance());
     super.getCells().get(0).size(25, 25);
     super.setChecked(checked);
     this.value = id;
@@ -46,5 +46,17 @@ public class CustomCheckBox extends CheckBox {
 
   public Object getValue() {
     return this.value;
+  }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
   }
 }

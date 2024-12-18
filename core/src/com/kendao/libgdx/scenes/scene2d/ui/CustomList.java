@@ -70,4 +70,16 @@ public class CustomList extends ScrollPane {
     }
     return (List<String>) super.getActor();
   }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
 }

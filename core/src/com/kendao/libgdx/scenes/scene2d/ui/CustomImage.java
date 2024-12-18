@@ -278,4 +278,16 @@ public class CustomImage extends Image {
   public String getTexturePath() {
     return this.texturePath;
   }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
 }

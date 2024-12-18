@@ -130,5 +130,17 @@ public class CustomTable extends Table {
     super.row();
   }
 
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
+
   public enum Alignments {LEFT, CENTER, RIGHT}
 }

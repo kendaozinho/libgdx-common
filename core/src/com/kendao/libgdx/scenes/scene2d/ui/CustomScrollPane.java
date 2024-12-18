@@ -15,4 +15,16 @@ public class CustomScrollPane extends ScrollPane {
     super.setFadeScrollBars(Gdx.app.getType() != Application.ApplicationType.Desktop);
     super.setFlickScroll(true);
   }
+
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
 }

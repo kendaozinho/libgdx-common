@@ -84,6 +84,18 @@ public class CustomLabel extends Label {
     super.rotateBy(amountInDegrees);
   }
 
+  @Deprecated
+  @Override
+  public String getName() {
+    return super.getName();
+  }
+
+  @Deprecated
+  @Override
+  public void setName(String name) {
+    super.setName(name);
+  }
+
   public enum Sizes {
     EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
   }
