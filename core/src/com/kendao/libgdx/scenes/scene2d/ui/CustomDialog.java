@@ -102,6 +102,7 @@ public class CustomDialog extends Dialog {
     super.setPosition((((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth() / 2) - (getWidth() / 2), (((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight() / 2) - (getHeight() / 2));
 
     super.addListener(new InputListener() {
+      @Override
       public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         if (x >= 0 && x <= getWidth() && y >= 0 && y <= (buttonHeight + 10) /* padding */) {
           cancel();

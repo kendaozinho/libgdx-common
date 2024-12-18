@@ -27,14 +27,14 @@ public class CustomImage extends Image {
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(Texture texture, float x, float y) {
+  public CustomImage(Texture texture, int x, int y) {
     super(texture);
     this.updateTexturePath(texture);
     super.setPosition(x, y);
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(Texture texture, float x, float y, float width, float height) {
+  public CustomImage(Texture texture, int x, int y, int width, int height) {
     super(texture);
     this.updateTexturePath(texture);
 
@@ -47,7 +47,7 @@ public class CustomImage extends Image {
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(Texture texture, float x, float y, float width, float height, int originAlignment, float amountInDegrees) {
+  public CustomImage(Texture texture, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
     super(texture);
     this.updateTexturePath(texture);
 
@@ -66,13 +66,13 @@ public class CustomImage extends Image {
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(TextureRegion textureRegion, float x, float y) {
+  public CustomImage(TextureRegion textureRegion, int x, int y) {
     super(textureRegion);
     super.setPosition(x, y);
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(TextureRegion textureRegion, float x, float y, float width, float height) {
+  public CustomImage(TextureRegion textureRegion, int x, int y, int width, int height) {
     super(textureRegion);
 
     super.setPosition(x, y);
@@ -84,7 +84,7 @@ public class CustomImage extends Image {
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(TextureRegion textureRegion, float x, float y, float width, float height, int originAlignment, float amountInDegrees) {
+  public CustomImage(TextureRegion textureRegion, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
     super(textureRegion);
 
     super.setPosition(x, y);
@@ -102,19 +102,19 @@ public class CustomImage extends Image {
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(Color color, float x, float y) {
+  public CustomImage(Color color, int x, int y) {
     super(new Texture(new CustomPixmap(color, ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight())));
     super.setPosition(x, y);
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(Color color, float x, float y, int width, int height) {
+  public CustomImage(Color color, int x, int y, int width, int height) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
     super.setOrigin(Align.center);
   }
 
-  public CustomImage(Color color, float x, float y, int width, int height, int originAlignment, float amountInDegrees) {
+  public CustomImage(Color color, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
     super.setOrigin(originAlignment);
@@ -223,7 +223,7 @@ public class CustomImage extends Image {
 
   public CustomPair<Long, Long> getCustomImagePositionBySize() {
     return CustomCoordinatesUtil.getCustomPositionByBlockSize(
-        super.getX(), super.getY(), (long) super.getWidth(), (long) super.getHeight()
+        (int) super.getX(), (int) super.getY(), (int) super.getWidth(), (int) super.getHeight()
     );
   }
 
@@ -258,6 +258,7 @@ public class CustomImage extends Image {
   public void startFadeAnimation() {
     super.addAction(Actions.forever(
         Actions.sequence(
+            Actions.delay(1f),
             Actions.alpha(0.5f, 1f),
             Actions.alpha(1f, 1f)
         )
@@ -267,6 +268,7 @@ public class CustomImage extends Image {
   public void startBounceAnimation() {
     super.addAction(Actions.forever(
         Actions.sequence(
+            Actions.delay(1f),
             Actions.moveBy(0, 20, 0.3f),
             Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
         )

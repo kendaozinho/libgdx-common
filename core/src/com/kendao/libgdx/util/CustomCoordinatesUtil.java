@@ -6,7 +6,7 @@ public final class CustomCoordinatesUtil {
   private CustomCoordinatesUtil() {
   }
 
-  public static CustomPair<Long, Long> getCustomPositionByBlockSize(float x, float y, long blockWidth, long blockHeight) {
+  public static CustomPair<Long, Long> getCustomPositionByBlockSize(int x, int y, int blockWidth, int blockHeight) {
     return new CustomPair<>((long) (x / blockWidth), (long) (y / blockHeight));
   }
 }

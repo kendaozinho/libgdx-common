@@ -24,7 +24,7 @@ public class CustomStage extends Stage {
     this.maxZoomValue = maxZoomValue;
   }
 
-  public void updateCameraPosition(float x, float y, float z) {
+  public void updateCameraPosition(int x, int y, int z) {
     super.getViewport().getCamera().position.set(x, y, z);
     super.getViewport().getCamera().update();
   }

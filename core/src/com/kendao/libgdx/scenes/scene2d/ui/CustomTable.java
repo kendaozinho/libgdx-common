@@ -23,10 +23,10 @@ public class CustomTable extends Table {
   }
 
   public void addRow(Actor actor) {
-    this.addRow(actor, ALIGNMENT.CENTER);
+    this.addRow(actor, Alignments.CENTER);
   }
 
-  public void addRow(Actor actor, ALIGNMENT alignment) {
+  public void addRow(Actor actor, Alignments alignment) {
     switch (alignment) {
       case LEFT:
         super.add(actor).left().pad(this.padding).fill().colspan(2);
@@ -43,10 +43,10 @@ public class CustomTable extends Table {
   }
 
   public void addRow(Actor actor, int width, int height) {
-    this.addRow(actor, width, height, ALIGNMENT.CENTER);
+    this.addRow(actor, width, height, Alignments.CENTER);
   }
 
-  public void addRow(Actor actor, int width, int height, ALIGNMENT alignment) {
+  public void addRow(Actor actor, int width, int height, Alignments alignment) {
     switch (alignment) {
       case LEFT:
         super.add(actor).left().pad(this.padding).width(width).height(height).colspan(2);
@@ -86,11 +86,33 @@ public class CustomTable extends Table {
     super.row();
   }
 
-  public void addRow(int width, int height, Actor... actors) {
-    this.addRow(width, height, ALIGNMENT.CENTER, actors);
+  public void addRow(Actor... actors) {
+    this.addRow(Alignments.CENTER, actors);
   }
 
-  public void addRow(int width, int height, ALIGNMENT alignment, Actor... actors) {
+  public void addRow(Alignments alignment, Actor... actors) {
+    for (Actor actor : actors) {
+      switch (alignment) {
+        case LEFT:
+          super.add(actor).left().pad(this.padding).fill();
+          break;
+        case RIGHT:
+          super.add(actor).right().pad(this.padding).fill();
+          break;
+        default:
+          super.add(actor).center().pad(this.padding).fill();
+          break;
+      }
+    }
+
+    super.row();
+  }
+
+  public void addRow(int width, int height, Actor... actors) {
+    this.addRow(width, height, Alignments.CENTER, actors);
+  }
+
+  public void addRow(int width, int height, Alignments alignment, Actor... actors) {
     for (Actor actor : actors) {
       switch (alignment) {
         case LEFT:
@@ -108,5 +130,5 @@ public class CustomTable extends Table {
     super.row();
   }
 
-  public enum ALIGNMENT {LEFT, CENTER, RIGHT}
+  public enum Alignments {LEFT, CENTER, RIGHT}
 }

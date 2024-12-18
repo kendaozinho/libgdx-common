@@ -10,6 +10,25 @@ public class CustomRadioButton extends CustomTable {
   private final List<CustomCheckBox> checkBoxes;
 
   public CustomRadioButton(List<CustomCheckBox> checkBoxes) {
+    this.checkBoxes = this.getFormattedCheckBoxes(checkBoxes, 1);
+  }
+
+  public CustomRadioButton(List<CustomCheckBox> checkBoxes, int numberOfColumns) {
+    this.checkBoxes = this.getFormattedCheckBoxes(checkBoxes, numberOfColumns);
+  }
+
+  public CustomRadioButton(List<CustomCheckBox> checkBoxes, int numberOfColumns, int x, int y) {
+    this.checkBoxes = this.getFormattedCheckBoxes(checkBoxes, numberOfColumns);
+    super.setPosition(x, y);
+  }
+
+  public CustomRadioButton(List<CustomCheckBox> checkBoxes, int numberOfColumns, int x, int y, int width, int height) {
+    this.checkBoxes = this.getFormattedCheckBoxes(checkBoxes, numberOfColumns);
+    super.setPosition(x, y);
+    super.setSize(width, height);
+  }
+
+  private List<CustomCheckBox> getFormattedCheckBoxes(List<CustomCheckBox> checkBoxes, int numberOfColumns) {
     if (checkBoxes.stream().filter(Button::isChecked).count() != 1) {
       for (int i = 0; i < checkBoxes.size(); i++) {
         checkBoxes.get(i).setChecked(i == 0);
@@ -29,13 +48,12 @@ public class CustomRadioButton extends CustomTable {
       }
     }));
 
-    if (checkBoxes.size() == 2) {
-      super.addRow(checkBoxes.get(0), checkBoxes.get(1));
-    } else {
-      checkBoxes.forEach(super::addRow);
+    for (int i = 0; i < checkBoxes.size(); i += numberOfColumns) {
+      List<CustomCheckBox> row = checkBoxes.subList(i, Math.min(i + numberOfColumns, checkBoxes.size()));
+      super.addRow(row.toArray(new CustomCheckBox[0]));
     }
 
-    this.checkBoxes = checkBoxes;
+    return checkBoxes;
   }
 
   public List<CustomCheckBox> getCheckBoxes() {

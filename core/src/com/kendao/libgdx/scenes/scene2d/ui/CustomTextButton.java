@@ -33,7 +33,7 @@ public class CustomTextButton extends TextButton {
     this.addListeners(listener);
   }
 
-  public CustomTextButton(String text, int x, int y, float width, float height, EventListener listener) {
+  public CustomTextButton(String text, int x, int y, int width, int height, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setPosition(x, y);
     super.setSize(width, height);
@@ -43,7 +43,7 @@ public class CustomTextButton extends TextButton {
     this.addListeners(listener);
   }
 
-  public CustomTextButton(String text, int x, int y, float width, float height, Color color, EventListener listener) {
+  public CustomTextButton(String text, int x, int y, int width, int height, Color color, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setPosition(x, y);
     super.setSize(width, height);
@@ -53,7 +53,7 @@ public class CustomTextButton extends TextButton {
     this.addListeners(listener);
   }
 
-  public CustomTextButton(String text, int x, int y, float width, float height, Color color, int originAlignment, float amountInDegrees, EventListener listener) {
+  public CustomTextButton(String text, int x, int y, int width, int height, Color color, int originAlignment, float amountInDegrees, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setPosition(x, y);
     super.setSize(width, height);
