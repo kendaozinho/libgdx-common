@@ -370,31 +370,25 @@ public class CustomImageButton extends ImageButton {
   }
 
   public void updateImageDrawable(Texture texture) {
-    super.getImage().setDrawable(
-        new SpriteDrawable(
-            new Sprite(
-                texture
-            )
+    super.getStyle().imageUp = new SpriteDrawable(
+        new Sprite(
+            texture
         )
     );
     this.updateImageTexturePath(texture);
   }
 
   public void updateImageDrawable(TextureRegion textureRegion) {
-    super.getImage().setDrawable(
-        new SpriteDrawable(
-            new Sprite(
-                textureRegion
-            )
+    super.getStyle().imageUp = new SpriteDrawable(
+        new Sprite(
+            textureRegion
         )
     );
     this.updateImageTexturePath(null);
   }
 
   public void updateImageDrawable(Image image) {
-    super.getImage().setDrawable(
-        image.getDrawable()
-    );
+    super.getStyle().imageUp = image.getDrawable();
     this.updateImageTexturePath(null);
   }
 
