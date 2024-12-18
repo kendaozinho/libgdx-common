@@ -1,13 +1,16 @@
 package com.kendao.libgdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.kendao.libgdx.assets.CustomAssetManager;
 import com.kendao.libgdx.graphics.CustomColor;
@@ -17,6 +20,7 @@ import com.kendao.libgdx.util.CustomStringUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImageButton extends ImageButton {
+  private String imageTexturePath = null;
   private long customX = 0, customY = 0, customZ = 0;
   private boolean enableSound = true;
 
@@ -71,6 +75,7 @@ public class CustomImageButton extends ImageButton {
 
   public CustomImageButton(Texture texture, EventListener listener) {
     super(new Image(texture).getDrawable());
+    this.updateImageTexturePath(texture);
     super.setTransform(true);
     super.setOrigin(Align.center);
     this.addListeners(listener);
@@ -78,6 +83,7 @@ public class CustomImageButton extends ImageButton {
 
   public CustomImageButton(Texture texture, int x, int y, EventListener listener) {
     super(new Image(texture).getDrawable());
+    this.updateImageTexturePath(texture);
 
     super.setPosition(x, y);
 
@@ -89,6 +95,7 @@ public class CustomImageButton extends ImageButton {
 
   public CustomImageButton(Texture texture, int x, int y, float width, float height, EventListener listener) {
     super(new Image(texture).getDrawable());
+    this.updateImageTexturePath(texture);
 
     super.setPosition(x, y);
 
@@ -104,6 +111,7 @@ public class CustomImageButton extends ImageButton {
 
   public CustomImageButton(Texture texture, int x, int y, float width, float height, int originAlignment, float amountInDegrees, EventListener listener) {
     super(new Image(texture).getDrawable());
+    this.updateImageTexturePath(texture);
 
     super.setPosition(x, y);
 
@@ -359,5 +367,46 @@ public class CustomImageButton extends ImageButton {
   public void updateCustomImagePositionBySize() {
     CustomPair<Long, Long> position = this.getCustomImagePositionBySize();
     this.setCustomPosition(position.getFirstValue(), position.getSecondValue());
+  }
+
+  public void updateImageDrawable(Texture texture) {
+    super.getImage().setDrawable(
+        new SpriteDrawable(
+            new Sprite(
+                texture
+            )
+        )
+    );
+    this.updateImageTexturePath(texture);
+  }
+
+  public void updateImageDrawable(TextureRegion textureRegion) {
+    super.getImage().setDrawable(
+        new SpriteDrawable(
+            new Sprite(
+                textureRegion
+            )
+        )
+    );
+    this.updateImageTexturePath(null);
+  }
+
+  public void updateImageDrawable(Image image) {
+    super.getImage().setDrawable(
+        image.getDrawable()
+    );
+    this.updateImageTexturePath(null);
+  }
+
+  private void updateImageTexturePath(Texture texture) {
+    if (texture != null && texture.getTextureData() instanceof FileTextureData) {
+      this.imageTexturePath = ((FileTextureData) texture.getTextureData()).getFileHandle().path();
+    } else {
+      this.imageTexturePath = null;
+    }
+  }
+
+  public String getImageTexturePath() {
+    return this.imageTexturePath;
   }
 }
