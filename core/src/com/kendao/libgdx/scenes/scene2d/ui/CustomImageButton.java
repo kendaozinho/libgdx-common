@@ -424,39 +424,74 @@ public class CustomImageButton extends ImageButton {
     }
   }
 
-  public void startPulseAnimation() {
-    super.addAction(Actions.forever(
-        Actions.sequence(
-            Actions.scaleTo(1.1f, 1.1f, 0.5f),
-            Actions.scaleTo(1.0f, 1.0f, 0.5f)
-        )
-    ));
+  public void executePulseAnimation(boolean forever) {
+    if (forever) {
+      super.addAction(Actions.forever(
+          Actions.sequence(
+              Actions.scaleTo(1.1f, 1.1f, 0.5f),
+              Actions.scaleTo(1.0f, 1.0f, 0.5f)
+          )
+      ));
+    } else {
+      super.addAction(
+          Actions.sequence(
+              Actions.scaleTo(1.1f, 1.1f, 0.5f),
+              Actions.scaleTo(1.0f, 1.0f, 0.5f)
+          )
+      );
+    }
   }
 
-  public void startRotationAnimation() {
-    super.addAction(Actions.forever(
-        Actions.rotateBy(360, 2)
-    ));
+  public void executeRotationAnimation(boolean forever) {
+    if (forever) {
+      super.addAction(Actions.forever(
+          Actions.rotateBy(360, 2)
+      ));
+    } else {
+      super.addAction(
+          Actions.rotateBy(360, 2)
+      );
+    }
   }
 
-  public void startFadeAnimation() {
-    super.addAction(Actions.forever(
-        Actions.sequence(
-            Actions.delay(1f),
-            Actions.alpha(0.5f, 1f),
-            Actions.alpha(1f, 1f)
-        )
-    ));
+  public void executeFadeAnimation(boolean forever) {
+    if (forever) {
+      super.addAction(Actions.forever(
+          Actions.sequence(
+              Actions.delay(0.5f),
+              Actions.alpha(0.5f, 1f),
+              Actions.alpha(1f, 1f)
+          )
+      ));
+    } else {
+      super.addAction(
+          Actions.sequence(
+              Actions.delay(0.5f),
+              Actions.alpha(0.5f, 1f),
+              Actions.alpha(1f, 1f)
+          )
+      );
+    }
   }
 
-  public void startBounceAnimation() {
-    super.addAction(Actions.forever(
-        Actions.sequence(
-            Actions.delay(1f),
-            Actions.moveBy(0, 20, 0.3f),
-            Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
-        )
-    ));
+  public void executeBounceAnimation(boolean forever) {
+    if (forever) {
+      super.addAction(Actions.forever(
+          Actions.sequence(
+              Actions.delay(0.5f),
+              Actions.moveBy(0, 20, 0.3f),
+              Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
+          )
+      ));
+    } else {
+      super.addAction(
+          Actions.sequence(
+              Actions.delay(0.5f),
+              Actions.moveBy(0, 20, 0.3f),
+              Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
+          )
+      );
+    }
   }
 
   public String getImageTexturePath() {
