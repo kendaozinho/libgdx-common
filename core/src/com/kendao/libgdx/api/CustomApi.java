@@ -3,8 +3,11 @@ package com.kendao.libgdx.api;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kendao.libgdx.api.dto.CustomApiResponse;
 import com.kendao.libgdx.util.CustomGsonUtil;
+
+import java.util.List;
 
 public class CustomApi {
   private final String baseUrl;
@@ -32,7 +35,11 @@ public class CustomApi {
     return 0;
   }
 
-  protected <T> T callApi(String method, String path, Object requestBody, Class<T> clazz) throws Throwable {
+  protected <T> List<T> callApiAsList(String method, String path, Object requestBody) throws Throwable {
+    return this.callApi(method, path, requestBody, new TypeToken<List<T>>() {}.getType());
+  }
+
+  protected <T> T callApi(String method, String path, Object requestBody, java.lang.reflect.Type clazz) throws Throwable {
     Net.HttpRequest httpRequest = new Net.HttpRequest(method);
     httpRequest.setUrl(this.baseUrl + path);
     if (requestBody != null) {
