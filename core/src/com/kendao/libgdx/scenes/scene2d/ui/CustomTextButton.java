@@ -1,10 +1,12 @@
 package com.kendao.libgdx.scenes.scene2d.ui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -143,6 +145,41 @@ public class CustomTextButton extends TextButton {
   public void rotateBy(float amountInDegrees, int align) {
     super.setOrigin(align);
     super.rotateBy(amountInDegrees);
+  }
+
+  public void startPulseAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.scaleTo(1.1f, 1.1f, 0.5f),
+            Actions.scaleTo(1.0f, 1.0f, 0.5f)
+        )
+    ));
+  }
+
+  public void startRotationAnimation() {
+    super.addAction(Actions.forever(
+        Actions.rotateBy(360, 2)
+    ));
+  }
+
+  public void startFadeAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.delay(1f),
+            Actions.alpha(0.5f, 1f),
+            Actions.alpha(1f, 1f)
+        )
+    ));
+  }
+
+  public void startBounceAnimation() {
+    super.addAction(Actions.forever(
+        Actions.sequence(
+            Actions.delay(1f),
+            Actions.moveBy(0, 20, 0.3f),
+            Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
+        )
+    ));
   }
 
   @Deprecated
