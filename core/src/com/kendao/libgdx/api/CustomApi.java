@@ -36,6 +36,9 @@ public class CustomApi {
     return 0;
   }
 
+  // Examples:
+  // Normal: Map map = callApi(Net.HttpMethods.PUT, "/maps", AccountMap.builder().id(1L).build(), Map.class);
+  // List: Map[] maps = callApi(Net.HttpMethods.GET, "/maps", null, Map[].class);
   protected <T> T callApi(String method, String path, Object requestBody, Class<T> clazz) throws Throwable {
     Net.HttpRequest httpRequest = new Net.HttpRequest(method);
     httpRequest.setUrl(this.baseUrl + path);
@@ -87,60 +90,6 @@ public class CustomApi {
             } catch (Throwable t) {
               throw new RuntimeException("0 | " + t);
             }
-          }
-        }
-      }
-    }
-  }
-
-  protected <T> List<T> callApiAsList(String method, String path, Object requestBody, Class<T[]> clazz) throws Throwable {
-    Net.HttpRequest httpRequest = new Net.HttpRequest(method);
-    httpRequest.setUrl(this.baseUrl + path);
-    if (requestBody != null) {
-      httpRequest.setContent(this.gson.toJson(requestBody));
-    }
-    httpRequest.setHeader("Authorization", this.secretKey);
-    httpRequest.setHeader("X-Client-ID", this.deviceId);
-    httpRequest.setHeader("X-Client-Version", this.appVersion);
-    httpRequest.setTimeOut(10000);
-
-    final CustomApiResponse response = new CustomApiResponse();
-
-    Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
-      @Override
-      public void handleHttpResponse(Net.HttpResponse httpResponse) {
-        String responseBody = httpResponse.getResultAsString();
-        if (httpResponse.getStatus().getStatusCode() >= 200 && httpResponse.getStatus().getStatusCode() < 300) {
-          response.setContent(responseBody == null ? "" : responseBody);
-        } else {
-          response.setContent(httpResponse.getStatus().getStatusCode() + " | " + responseBody);
-        }
-      }
-
-      @Override
-      public void failed(Throwable t) {
-        response.setContent("0 | " + t.toString());
-      }
-
-      @Override
-      public void cancelled() {
-        response.setContent("0 | Operation was canceled");
-      }
-    });
-
-    while (true) {
-      Thread.sleep(25);
-
-      if (response.getContent() != null) {
-        String[] words = response.getContent().split(" ");
-        if (words.length > 1 && words[1].equals("|")) { // When API returns error
-          throw new RuntimeException(response.getContent());
-        } else { // When API returns success
-          try {
-            T[] array = this.gson.fromJson(response.getContent(), clazz);
-            return Arrays.asList(array);
-          } catch (Throwable t) {
-            throw new RuntimeException("0 | " + t);
           }
         }
       }
