@@ -86,8 +86,8 @@ public class CustomTextArea extends ScrollPane {
     return super.getName();
   }
 
-  public void setId(String name) {
-    super.setName(name);
+  public void setId(String id) {
+    super.setName(id);
   }
 
   /**
