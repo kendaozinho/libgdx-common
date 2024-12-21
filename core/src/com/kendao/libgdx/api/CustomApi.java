@@ -3,12 +3,8 @@ package com.kendao.libgdx.api;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kendao.libgdx.api.dto.CustomApiResponse;
 import com.kendao.libgdx.util.CustomGsonUtil;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class CustomApi {
   private final String baseUrl;

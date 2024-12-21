@@ -97,4 +97,11 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
   public void setProcessing(Boolean processing) {
     this.processing = processing;
   }
+
+  public synchronized Boolean getOrSetProcessingSafely(Boolean processing) {
+    if (processing != null) {
+      this.processing = processing;
+    }
+    return this.processing;
+  }
 }

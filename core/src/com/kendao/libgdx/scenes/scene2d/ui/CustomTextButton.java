@@ -217,15 +217,29 @@ public class CustomTextButton extends TextButton {
     }
   }
 
-  @Deprecated
-  @Override
-  public String getName() {
+  public String getId() {
     return super.getName();
   }
 
+  public void setId(String name) {
+    super.setName(name);
+  }
+
+  /**
+   * @deprecated Use {@link #getId()} method
+   */
+  @Deprecated
+  @Override
+  public String getName() {
+    return this.getId();
+  }
+
+  /**
+   * @deprecated Use {@link #setId(String name)} method
+   */
   @Deprecated
   @Override
   public void setName(String name) {
-    super.setName(name);
+    this.setId(name);
   }
 }

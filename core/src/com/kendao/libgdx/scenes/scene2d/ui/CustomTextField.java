@@ -46,7 +46,7 @@ public class CustomTextField extends TextField {
   @Override
   @Deprecated
   public String getMessageText() {
-    return null;
+    return this.getPlaceholder();
   }
 
   /**
@@ -55,6 +55,7 @@ public class CustomTextField extends TextField {
   @Override
   @Deprecated
   public void setMessageText(String text) {
+    this.setPlaceholder(text);
   }
 
   /**
@@ -145,16 +146,30 @@ public class CustomTextField extends TextField {
     }
   }
 
-  @Deprecated
-  @Override
-  public String getName() {
+  public String getId() {
     return super.getName();
   }
 
+  public void setId(String name) {
+    super.setName(name);
+  }
+
+  /**
+   * @deprecated Use {@link #getId()} method
+   */
+  @Deprecated
+  @Override
+  public String getName() {
+    return this.getId();
+  }
+
+  /**
+   * @deprecated Use {@link #setId(String name)} method
+   */
   @Deprecated
   @Override
   public void setName(String name) {
-    super.setName(name);
+    this.setId(name);
   }
 
   public enum CharTypes {ONLY_LETTERS, ONLY_NUMBERS, ONLY_LETTERS_WITH_SPACE, ONLY_LETTERS_AND_NUMBERS, ALL}
