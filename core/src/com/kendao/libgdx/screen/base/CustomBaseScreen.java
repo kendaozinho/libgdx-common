@@ -20,7 +20,7 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     this.backgroundStage = new CustomStage(false, null, null);
     this.processing = false;
 
-    this.setInputMultiplexerProcessor();
+    this.setInputMultiplexerProcessor(false);
   }
 
   protected CustomBaseScreen(Boolean mainStageEnableCameraFeatures, Float mainStageMinZoomValue, Float mainStageMaxZoomValue) {
@@ -30,7 +30,7 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     this.backgroundStage = new CustomStage(false, null, null);
     this.processing = false;
 
-    this.setInputMultiplexerProcessor();
+    this.setInputMultiplexerProcessor(mainStageEnableCameraFeatures);
   }
 
   public static CustomBaseScreen getInstance() {
@@ -41,14 +41,14 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     return (T) CustomBaseScreen.getInstance();
   }
 
-  private void setInputMultiplexerProcessor() {
+  private void setInputMultiplexerProcessor(Boolean mainStageEnableCameraFeatures) {
     InputMultiplexer multiplexer = new InputMultiplexer();
 
     multiplexer.addProcessor(this.hudStage);
     multiplexer.addProcessor(this.landscapeStage);
     multiplexer.addProcessor(this.mainStage);
     multiplexer.addProcessor(this.backgroundStage);
-    multiplexer.addProcessor(new CustomGestureDetector(this));
+    multiplexer.addProcessor(new CustomGestureDetector(this, mainStageEnableCameraFeatures));
 
     Gdx.input.setInputProcessor(multiplexer);
   }

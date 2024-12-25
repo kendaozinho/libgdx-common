@@ -1,9 +1,9 @@
 package com.kendao.libgdx.listener;
 
 public interface CustomGameListener {
-  public Integer getFullWidth();
+  Integer getFullWidth();
 
-  public Integer getFullHeight();
+  Integer getFullHeight();
 
-  public <T> T getInstanceOf(Class<T> clazz);
+  <T> T getInstanceOf(Class<T> clazz);
 }

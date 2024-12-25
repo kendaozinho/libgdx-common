@@ -76,4 +76,8 @@ public class CustomMainScreen extends CustomBaseScreen {
   @Override
   public void pinchIn() {
   }
+
+  @Override
+  public void onDrag(float x, float y, float deltaX, float deltaY) {
+  }
 }

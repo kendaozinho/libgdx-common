@@ -12,4 +12,6 @@ public interface CustomGestureListener {
   void pinchOut();
 
   void pinchIn();
+
+  void onDrag(float x, float y, float deltaX, float deltaY);
 }

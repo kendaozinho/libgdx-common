@@ -1,22 +1,29 @@
 package com.kendao.libgdx.input;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 import com.kendao.libgdx.listener.CustomGestureListener;
 import com.kendao.libgdx.screen.base.CustomBaseScreen;
 
 public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
   private final CustomGestureListener directionListener;
+  private final Vector2 lastTouch;
+  private final Boolean updateCamera;
   private float initialZoom;
 
-  public CustomGestureAdapter(CustomGestureListener directionListener) {
+  public CustomGestureAdapter(CustomGestureListener directionListener, Boolean updateCamera) {
     this.directionListener = directionListener;
     this.initialZoom = 0f;
+    this.lastTouch = new Vector2();
+    this.updateCamera = updateCamera;
   }
 
   @Override
   public boolean touchDown(float x, float y, int pointer, int button) {
     this.initialZoom = ((OrthographicCamera) CustomBaseScreen.getInstance().getMainStage().getCamera()).zoom;
+    this.lastTouch.set(Gdx.input.getX(), Gdx.input.getY());
     return super.touchDown(x, y, pointer, button);
   }
 
@@ -53,5 +60,25 @@ public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
       }
     }
     return super.fling(velocityX, velocityY, button);
+  }
+
+  @Override
+  public boolean pan(float x, float y, float deltaX, float deltaY) {
+    if (this.updateCamera) {
+      final OrthographicCamera camera = ((OrthographicCamera) CustomBaseScreen.getInstance().getMainStage().getCamera());
+
+      float deltaX2 = Gdx.input.getX() - lastTouch.x;
+      float deltaY2 = Gdx.input.getY() - lastTouch.y;
+
+      camera.position.x -= deltaX2 * camera.zoom;
+      camera.position.y += deltaY2 * camera.zoom;
+
+      this.lastTouch.set(Gdx.input.getX(), Gdx.input.getY());
+
+      camera.update();
+    }
+
+    this.directionListener.onDrag(x, y, deltaX, deltaY);
+    return super.pan(x, y, deltaX, deltaY);
   }
 }
