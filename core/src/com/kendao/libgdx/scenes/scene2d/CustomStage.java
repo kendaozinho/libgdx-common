@@ -24,6 +24,18 @@ public class CustomStage extends Stage {
     super.getViewport().getCamera().update();
   }
 
+  public void zoomIn(float minZoomValue, float quantity) {
+    if (((OrthographicCamera) super.getViewport().getCamera()).zoom > minZoomValue /* 1.0f is default */) {
+      ((OrthographicCamera) super.getViewport().getCamera()).zoom -= quantity;
+    }
+  }
+
+  public void zoomOut(float maxZoomValue, float quantity) {
+    if (((OrthographicCamera) super.getViewport().getCamera()).zoom < maxZoomValue /* 1.0f is default */) {
+      ((OrthographicCamera) super.getViewport().getCamera()).zoom += quantity;
+    }
+  }
+
   public Actor getActorById(String id) {
     for (Actor actor : super.getActors()) {
       if (id != null && actor.getName() != null && id.equals(actor.getName())) {
