@@ -78,6 +78,10 @@ public class CustomTextField extends TextField {
     return new TextFieldClickListener() {
       @Override
       public boolean keyTyped(InputEvent event, char character) {
+        if (character == '\n' || character == '\r') {
+          unfocus(true);
+          return true;
+        }
         return super.keyTyped(event, isUpperCase ? Character.toUpperCase(character) : character);
       }
     };
@@ -95,6 +99,15 @@ public class CustomTextField extends TextField {
       super.setCursorPosition(super.getText().length());
       if (showOnScreenKeyBoard) {
         super.getOnscreenKeyboard().show(true);
+      }
+    }
+  }
+
+  public void unfocus(Boolean hideOnScreenKeyBoard) {
+    if (super.getStage() != null) {
+      super.getStage().setKeyboardFocus(null);
+      if (hideOnScreenKeyBoard) {
+        super.getOnscreenKeyboard().show(false);
       }
     }
   }
