@@ -14,23 +14,13 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
   private Boolean processing;
 
   protected CustomBaseScreen() {
-    this.hudStage = new CustomStage(false, null, null);
-    this.landscapeStage = new CustomStage(false, null, null);
-    this.mainStage = new CustomStage(false, 0.50f, 2.50f);
-    this.backgroundStage = new CustomStage(false, null, null);
+    this.hudStage = new CustomStage();
+    this.landscapeStage = new CustomStage();
+    this.mainStage = new CustomStage();
+    this.backgroundStage = new CustomStage();
     this.processing = false;
 
-    this.setInputMultiplexerProcessor(false);
-  }
-
-  protected CustomBaseScreen(Boolean mainStageEnableCameraFeatures, Float mainStageMinZoomValue, Float mainStageMaxZoomValue) {
-    this.hudStage = new CustomStage(false, null, null);
-    this.landscapeStage = new CustomStage(false, null, null);
-    this.mainStage = new CustomStage(mainStageEnableCameraFeatures, mainStageMinZoomValue, mainStageMaxZoomValue);
-    this.backgroundStage = new CustomStage(false, null, null);
-    this.processing = false;
-
-    this.setInputMultiplexerProcessor(mainStageEnableCameraFeatures);
+    this.setInputMultiplexerProcessor();
   }
 
   public static CustomBaseScreen getInstance() {
@@ -41,14 +31,14 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     return (T) CustomBaseScreen.getInstance();
   }
 
-  private void setInputMultiplexerProcessor(Boolean mainStageEnableCameraFeatures) {
+  private void setInputMultiplexerProcessor() {
     InputMultiplexer multiplexer = new InputMultiplexer();
 
     multiplexer.addProcessor(this.hudStage);
     multiplexer.addProcessor(this.landscapeStage);
     multiplexer.addProcessor(this.mainStage);
     multiplexer.addProcessor(this.backgroundStage);
-    multiplexer.addProcessor(new CustomGestureDetector(this, mainStageEnableCameraFeatures));
+    multiplexer.addProcessor(new CustomGestureDetector(this));
 
     Gdx.input.setInputProcessor(multiplexer);
   }
