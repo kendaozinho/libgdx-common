@@ -120,15 +120,14 @@ public class CustomLabel extends Label {
     if (forever) {
       super.addAction(Actions.forever(
           Actions.sequence(
-              Actions.delay(0.5f),
               Actions.alpha(0.5f, 1f),
-              Actions.alpha(1f, 1f)
+              Actions.alpha(1f, 1f),
+              Actions.delay(0.5f)
           )
       ));
     } else {
       super.addAction(
           Actions.sequence(
-              Actions.delay(0.5f),
               Actions.alpha(0.5f, 1f),
               Actions.alpha(1f, 1f)
           )
@@ -140,15 +139,14 @@ public class CustomLabel extends Label {
     if (forever) {
       super.addAction(Actions.forever(
           Actions.sequence(
-              Actions.delay(0.5f),
               Actions.moveBy(0, 20, 0.3f),
-              Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
+              Actions.moveBy(0, -20, 0.3f, Interpolation.bounce),
+              Actions.delay(0.5f)
           )
       ));
     } else {
       super.addAction(
           Actions.sequence(
-              Actions.delay(0.5f),
               Actions.moveBy(0, 20, 0.3f),
               Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
           )
