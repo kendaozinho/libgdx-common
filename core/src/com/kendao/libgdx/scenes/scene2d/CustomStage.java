@@ -2,6 +2,7 @@ package com.kendao.libgdx.scenes.scene2d;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -57,5 +58,9 @@ public class CustomStage extends Stage {
       }
     }
     return null;
+  }
+
+  public Vector2 fromScreenToStageCoordinates(int screenX, int screenY) {
+    return super.getViewport().unproject(new Vector2(screenX, screenY));
   }
 }
