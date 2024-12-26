@@ -70,14 +70,22 @@ public class CustomMainScreen extends CustomBaseScreen {
   }
 
   @Override
-  public void pinchOut() {
+  public void zoomIn() {
   }
 
   @Override
-  public void pinchIn() {
+  public void zoomOut() {
   }
 
   @Override
-  public void onDrag(float x, float y, float deltaX, float deltaY) {
+  public void touchDown(int screenX, int screenY) {
+  }
+
+  @Override
+  public void touchUp(int screenX, int screenY) {
+  }
+
+  @Override
+  public void touchDragged(int screenX, int screenY) {
   }
 }

@@ -9,9 +9,13 @@ public interface CustomGestureListener {
 
   void swipeDown();
 
-  void pinchOut();
+  void zoomIn();
 
-  void pinchIn();
+  void zoomOut();
 
-  void onDrag(float x, float y, float deltaX, float deltaY);
+  void touchDown(int screenX, int screenY);
+
+  void touchUp(int screenX, int screenY);
+
+  void touchDragged(int screenX, int screenY);
 }

@@ -6,9 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.kendao.libgdx.listener.CustomGameListener;
+import com.kendao.libgdx.listener.CustomGestureListener;
 
 public class CustomStage extends Stage {
-  public CustomStage() {
+  private final CustomGestureListener directionListener;
+
+  public CustomStage(CustomGestureListener directionListener) {
     super(new StretchViewport(
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight(),
@@ -17,6 +20,17 @@ public class CustomStage extends Stage {
             ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
         )
     ));
+    this.directionListener = directionListener;
+  }
+
+  @Override
+  public boolean scrolled(float amountX, float amountY) {
+    if (amountX == -1 || amountY == -1) {
+      this.directionListener.zoomIn();
+    } else if (amountX == 1 || amountY == 1) {
+      this.directionListener.zoomOut();
+    }
+    return super.scrolled(amountX, amountY);
   }
 
   public void updateCameraPosition(float x, float y, float z) {

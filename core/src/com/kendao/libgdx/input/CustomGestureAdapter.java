@@ -13,9 +13,9 @@ public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
   @Override
   public boolean zoom(float initialDistance, float distance) {
     if (distance > initialDistance) {
-      this.directionListener.pinchIn();
+      this.directionListener.zoomOut();
     } else if (distance < initialDistance) {
-      this.directionListener.pinchOut();
+      this.directionListener.zoomIn();
     }
 
     return super.zoom(initialDistance, distance);
@@ -38,12 +38,5 @@ public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
     }
 
     return super.fling(velocityX, velocityY, button);
-  }
-
-  @Override
-  public boolean pan(float x, float y, float deltaX, float deltaY) {
-    this.directionListener.onDrag(x, y, deltaX, deltaY);
-
-    return super.pan(x, y, deltaX, deltaY);
   }
 }

@@ -3,21 +3,22 @@ package com.kendao.libgdx.screen.base;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.kendao.libgdx.input.CustomGestureDetector;
+import com.kendao.libgdx.input.CustomInputAdapter;
 import com.kendao.libgdx.listener.CustomGestureListener;
 import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
 public abstract class CustomBaseScreen implements CustomGestureListener {
-  private CustomStage hudStage;
-  private CustomStage landscapeStage;
-  private CustomStage mainStage;
-  private CustomStage backgroundStage;
+  private final CustomStage hudStage;
+  private final CustomStage landscapeStage;
+  private final CustomStage mainStage;
+  private final CustomStage backgroundStage;
   private Boolean processing;
 
   protected CustomBaseScreen() {
-    this.hudStage = new CustomStage();
-    this.landscapeStage = new CustomStage();
-    this.mainStage = new CustomStage();
-    this.backgroundStage = new CustomStage();
+    this.hudStage = new CustomStage(this);
+    this.landscapeStage = new CustomStage(this);
+    this.mainStage = new CustomStage(this);
+    this.backgroundStage = new CustomStage(this);
     this.processing = false;
 
     this.setInputMultiplexerProcessor();
@@ -39,6 +40,7 @@ public abstract class CustomBaseScreen implements CustomGestureListener {
     multiplexer.addProcessor(this.mainStage);
     multiplexer.addProcessor(this.backgroundStage);
     multiplexer.addProcessor(new CustomGestureDetector(this));
+    multiplexer.addProcessor(new CustomInputAdapter(this));
 
     Gdx.input.setInputProcessor(multiplexer);
   }
