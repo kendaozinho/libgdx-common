@@ -31,7 +31,7 @@ public class CustomInputAdapter extends InputAdapter {
     Vector2 mainStageCoordinates =
         CustomScreenManager.getInstance().getScreen().getMainStage().fromScreenToStageCoordinates(screenX, screenY);
 
-    this.directionListener.touchDown(mainStageCoordinates.x, mainStageCoordinates.y);
+    this.directionListener.touchUp(mainStageCoordinates.x, mainStageCoordinates.y);
 
     return response;
   }
@@ -43,7 +43,7 @@ public class CustomInputAdapter extends InputAdapter {
     Vector2 mainStageCoordinates =
         CustomScreenManager.getInstance().getScreen().getMainStage().fromScreenToStageCoordinates(screenX, screenY);
 
-    this.directionListener.touchDown(mainStageCoordinates.x, mainStageCoordinates.y);
+    this.directionListener.touchDragged(mainStageCoordinates.x, mainStageCoordinates.y);
 
     return response;
   }
