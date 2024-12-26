@@ -91,14 +91,14 @@ public class CustomSplashScreen extends CustomBaseScreen {
   }
 
   @Override
-  public void touchDown(int screenX, int screenY) {
+  public void touchDown(float x, float y) {
   }
 
   @Override
-  public void touchUp(int screenX, int screenY) {
+  public void touchUp(float x, float y) {
   }
 
   @Override
-  public void touchDragged(int screenX, int screenY) {
+  public void touchDragged(float x, float y) {
   }
 }

@@ -13,9 +13,9 @@ public interface CustomGestureListener {
 
   void zoomOut();
 
-  void touchDown(int screenX, int screenY);
+  void touchDown(float x, float y);
 
-  void touchUp(int screenX, int screenY);
+  void touchUp(float x, float y);
 
-  void touchDragged(int screenX, int screenY);
+  void touchDragged(float x, float y);
 }
