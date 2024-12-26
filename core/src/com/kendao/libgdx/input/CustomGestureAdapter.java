@@ -13,9 +13,9 @@ public class CustomGestureAdapter extends GestureDetector.GestureAdapter {
   @Override
   public boolean zoom(float initialDistance, float distance) {
     if (distance > initialDistance) {
-      this.directionListener.zoomOut();
-    } else if (distance < initialDistance) {
       this.directionListener.zoomIn();
+    } else if (distance < initialDistance) {
+      this.directionListener.zoomOut();
     }
 
     return super.zoom(initialDistance, distance);
