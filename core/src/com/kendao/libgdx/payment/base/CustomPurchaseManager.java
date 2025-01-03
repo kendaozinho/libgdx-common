@@ -23,7 +23,7 @@ public class CustomPurchaseManager {
   }
 
   /***
-   * @return If method was executed.
+   * @return If method was executed, but install method is async.
    */
   public Boolean install(PurchaseObserver purchaseObserver, HashMap<OfferType, String> offers) {
     if (this.purchaseManager != null) {
@@ -56,7 +56,7 @@ public class CustomPurchaseManager {
   }
 
   /***
-   * @return If method was executed.
+   * @return If method was executed, but purchase method is async.
    */
   public Boolean purchase(String identifier) {
     if (this.installed()) {
@@ -67,7 +67,7 @@ public class CustomPurchaseManager {
   }
 
   /***
-   * @return If method was executed.
+   * @return If method was executed, but purchaseRestore method is async.
    */
   public Boolean restorePurchases() {
     if (this.installed()) {

@@ -63,30 +63,4 @@ public class CustomRadioButton extends CustomTable {
   public CustomCheckBox getCheckedBox() {
     return this.checkBoxes.stream().filter(Button::isChecked).findFirst().orElse(null);
   }
-
-  public String getId() {
-    return super.getName();
-  }
-
-  public void setId(String id) {
-    super.setName(id);
-  }
-
-  /**
-   * @deprecated Use {@link #getId()} method
-   */
-  @Deprecated
-  @Override
-  public String getName() {
-    return this.getId();
-  }
-
-  /**
-   * @deprecated Use {@link #setId(String name)} method
-   */
-  @Deprecated
-  @Override
-  public void setName(String name) {
-    this.setId(name);
-  }
 }
