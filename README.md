@@ -1,21 +1,21 @@
 # libgdx-common
 
-Biblioteca utilizada nos jogos criados pela lunar bits.
+Library used in games created by Lunar Bits.
 
-## Pré-requisitos
+## Prerequisites
 
 - Java 11.0.2
 - LibGDX 1.11.0
 
-## Inicialização
+## Initialization
 
 ```bash
 gradle desktop:run
 ```
 
-## Instalação
+## Installation
 
-Adicione a biblioteca no projeto core, dentro do arquivo build.gradle da pasta raiz do seu projeto:
+Add the library to the core project inside the build.gradle file located in your project's root folder:
 
 ```js
 project(":core") {
@@ -26,18 +26,16 @@ project(":core") {
 
         // ...
 
-        implementation "com.github.kendaozinho:libgdx-common:0.0.82" // <-- add this
+        implementation "com.github.kendaozinho:libgdx-common:0.0.83" // <-- add this
     }
 }
 ```
 
-Adicione a pasta [ui](./core/assets/ui) e a pasta [audio](./core/assets/audio) dentro dos assets do seu projeto
-android (ou projeto core, caso não exista).
+Add the [ui](./core/assets/ui) folder and the [audio](./core/assets/audio) folder inside your Android project's assets (or the core project if it doesn't exist).
 
-Importe as [libs](https://github.com/libgdx/gdx-pay) de pagamento junto com
-as [libs](https://github.com/libgdx/gdx-pay/tree/master/gdx-pay-android-googlebilling) do smartphone, caso necessário.
+Import the [payment libs](https://github.com/libgdx/gdx-pay) along with the [smartphone libs](https://github.com/libgdx/gdx-pay/tree/master/gdx-pay-android-googlebilling) if needed.
 
-## Publicação
+## Publishing
 
 Maven Local:
 
@@ -50,3 +48,7 @@ Mavel Central:
 ```
 gradle publish
 ```
+
+## Author
+
+Kenneth Gottschalk de Azevedo.

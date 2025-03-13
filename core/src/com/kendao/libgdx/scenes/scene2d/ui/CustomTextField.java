@@ -1,8 +1,11 @@
 package com.kendao.libgdx.scenes.scene2d.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
 public class CustomTextField extends TextField {
@@ -11,29 +14,29 @@ public class CustomTextField extends TextField {
 
   private boolean isUpperCase = false;
 
-  public CustomTextField() {
+  public CustomTextField(String title) {
     super("", CustomSkin.getInstance());
-    this.instantiate(50, false, false, CharTypes.ALL);
+    this.instantiate(title, 50, false, false, CharTypes.ALL);
   }
 
-  public CustomTextField(CharTypes type) {
+  public CustomTextField(String title, CharTypes type) {
     super("", CustomSkin.getInstance());
-    this.instantiate(50, false, false, type);
+    this.instantiate(title, 50, false, false, type);
   }
 
-  public CustomTextField(CharTypes type, int maxLength) {
+  public CustomTextField(String title, CharTypes type, int maxLength) {
     super("", CustomSkin.getInstance());
-    this.instantiate(maxLength, false, false, type);
+    this.instantiate(title, maxLength, false, false, type);
   }
 
-  public CustomTextField(CharTypes type, int maxLength, boolean isUpperCase) {
+  public CustomTextField(String title, CharTypes type, int maxLength, boolean isUpperCase) {
     super("", CustomSkin.getInstance());
-    this.instantiate(maxLength, isUpperCase, false, type);
+    this.instantiate(title, maxLength, isUpperCase, false, type);
   }
 
-  public CustomTextField(CharTypes type, int maxLength, boolean isUpperCase, boolean isPassword) {
+  public CustomTextField(String title, CharTypes type, int maxLength, boolean isUpperCase, boolean isPassword) {
     super("", CustomSkin.getInstance());
-    this.instantiate(maxLength, isUpperCase, isPassword, type);
+    this.instantiate(title, maxLength, isUpperCase, isPassword, type);
   }
 
   public void clearText() {
@@ -78,10 +81,11 @@ public class CustomTextField extends TextField {
     return new TextFieldClickListener() {
       @Override
       public boolean keyTyped(InputEvent event, char character) {
-        if (character == '\n' || character == '\r') {
-          unfocus(true);
-          return true;
-        }
+        // Pressing ENTER
+        // if (character == '\n' || character == '\r') {
+        //   unfocus();
+        //   return true;
+        // }
         return super.keyTyped(event, isUpperCase ? Character.toUpperCase(character) : character);
       }
     };
@@ -93,26 +97,15 @@ public class CustomTextField extends TextField {
     super.setCursorPosition(super.getText().length());
   }
 
-  public void focus(Boolean showOnScreenKeyBoard) {
-    if (super.getStage() != null) {
-      super.getStage().setKeyboardFocus(this);
-      super.setCursorPosition(super.getText().length());
-      if (showOnScreenKeyBoard) {
-        super.getOnscreenKeyboard().show(true);
+  public void focus() {
+    super.getListeners().forEach(listener -> {
+      if (listener instanceof ClickListener) {
+        ((ClickListener) listener).clicked(null, 0, 0); // Call click event manually
       }
-    }
+    });
   }
 
-  public void unfocus(Boolean hideOnScreenKeyBoard) {
-    if (super.getStage() != null) {
-      super.getStage().setKeyboardFocus(null);
-      if (hideOnScreenKeyBoard) {
-        super.getOnscreenKeyboard().show(false);
-      }
-    }
-  }
-
-  private void instantiate(int maxLength, boolean isUpperCase, boolean isPassword, final CharTypes type) {
+  private void instantiate(String title, int maxLength, boolean isUpperCase, boolean isPassword, final CharTypes type) {
     super.setPosition(0, 0);
     super.setSize(this.defaultWidth, this.defaultHeight);
 
@@ -157,6 +150,31 @@ public class CustomTextField extends TextField {
         return false;
       });
     }
+
+    // Disable default virtual keyboard
+    super.setOnscreenKeyboard(visible -> {
+      // do nothing
+    });
+
+    super.addListener(new ClickListener() {
+      @Override
+      public void clicked(InputEvent event, float x, float y) {
+        // click effect
+        selectAll(); // or setCursorPosition(getText().length());
+
+        Gdx.input.getTextInput(new Input.TextInputListener() {
+          @Override
+          public void input(String text) {
+            setText(text);
+          }
+
+          @Override
+          public void canceled() {
+            // do nothing
+          }
+        }, title, getText(), "");
+      }
+    });
   }
 
   public String getId() {
