@@ -51,4 +51,4 @@ gradle publish
 
 ## Author
 
-Kenneth Gottschalk de Azevedo.
+Kenneth Gottschalk de Azevedo
