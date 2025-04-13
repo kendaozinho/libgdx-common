@@ -26,14 +26,16 @@ project(":core") {
 
         // ...
 
-        implementation "com.github.kendaozinho:libgdx-common:0.0.84" // <-- add this
+        implementation "com.github.kendaozinho:libgdx-common:0.0.85" // <-- add this
     }
 }
 ```
 
-Add the [ui](./core/assets/ui) folder and the [audio](./core/assets/audio) folder inside your Android project's assets (or the core project if it doesn't exist).
+Add the [ui](./core/assets/ui) folder and the [audio](./core/assets/audio) folder inside your Android project's assets (
+or the core project if it doesn't exist).
 
-Import the [payment libs](https://github.com/libgdx/gdx-pay) along with the [smartphone libs](https://github.com/libgdx/gdx-pay/tree/master/gdx-pay-android-googlebilling) if needed.
+Import the [payment libs](https://github.com/libgdx/gdx-pay) along with
+the [smartphone libs](https://github.com/libgdx/gdx-pay/tree/master/gdx-pay-android-googlebilling) if needed.
 
 ## Publishing
 
