@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Logger;
 import com.kendao.libgdx.listener.CustomGameListener;
 import com.kendao.libgdx.storage.CustomStorage;
+import com.kendao.libgdx.util.CustomGsonUtil;
+import com.kendao.libgdx.util.CustomStringUtil;
 
 public class CustomAssetManager extends AssetManager {
   private final Logger logger = new Logger(this.toString(), Application.LOG_DEBUG);
@@ -71,6 +73,9 @@ public class CustomAssetManager extends AssetManager {
             fileOrFolder.extension().toLowerCase().equals("jpeg") ||
             fileOrFolder.extension().toLowerCase().equals("bmp")) {
           super.load(fileName, Texture.class);
+        } else if (fileOrFolder.extension().toLowerCase().equals("txt") ||
+            fileOrFolder.extension().toLowerCase().equals("json")) {
+          super.load(fileName, String.class);
         }
       }
     }
@@ -100,6 +105,15 @@ public class CustomAssetManager extends AssetManager {
 
   public Music getMusic(String fileName) {
     return super.get(fileName, Music.class);
+  }
+
+  public String getText(String fileName) {
+    return super.get(fileName, String.class);
+  }
+
+  public <T> T getJsonAsObject(String fileName, Class<T> clazz) {
+    String jsonFile = this.getText(fileName);
+    return CustomStringUtil.hasValue(jsonFile) ? CustomGsonUtil.getGson().fromJson(jsonFile, clazz) : null;
   }
 
   public Sound getConfirmSound() {
