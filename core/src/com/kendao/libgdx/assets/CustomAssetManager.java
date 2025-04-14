@@ -14,9 +14,12 @@ import com.kendao.libgdx.storage.CustomStorage;
 import com.kendao.libgdx.util.CustomGsonUtil;
 import com.kendao.libgdx.util.CustomStringUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CustomAssetManager extends AssetManager {
   private final Logger logger = new Logger(this.toString(), Application.LOG_DEBUG);
-
+  private final Map<String, String> textFiles = new HashMap<>();
   private String confirmSoundPath = "audio/sound/confirm.mp3";
   private String cancelSoundPath = "audio/sound/cancel.mp3";
 
@@ -62,20 +65,19 @@ public class CustomAssetManager extends AssetManager {
 
         this.logger.info("Loading asset: " + fileName);
 
-        if (fileOrFolder.extension().toLowerCase().equals("mp3")) {
+        if (fileOrFolder.extension().equalsIgnoreCase("mp3")) {
           if (fileName.toLowerCase().contains("/sound")) {
             super.load(fileName, Sound.class);
           } else if (fileName.toLowerCase().contains("/music")) {
             super.load(fileName, Music.class);
           }
-        } else if (fileOrFolder.extension().toLowerCase().equals("png") ||
-            fileOrFolder.extension().toLowerCase().equals("jpg") ||
-            fileOrFolder.extension().toLowerCase().equals("jpeg") ||
-            fileOrFolder.extension().toLowerCase().equals("bmp")) {
+        } else if (fileOrFolder.extension().equalsIgnoreCase("png") ||
+            fileOrFolder.extension().equalsIgnoreCase("jpg") ||
+            fileOrFolder.extension().equalsIgnoreCase("jpeg") ||
+            fileOrFolder.extension().equalsIgnoreCase("bmp")) {
           super.load(fileName, Texture.class);
-        } else if (fileOrFolder.extension().toLowerCase().equals("txt") ||
-            fileOrFolder.extension().toLowerCase().equals("json")) {
-          super.load(fileName, String.class);
+        } else if (fileOrFolder.extension().equalsIgnoreCase("json")) {
+          this.textFiles.put(fileName, fileOrFolder.readString());
         }
       }
     }
@@ -108,7 +110,7 @@ public class CustomAssetManager extends AssetManager {
   }
 
   public String getText(String fileName) {
-    return super.get(fileName, String.class);
+    return this.textFiles.get(fileName);
   }
 
   public <T> T getJsonAsObject(String fileName, Class<T> clazz) {
