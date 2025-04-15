@@ -1,7 +1,10 @@
 package com.kendao.libgdx.dragonbones.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class DragonBonesTextureDto {
   private String name;
@@ -30,6 +33,49 @@ public class DragonBonesTextureDto {
 
   public void setImagePath(String imagePath) {
     this.imagePath = imagePath;
+  }
+
+  public List<String> getAnimationTypes() {
+    Set<String> animationTypes = new HashSet<>();
+
+    for (SubTexture subTexture : this.getSubTexture()) {
+      String name = subTexture.getName();
+      int underscoreIndex = name.indexOf('_');
+      if (underscoreIndex > 0) {
+        String animationType = name.substring(0, underscoreIndex);
+        animationTypes.add(animationType);
+      }
+    }
+
+    return new ArrayList<>(animationTypes)
+        .stream()
+        .sorted()
+        .collect(Collectors.toList());
+  }
+
+  public Map<String, List<TextureRegion>> getTextureRegionsByAnimationType(
+      Texture spriteSheet
+  ) {
+    Map<String, List<TextureRegion>> animations = new HashMap<>();
+
+    for (SubTexture sub : this.getSubTexture()) {
+      String fullName = sub.getName();
+      String animationName = fullName.contains("_") ? fullName.substring(0, fullName.indexOf("_")) : fullName;
+
+      TextureRegion region = new TextureRegion(
+          spriteSheet,
+          sub.getX(),
+          sub.getY(),
+          sub.getWidth(),
+          sub.getHeight()
+      );
+
+      animations
+          .computeIfAbsent(animationName, k -> new ArrayList<>())
+          .add(region);
+    }
+
+    return animations;
   }
 
   public static class SubTexture {
@@ -79,4 +125,5 @@ public class DragonBonesTextureDto {
       this.height = height;
     }
   }
+
 }

@@ -3,20 +3,39 @@ package com.kendao.libgdx.scenes.scene2d.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.kendao.libgdx.dragonbones.dto.DragonBonesTextureDto;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class CustomAnimatedImage extends CustomImage {
-  private final Array<TextureRegion> frames;
-
+  private final List<String> animationOptions;
+  private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
-
+  private String currentAnimation;
+  private String lastAnimation;
   private int frameCounter = 0;
   private int currentFrame = 0;
+
+  private boolean waitToSwitch = false;
+
+  public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int ticksPerFrame) {
+    super(
+        TextureRegion.split(
+            spriteSheet,
+            spriteSheet.getWidth() / cols,
+            spriteSheet.getHeight() / rows
+        )[0][0],
+        0, 0,
+        spriteSheet.getWidth() / cols, spriteSheet.getHeight() / rows
+    );
+
+    this.ticksPerFrame = ticksPerFrame;
+
+    this.animationOptions = Collections.singletonList("default");
+    this.currentAnimation = this.animationOptions.get(0);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = this.extractFrames(spriteSheet, cols, rows, (cols * rows));
+  }
 
   public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int frameQuantity, int ticksPerFrame) {
     super(
@@ -31,7 +50,10 @@ public class CustomAnimatedImage extends CustomImage {
 
     this.ticksPerFrame = ticksPerFrame;
 
-    this.frames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
+    this.animationOptions = Collections.singletonList("default");
+    this.currentAnimation = this.animationOptions.get(0);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
   }
 
   public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int x, int y, int width, int height, int frameQuantity, int ticksPerFrame) {
@@ -47,9 +69,11 @@ public class CustomAnimatedImage extends CustomImage {
 
     this.ticksPerFrame = ticksPerFrame;
 
-    this.frames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
+    this.animationOptions = Collections.singletonList("default");
+    this.currentAnimation = this.animationOptions.get(0);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
   }
-
 
   public CustomAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int ticksPerFrame) {
     super(
@@ -65,7 +89,10 @@ public class CustomAnimatedImage extends CustomImage {
 
     this.ticksPerFrame = ticksPerFrame;
 
-    this.frames = this.extractFrames(spriteSheet, textureDto);
+    this.animationOptions = textureDto.getAnimationTypes();
+    this.currentAnimation = this.animationOptions.isEmpty() ? null : this.animationOptions.get(0);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = textureDto.getTextureRegionsByAnimationType(spriteSheet);
   }
 
   public CustomAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int x, int y, int width, int height, int ticksPerFrame) {
@@ -81,64 +108,106 @@ public class CustomAnimatedImage extends CustomImage {
 
     this.ticksPerFrame = ticksPerFrame;
 
-    this.frames = this.extractFrames(spriteSheet, textureDto);
+    this.animationOptions = textureDto.getAnimationTypes();
+    this.currentAnimation = this.animationOptions.isEmpty() ? null : this.animationOptions.get(0);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = textureDto.getTextureRegionsByAnimationType(spriteSheet);
   }
 
-  private Array<TextureRegion> extractFrames(Texture spriteSheet, int cols, int rows, int frameQuantity) {
+  private Map<String, List<TextureRegion>> extractFrames(Texture spriteSheet, int cols, int rows, int frameQuantity) {
     TextureRegion[][] dividedTextureRegions = TextureRegion.split(
         spriteSheet,
         spriteSheet.getWidth() / cols,
         spriteSheet.getHeight() / rows
     );
 
-    Array<TextureRegion> textureRegions = new Array<>(frameQuantity);
+    ArrayList<TextureRegion> textureRegions = new ArrayList<>(frameQuantity);
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < cols; col++) {
         textureRegions.add(dividedTextureRegions[row][col]);
 
-        if (textureRegions.size >= frameQuantity) {
+        if (textureRegions.size() >= frameQuantity) {
           break;
         }
       }
 
-      if (textureRegions.size >= frameQuantity) {
+      if (textureRegions.size() >= frameQuantity) {
         break;
       }
     }
 
-    return textureRegions;
-  }
-
-  private Array<TextureRegion> extractFrames(Texture spriteSheet, DragonBonesTextureDto textureDto) {
-    Array<TextureRegion> textureRegions = new Array<>();
-
-    List<DragonBonesTextureDto.SubTexture> sortedSubTextures = new ArrayList<>(textureDto.getSubTexture());
-
-    sortedSubTextures.sort(Comparator.comparing(DragonBonesTextureDto.SubTexture::getName));
-
-    for (DragonBonesTextureDto.SubTexture sub : sortedSubTextures) {
-      TextureRegion region = new TextureRegion(
-          spriteSheet,
-          sub.getX(),
-          sub.getY(),
-          sub.getWidth(),
-          sub.getHeight()
-      );
-      textureRegions.add(region);
-    }
-
-    return textureRegions;
+    Map<String, List<TextureRegion>> response = new HashMap<>();
+    response.put("default", textureRegions);
+    return response;
   }
 
   @Override
   public void act(float delta) {
     super.act(delta);
 
+    if (this.currentAnimation == null || !this.animationFrames.containsKey(this.currentAnimation)) {
+      return;
+    }
+
+    // Decide qual animação usar: se for pra esperar, continua usando a última até terminar
+    String animationToUse = this.waitToSwitch && !this.currentAnimation.equals(this.lastAnimation)
+        ? this.lastAnimation
+        : this.currentAnimation;
+
+    List<TextureRegion> frames = this.animationFrames.get(animationToUse);
+
     this.frameCounter++;
+
     if (this.frameCounter >= this.ticksPerFrame) {
       this.frameCounter = 0;
-      this.currentFrame = (this.currentFrame + 1) % this.frames.size;
-      super.setDrawable(new TextureRegionDrawable(this.frames.get(this.currentFrame)));
+
+      this.currentFrame++;
+
+      if (this.currentFrame >= frames.size()) {
+        this.currentFrame = 0;
+
+        // só troca se for pra esperar e chegou ao fim
+        if (this.waitToSwitch && !this.currentAnimation.equals(this.lastAnimation)) {
+          this.lastAnimation = this.currentAnimation;
+        }
+      }
+
+      // atualiza o frame
+      super.setDrawable(new TextureRegionDrawable(frames.get(this.currentFrame)));
     }
+  }
+
+  public List<String> getAnimationOptions() {
+    return this.animationOptions;
+  }
+
+  public String getCurrentAnimation() {
+    return this.currentAnimation;
+  }
+
+  public void setCurrentAnimation(String currentAnimation) {
+    if (this.animationOptions.contains(currentAnimation)) {
+      this.currentAnimation = currentAnimation;
+    } else {
+      System.err.println(
+          "Unable to load animation " + currentAnimation + ". Options: " + String.join(",", this.animationOptions)
+      );
+    }
+  }
+
+//  public Map<String, List<TextureRegion>> getAnimationFrames() {
+//    return this.animationFrames;
+//  }
+
+  public int getTicksPerFrame() {
+    return this.ticksPerFrame;
+  }
+
+  public boolean getWaitToSwitch() {
+    return this.waitToSwitch;
+  }
+
+  public void setWaitToSwitch(boolean waitToSwitch) {
+    this.waitToSwitch = waitToSwitch;
   }
 }
