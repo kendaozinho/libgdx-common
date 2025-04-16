@@ -136,8 +136,8 @@ public abstract class CustomAttackAnimation extends CustomImage {
     TOP_LEFT_TO_BOTTOM_RIGHT,
     BOTTOM_RIGHT_TO_TOP_LEFT,
     BOTTOM_LEFT_TO_TOP_RIGHT,
-    UP_TO_DOWN,
-    DOWN_TO_UP,
+    TOP_TO_BOTTOM,
+    BOTTOM_TO_TOP,
     LEFT_TO_RIGHT,
     RIGHT_TO_LEFT,
     CUSTOM

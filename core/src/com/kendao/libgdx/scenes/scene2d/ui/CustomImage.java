@@ -19,20 +19,22 @@ import com.kendao.libgdx.util.CustomStringUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImage extends Image {
+  private int defaultOrigin = Align.center;
+
   private String texturePath = null;
   private long customX = 0, customY = 0, customZ = 0;
 
   public CustomImage(Texture texture) {
     super(texture);
     this.updateTexturePath(texture);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(Texture texture, int x, int y) {
     super(texture);
     this.updateTexturePath(texture);
     super.setPosition(x, y);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(Texture texture, int x, int y, int width, int height) {
@@ -45,7 +47,7 @@ public class CustomImage extends Image {
       super.setSize(width, height);
     }
 
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(Texture texture, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
@@ -58,19 +60,19 @@ public class CustomImage extends Image {
       super.setSize(width, height);
     }
 
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
   }
 
   public CustomImage(TextureRegion textureRegion) {
     super(textureRegion);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(TextureRegion textureRegion, int x, int y) {
     super(textureRegion);
     super.setPosition(x, y);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(TextureRegion textureRegion, int x, int y, int width, int height) {
@@ -82,7 +84,7 @@ public class CustomImage extends Image {
       super.setSize(width, height);
     }
 
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(TextureRegion textureRegion, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
@@ -94,31 +96,31 @@ public class CustomImage extends Image {
       super.setSize(width, height);
     }
 
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
   }
 
   public CustomImage(Color color) {
     super(new Texture(new CustomPixmap(color, ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight())));
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(Color color, int x, int y) {
     super(new Texture(new CustomPixmap(color, ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight())));
     super.setPosition(x, y);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(Color color, int x, int y, int width, int height) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
   }
 
   public CustomImage(Color color, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
     super(new Texture(new CustomPixmap(color, width, height)));
     super.setPosition(x, y);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
   }
 
@@ -178,12 +180,12 @@ public class CustomImage extends Image {
   }
 
   public void setRotation(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.setRotation(amountInDegrees);
   }
 
   public void rotateBy(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.rotateBy(amountInDegrees);
   }
 
@@ -373,5 +375,29 @@ public class CustomImage extends Image {
   @Override
   public void setName(String name) {
     this.setId(name);
+  }
+
+  @Override
+  public void setOrigin(int alignment) {
+    super.setOrigin(alignment);
+    this.defaultOrigin = alignment;
+  }
+
+  @Override
+  public void setSize(float width, float height) {
+    super.setSize(width, height);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setWidth(float width) {
+    super.setWidth(width);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setHeight(float height) {
+    super.setHeight(height);
+    super.setOrigin(this.defaultOrigin);
   }
 }

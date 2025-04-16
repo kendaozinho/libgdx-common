@@ -13,13 +13,14 @@ import com.kendao.libgdx.util.CustomStringUtil;
 
 public class CustomTextButton extends TextButton {
   private final Color defaultColor = Color.ROYAL;
+  private int defaultOrigin = Align.center;
   private boolean enableSound = true;
 
   public CustomTextButton(String text, EventListener listener) {
     super(text, CustomSkin.getInstance());
     super.setColor(this.defaultColor);
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -28,7 +29,7 @@ public class CustomTextButton extends TextButton {
     super.setPosition(x, y);
     super.setColor(this.defaultColor);
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -38,7 +39,7 @@ public class CustomTextButton extends TextButton {
     super.setSize(width, height);
     super.setColor(this.defaultColor);
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -48,7 +49,7 @@ public class CustomTextButton extends TextButton {
     super.setSize(width, height);
     super.setColor(color);
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -58,7 +59,7 @@ public class CustomTextButton extends TextButton {
     super.setSize(width, height);
     super.setColor(color);
     super.setTransform(true);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
     this.addListeners(listener);
   }
@@ -135,12 +136,12 @@ public class CustomTextButton extends TextButton {
   }
 
   public void setRotation(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.setRotation(amountInDegrees);
   }
 
   public void rotateBy(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.rotateBy(amountInDegrees);
   }
 
@@ -272,5 +273,29 @@ public class CustomTextButton extends TextButton {
   @Override
   public void setName(String name) {
     this.setId(name);
+  }
+
+  @Override
+  public void setOrigin(int alignment) {
+    super.setOrigin(alignment);
+    this.defaultOrigin = alignment;
+  }
+
+  @Override
+  public void setSize(float width, float height) {
+    super.setSize(width, height);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setWidth(float width) {
+    super.setWidth(width);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setHeight(float height) {
+    super.setHeight(height);
+    super.setOrigin(this.defaultOrigin);
   }
 }

@@ -23,6 +23,8 @@ import com.kendao.libgdx.util.CustomStringUtil;
 import com.kendao.libgdx.util.dto.CustomPair;
 
 public class CustomImageButton extends ImageButton {
+  private int defaultOrigin = Align.center;
+
   private String imageTexturePath = null;
   private long customX = 0, customY = 0, customZ = 0;
   private boolean enableSound = true;
@@ -30,7 +32,7 @@ public class CustomImageButton extends ImageButton {
   public CustomImageButton(Image image, EventListener listener) {
     super(image.getDrawable());
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -40,7 +42,7 @@ public class CustomImageButton extends ImageButton {
     super.setPosition(x, y);
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -55,7 +57,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -70,7 +72,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
@@ -80,7 +82,7 @@ public class CustomImageButton extends ImageButton {
     super(new Image(texture).getDrawable());
     this.updateImageTexturePath(texture);
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
     this.addListeners(listener);
   }
 
@@ -91,7 +93,7 @@ public class CustomImageButton extends ImageButton {
     super.setPosition(x, y);
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -107,7 +109,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -123,7 +125,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
@@ -143,7 +145,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -162,7 +164,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
@@ -172,7 +174,7 @@ public class CustomImageButton extends ImageButton {
     super(new Image(textureRegion).getDrawable());
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -183,7 +185,7 @@ public class CustomImageButton extends ImageButton {
     super.setPosition(x, y);
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -198,7 +200,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -213,7 +215,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
@@ -233,7 +235,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(Align.center);
+    this.setOrigin(Align.center);
 
     this.addListeners(listener);
   }
@@ -252,7 +254,7 @@ public class CustomImageButton extends ImageButton {
     }
 
     super.setTransform(true);
-    super.setOrigin(originAlignment);
+    this.setOrigin(originAlignment);
     super.rotateBy(amountInDegrees);
 
     this.addListeners(listener);
@@ -317,12 +319,12 @@ public class CustomImageButton extends ImageButton {
   }
 
   public void setRotation(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.setRotation(amountInDegrees);
   }
 
   public void rotateBy(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.rotateBy(amountInDegrees);
   }
 
@@ -557,5 +559,29 @@ public class CustomImageButton extends ImageButton {
   @Override
   public void setName(String name) {
     this.setId(name);
+  }
+
+  @Override
+  public void setOrigin(int alignment) {
+    super.setOrigin(alignment);
+    this.defaultOrigin = alignment;
+  }
+
+  @Override
+  public void setSize(float width, float height) {
+    super.setSize(width, height);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setWidth(float width) {
+    super.setWidth(width);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setHeight(float height) {
+    super.setHeight(height);
+    super.setOrigin(this.defaultOrigin);
   }
 }

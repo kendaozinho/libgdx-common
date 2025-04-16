@@ -5,18 +5,25 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 
 public class CustomLabel extends Label {
+  private int defaultOrigin = Align.center;
+
   public CustomLabel() {
     super("", CustomSkin.getInstance());
 
     this.setFontSize(Sizes.SMALL);
+
+    this.setOrigin(Align.center);
   }
 
   public CustomLabel(CharSequence text) {
     super(text, CustomSkin.getInstance());
 
     this.setFontSize(Sizes.SMALL);
+
+    this.setOrigin(Align.center);
   }
 
   public CustomLabel(CharSequence text, Color color) {
@@ -27,12 +34,16 @@ public class CustomLabel extends Label {
     }
 
     this.setFontSize(Sizes.SMALL);
+
+    this.setOrigin(Align.center);
   }
 
   public CustomLabel(CharSequence text, Sizes fontSize) {
     super(text, CustomSkin.getInstance());
 
     this.setFontSize(fontSize);
+
+    this.setOrigin(Align.center);
   }
 
   public CustomLabel(CharSequence text, Color color, Sizes fontSize) {
@@ -43,6 +54,8 @@ public class CustomLabel extends Label {
     }
 
     this.setFontSize(fontSize);
+
+    this.setOrigin(Align.center);
   }
 
   public void setFontSize(Sizes fontSize) {
@@ -78,12 +91,12 @@ public class CustomLabel extends Label {
   }
 
   public void setRotation(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.setRotation(amountInDegrees);
   }
 
   public void rotateBy(float amountInDegrees, int align) {
-    super.setOrigin(align);
+    this.setOrigin(align);
     super.rotateBy(amountInDegrees);
   }
 
@@ -215,6 +228,30 @@ public class CustomLabel extends Label {
   @Override
   public void setName(String name) {
     this.setId(name);
+  }
+
+  @Override
+  public void setOrigin(int alignment) {
+    super.setOrigin(alignment);
+    this.defaultOrigin = alignment;
+  }
+
+  @Override
+  public void setSize(float width, float height) {
+    super.setSize(width, height);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setWidth(float width) {
+    super.setWidth(width);
+    super.setOrigin(this.defaultOrigin);
+  }
+
+  @Override
+  public void setHeight(float height) {
+    super.setHeight(height);
+    super.setOrigin(this.defaultOrigin);
   }
 
   public enum Sizes {
