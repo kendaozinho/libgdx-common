@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.kendao.libgdx.dragonbones.dto.DragonBonesTextureDto;
+import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
 import java.util.*;
 
@@ -169,6 +170,13 @@ public class CustomCharacterAnimatedImage extends CustomCharacterImage {
 
         attack.execute();
       }
+    }
+  }
+
+  public void addStageActors(CustomStage stage) {
+    stage.addActor(this);
+    if (this.attacks != null) {
+      this.attacks.forEach((id, attack) -> stage.addActor(attack));
     }
   }
 

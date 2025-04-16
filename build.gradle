@@ -67,8 +67,8 @@ project(":core") {
                 groupId = 'com.github.kendaozinho'
                 artifactId = 'libgdx-common'
 
-                version = "0.0.92"
-                // version = "0.0.92-SNAPSHOT"
+                version = "0.0.93"
+                // version = "0.0.93-SNAPSHOT"
 
                 from components.java
 
