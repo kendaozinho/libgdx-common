@@ -1,8 +1,9 @@
-package com.kendao.libgdx.scenes.scene2d.ui;
+package com.kendao.libgdx.scenes.scene2d.animation;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.kendao.libgdx.scenes.scene2d.ui.CustomImage;
 
 public class CustomCharacterImage extends CustomImage {
   public CustomCharacterImage(Texture texture) {
@@ -53,7 +54,7 @@ public class CustomCharacterImage extends CustomImage {
     super(color, x, y, width, height, originAlignment, amountInDegrees);
   }
 
-  public void wasAttacked() {
+  public void wasAttacked(CustomCharacterImage attacker, CustomAttackAnimation attack) {
     // do nothing by default, override this method!
   }
 }

@@ -1,35 +1,54 @@
-package com.kendao.libgdx.scenes.scene2d.ui;
+package com.kendao.libgdx.scenes.scene2d.animation;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.kendao.libgdx.scenes.scene2d.ui.CustomImage;
 
 import java.util.HashMap;
 
 public abstract class CustomAttackAnimation extends CustomImage {
+  private final CustomCharacterImage attacker;
   private final HashMap<String, CustomCharacterImage> targets;
   private final float durationInSeconds;
+  private final int damage;
 
   public CustomAttackAnimation(
-      Texture texture, HashMap<String, CustomCharacterImage> targets
+      Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets
   ) {
     super(texture);
+    this.attacker = attacker;
     this.targets = targets;
     this.durationInSeconds = 3f;
+    this.damage = 1;
   }
 
   public CustomAttackAnimation(
-      Texture texture, HashMap<String, CustomCharacterImage> targets, float durationInSeconds
+      Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, float durationInSeconds
   ) {
     super(texture);
+    this.attacker = attacker;
     this.targets = targets;
     this.durationInSeconds = durationInSeconds;
+    this.damage = 1;
   }
 
   public CustomAttackAnimation(
-      Texture texture, HashMap<String, CustomCharacterImage> targets, float durationInSeconds, CustomAttackEffects effect
+      Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, float durationInSeconds, int damage
   ) {
     super(texture);
+    this.attacker = attacker;
     this.targets = targets;
     this.durationInSeconds = durationInSeconds;
+    this.damage = damage;
+  }
+
+  public CustomAttackAnimation(
+      Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, float durationInSeconds, int damage, CustomAttackEffects effect
+  ) {
+    super(texture);
+    this.attacker = attacker;
+    this.targets = targets;
+    this.durationInSeconds = durationInSeconds;
+    this.damage = damage;
     this.setEffect(effect);
   }
 
@@ -66,6 +85,10 @@ public abstract class CustomAttackAnimation extends CustomImage {
   }
 
   private void checkCollision() {
+    if (this.targets == null) {
+      return;
+    }
+
     float thisX = super.getX();
     float thisY = super.getY();
     float thisWidth = super.getWidth();
@@ -83,13 +106,25 @@ public abstract class CustomAttackAnimation extends CustomImage {
           thisY + thisHeight > targetY;
 
       if (overlaps) {
-        target.wasAttacked();
+        target.wasAttacked(this.attacker, this);
       }
     }
   }
 
+  public CustomCharacterImage getAttacker() {
+    return this.attacker;
+  }
+
+  public HashMap<String, CustomCharacterImage> getTargets() {
+    return this.targets;
+  }
+
   public float getDurationInSeconds() {
     return this.durationInSeconds;
+  }
+
+  public int getDamage() {
+    return this.damage;
   }
 
   public abstract void execute();

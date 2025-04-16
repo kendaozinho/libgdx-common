@@ -1,4 +1,4 @@
-package com.kendao.libgdx.scenes.scene2d.ui;
+package com.kendao.libgdx.scenes.scene2d.animation;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,6 +11,9 @@ public class CustomCharacterAnimatedImage extends CustomCharacterImage {
   private final List<String> animationOptions;
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
+
+  private Map<String, CustomAttackAnimation> attacks;
+
   private String currentAnimation;
   private String lastAnimation;
   private int frameCounter = 0;
@@ -120,7 +123,7 @@ public class CustomCharacterAnimatedImage extends CustomCharacterImage {
         : animationOptions.stream()
         .filter(a -> {
           String lower = a.toLowerCase();
-          return lower.contains("default") || lower.contains("idle") || lower.contains("normal");
+          return lower.equals("default") || lower.equals("idle") || lower.equals("normal");
         })
         .findFirst()
         .orElse(animationOptions.get(0));
@@ -151,6 +154,22 @@ public class CustomCharacterAnimatedImage extends CustomCharacterImage {
     Map<String, List<TextureRegion>> response = new HashMap<>();
     response.put("default", textureRegions);
     return response;
+  }
+
+  public void attack(String attackId) {
+    if (this.attacks != null) {
+      CustomAttackAnimation attack = this.attacks.get(attackId);
+      if (attack != null) {
+        for (String animation : this.animationOptions) {
+          if (animation.equalsIgnoreCase("attack") || animation.equalsIgnoreCase("atk")) {
+            this.setCurrentAnimation(animation);
+            break;
+          }
+        }
+
+        attack.execute();
+      }
+    }
   }
 
   @Override
@@ -213,6 +232,14 @@ public class CustomCharacterAnimatedImage extends CustomCharacterImage {
 
   public int getTicksPerFrame() {
     return this.ticksPerFrame;
+  }
+
+  public Map<String, CustomAttackAnimation> getAttacks() {
+    return this.attacks;
+  }
+
+  public void setAttacks(Map<String, CustomAttackAnimation> attacks) {
+    this.attacks = attacks;
   }
 
   public boolean getWaitToSwitch() {
