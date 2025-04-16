@@ -26,7 +26,7 @@ project(":core") {
 
         // ...
 
-        implementation "com.github.kendaozinho:libgdx-common:0.0.90" // <-- add this
+        implementation "com.github.kendaozinho:libgdx-common:0.0.91" // <-- add this
     }
 }
 ```

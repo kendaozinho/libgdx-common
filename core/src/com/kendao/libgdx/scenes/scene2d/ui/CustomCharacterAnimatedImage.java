@@ -7,7 +7,7 @@ import com.kendao.libgdx.dragonbones.dto.DragonBonesTextureDto;
 
 import java.util.*;
 
-public class CustomAnimatedImage extends CustomCharacterImage {
+public class CustomCharacterAnimatedImage extends CustomCharacterImage {
   private final List<String> animationOptions;
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
@@ -18,7 +18,7 @@ public class CustomAnimatedImage extends CustomCharacterImage {
 
   private boolean waitToSwitch = true;
 
-  public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int ticksPerFrame) {
+  public CustomCharacterAnimatedImage(Texture spriteSheet, int cols, int rows, int ticksPerFrame) {
     super(
         TextureRegion.split(
             spriteSheet,
@@ -37,7 +37,7 @@ public class CustomAnimatedImage extends CustomCharacterImage {
     this.animationFrames = this.extractFrames(spriteSheet, cols, rows, (cols * rows));
   }
 
-  public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int frameQuantity, int ticksPerFrame) {
+  public CustomCharacterAnimatedImage(Texture spriteSheet, int cols, int rows, int frameQuantity, int ticksPerFrame) {
     super(
         TextureRegion.split(
             spriteSheet,
@@ -56,7 +56,7 @@ public class CustomAnimatedImage extends CustomCharacterImage {
     this.animationFrames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
   }
 
-  public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int x, int y, int width, int height, int frameQuantity, int ticksPerFrame) {
+  public CustomCharacterAnimatedImage(Texture spriteSheet, int cols, int rows, int x, int y, int width, int height, int frameQuantity, int ticksPerFrame) {
     super(
         TextureRegion.split(
             spriteSheet,
@@ -75,7 +75,7 @@ public class CustomAnimatedImage extends CustomCharacterImage {
     this.animationFrames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
   }
 
-  public CustomAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int ticksPerFrame) {
+  public CustomCharacterAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int ticksPerFrame) {
     super(
         TextureRegion.split(
             spriteSheet,
@@ -90,12 +90,12 @@ public class CustomAnimatedImage extends CustomCharacterImage {
     this.ticksPerFrame = ticksPerFrame;
 
     this.animationOptions = textureDto.getAnimationTypes();
-    this.currentAnimation = this.animationOptions.isEmpty() ? null : this.animationOptions.get(0);
+    this.currentAnimation = this.getDefaultAnimation(this.animationOptions);
     this.lastAnimation = this.currentAnimation;
     this.animationFrames = textureDto.getTextureRegionsByAnimationType(spriteSheet);
   }
 
-  public CustomAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int x, int y, int width, int height, int ticksPerFrame) {
+  public CustomCharacterAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int x, int y, int width, int height, int ticksPerFrame) {
     super(
         TextureRegion.split(
             spriteSheet,
@@ -109,9 +109,21 @@ public class CustomAnimatedImage extends CustomCharacterImage {
     this.ticksPerFrame = ticksPerFrame;
 
     this.animationOptions = textureDto.getAnimationTypes();
-    this.currentAnimation = this.animationOptions.isEmpty() ? null : this.animationOptions.get(0);
+    this.currentAnimation = this.getDefaultAnimation(this.animationOptions);
     this.lastAnimation = this.currentAnimation;
     this.animationFrames = textureDto.getTextureRegionsByAnimationType(spriteSheet);
+  }
+
+  private String getDefaultAnimation(List<String> animationOptions) {
+    return (animationOptions == null || animationOptions.isEmpty())
+        ? null
+        : animationOptions.stream()
+        .filter(a -> {
+          String lower = a.toLowerCase();
+          return lower.contains("default") || lower.contains("idle") || lower.contains("normal");
+        })
+        .findFirst()
+        .orElse(animationOptions.get(0));
   }
 
   private Map<String, List<TextureRegion>> extractFrames(Texture spriteSheet, int cols, int rows, int frameQuantity) {
