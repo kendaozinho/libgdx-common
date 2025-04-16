@@ -140,7 +140,8 @@ public abstract class CustomAttackAnimation extends CustomImage {
     BOTTOM_TO_TOP,
     LEFT_TO_RIGHT,
     RIGHT_TO_LEFT,
-    CUSTOM
+    ORIGIN_TO_DESTINY,
+    CUSTOM_COORDINATES
   }
 
   public enum CustomAttackEffects {
