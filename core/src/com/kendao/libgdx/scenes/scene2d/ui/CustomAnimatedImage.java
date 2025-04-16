@@ -7,7 +7,7 @@ import com.kendao.libgdx.dragonbones.dto.DragonBonesTextureDto;
 
 import java.util.*;
 
-public class CustomAnimatedImage extends CustomImage {
+public class CustomAnimatedImage extends CustomCharacterImage {
   private final List<String> animationOptions;
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
@@ -16,7 +16,7 @@ public class CustomAnimatedImage extends CustomImage {
   private int frameCounter = 0;
   private int currentFrame = 0;
 
-  private boolean waitToSwitch = false;
+  private boolean waitToSwitch = true;
 
   public CustomAnimatedImage(Texture spriteSheet, int cols, int rows, int ticksPerFrame) {
     super(

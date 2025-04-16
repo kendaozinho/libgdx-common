@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -258,15 +259,21 @@ public class CustomImage extends Image {
     }
   }
 
-  public void executeRotationAnimation(boolean forever) {
+  public void executeRotateRightAnimation(boolean forever) {
+    Action rotateAction = Actions.rotateBy(360f, 2f); // horário
     if (forever) {
-      super.addAction(Actions.forever(
-          Actions.rotateBy(360, 2)
-      ));
+      super.addAction(Actions.forever(rotateAction));
     } else {
-      super.addAction(
-          Actions.rotateBy(360, 2)
-      );
+      super.addAction(rotateAction);
+    }
+  }
+
+  public void executeRotateLeftAnimation(boolean forever) {
+    Action rotateAction = Actions.rotateBy(-360f, 2f); // anti-horário
+    if (forever) {
+      super.addAction(Actions.forever(rotateAction));
+    } else {
+      super.addAction(rotateAction);
     }
   }
 
@@ -305,6 +312,36 @@ public class CustomImage extends Image {
               Actions.moveBy(0, -20, 0.3f, Interpolation.bounce)
           )
       );
+    }
+  }
+
+  public void executeFlipHorizontalAnimation(boolean forever) {
+    Action flipAction = Actions.sequence(
+        Actions.run(() -> setScaleX(-1f)),
+        Actions.delay(0.25f),
+        Actions.run(() -> setScaleX(1f)),
+        Actions.delay(0.25f)
+    );
+
+    if (forever) {
+      super.addAction(Actions.forever(flipAction));
+    } else {
+      super.addAction(flipAction);
+    }
+  }
+
+  public void executeFlipVerticalAnimation(boolean forever) {
+    Action flipAction = Actions.sequence(
+        Actions.run(() -> setScaleY(-1f)),
+        Actions.delay(0.25f),
+        Actions.run(() -> setScaleY(1f)),
+        Actions.delay(0.25f)
+    );
+
+    if (forever) {
+      super.addAction(Actions.forever(flipAction));
+    } else {
+      super.addAction(flipAction);
     }
   }
 
