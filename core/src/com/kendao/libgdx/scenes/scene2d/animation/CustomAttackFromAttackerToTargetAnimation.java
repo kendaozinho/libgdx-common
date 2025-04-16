@@ -7,25 +7,25 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import java.util.HashMap;
 
 public class CustomAttackFromAttackerToTargetAnimation extends CustomAttackAnimation {
-  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY) {
+  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height) {
     super(texture, attacker, targets);
     super.setSize(width, height);
     super.setPosition(-9999, -9999);
   }
 
-  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY, float durationInSeconds) {
+  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, float durationInSeconds) {
     super(texture, attacker, targets, durationInSeconds);
     super.setSize(width, height);
     super.setPosition(-9999, -9999);
   }
 
-  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY, float durationInSeconds, int damage) {
+  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, float durationInSeconds, int damage) {
     super(texture, attacker, targets, durationInSeconds, damage);
     super.setSize(width, height);
     super.setPosition(-9999, -9999);
   }
 
-  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY, float durationInSeconds, int damage, CustomAttackEffects effect) {
+  public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, float durationInSeconds, int damage, CustomAttackEffects effect) {
     super(texture, attacker, targets, durationInSeconds, damage, effect);
     super.setSize(width, height);
     super.setPosition(-9999, -9999);

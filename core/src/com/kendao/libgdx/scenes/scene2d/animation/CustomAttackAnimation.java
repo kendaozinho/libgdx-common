@@ -141,6 +141,7 @@ public abstract class CustomAttackAnimation extends CustomImage {
     LEFT_TO_RIGHT,
     RIGHT_TO_LEFT,
     ORIGIN_TO_DESTINY,
+    ORIGIN_TO_COORDINATES,
     CUSTOM_COORDINATES
   }
 
