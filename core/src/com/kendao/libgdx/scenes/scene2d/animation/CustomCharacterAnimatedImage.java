@@ -254,24 +254,30 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
 
     if (this.frameCounter >= this.ticksPerFrame) {
       this.frameCounter = 0;
+      boolean animationFinished = false;
+
       this.currentFrame++;
 
       if (this.currentFrame >= frames.size()) {
         this.currentFrame = 0;
+        animationFinished = true;
 
         // Se terminou a animação, verifica se precisa trocar
-        if (this.getCurrentAnimation().equalsIgnoreCase("attack") || this.getCurrentAnimation().equalsIgnoreCase("atk")) {
-          afterAttack();
-        } else if (this.waitToSwitch && !this.currentAnimation.equals(this.lastAnimation)) {
+        if (this.waitToSwitch && !this.currentAnimation.equals(this.lastAnimation)) {
           this.lastAnimation = this.currentAnimation;
         }
       }
 
       // Atualiza o frame
       super.setDrawable(new TextureRegionDrawable(frames.get(this.currentFrame)));
+
+      if (animationFinished &&
+          (animationToUse.equalsIgnoreCase("attack") || animationToUse.equalsIgnoreCase("atk"))) {
+        this.afterAttack();
+      }
     }
   }
-
+  
   public List<String> getAnimationOptions() {
     return this.animationOptions;
   }
