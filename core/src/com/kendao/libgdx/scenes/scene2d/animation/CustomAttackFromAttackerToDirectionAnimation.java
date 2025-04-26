@@ -52,84 +52,14 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
     float originX = super.getAttacker().getX() + (super.getAttacker().getWidth() / 2);
     float originY = super.getAttacker().getY() + (super.getAttacker().getHeight() / 2);
 
-    float destinyX = originX;
-    float destinyY = originY;
-
-    // Calcula o fator de diagonal (1/sqrt(2) ≈ 0.7071) para manter a mesma distância total
-    float diagonalFactor = (float) (this.distance * Math.sqrt(2) / 2);
-    float halfDiagonalFactor = (float) (this.distance * Math.sqrt(0.5 - Math.sqrt(2) / 4)); // Fator para direções intermediárias
-
-    switch (this.direction) {
-      case N:
-        destinyY += this.distance;
-        break;
-      case NNE:
-        destinyX += halfDiagonalFactor;
-        destinyY += halfDiagonalFactor;
-        break;
-      case NE:
-        destinyX += diagonalFactor;
-        destinyY += diagonalFactor;
-        break;
-      case ENE:
-        destinyX += halfDiagonalFactor;
-        destinyY += halfDiagonalFactor;
-        break;
-      case E:
-        destinyX += this.distance;
-        break;
-      case ESE:
-        destinyX += halfDiagonalFactor;
-        destinyY -= halfDiagonalFactor;
-        break;
-      case SE:
-        destinyX += diagonalFactor;
-        destinyY -= diagonalFactor;
-        break;
-      case SSE:
-        destinyX += halfDiagonalFactor;
-        destinyY -= halfDiagonalFactor;
-        break;
-      case S:
-        destinyY -= this.distance;
-        break;
-      case SSW:
-        destinyX -= halfDiagonalFactor;
-        destinyY -= halfDiagonalFactor;
-        break;
-      case SW:
-        destinyX -= diagonalFactor;
-        destinyY -= diagonalFactor;
-        break;
-      case WSW:
-        destinyX -= halfDiagonalFactor;
-        destinyY -= halfDiagonalFactor;
-        break;
-      case W:
-        destinyX -= this.distance;
-        break;
-      case WNW:
-        destinyX -= halfDiagonalFactor;
-        destinyY += halfDiagonalFactor;
-        break;
-      case NW:
-        destinyX -= diagonalFactor;
-        destinyY += diagonalFactor;
-        break;
-      case NNW:
-        destinyX -= halfDiagonalFactor;
-        destinyY += halfDiagonalFactor;
-        break;
-    }
+    float destinyX = originX + this.direction.getXMultiplier() * this.distance;
+    float destinyY = originY + this.direction.getYMultiplier() * this.distance;
 
     super.getColor().a = 0f; // Começa completamente transparente
 
     super.addAction(Actions.sequence(
         Actions.run(() -> {
-          super.setPosition(
-              super.getAttacker().getX() + (super.getAttacker().getWidth() / 2),
-              super.getAttacker().getY() + (super.getAttacker().getHeight() / 2)
-          );
+          super.setPosition(originX, originY);
         }),
         Actions.fadeIn(0.2f), // mostrar
         Actions.moveTo(
