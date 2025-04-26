@@ -11,8 +11,8 @@ public final class CustomNumberUtil {
    * Generate random Integer between min and max (inclusive)
    */
   public static Integer getRandomValue(Integer min, Integer max) {
-    if (min >= max) {
-      throw new IllegalArgumentException("Max must be greater than min");
+    if (min > max) {
+      throw new IllegalArgumentException("Max must be greater than or equal to min");
     }
     return ThreadLocalRandom.current().nextInt(min, max + 1);
   }
@@ -21,8 +21,8 @@ public final class CustomNumberUtil {
    * Generate random Long between min and max (inclusive)
    */
   public static Long getRandomValue(Long min, Long max) {
-    if (min >= max) {
-      throw new IllegalArgumentException("Max must be greater than min");
+    if (min > max) {
+      throw new IllegalArgumentException("Max must be greater than or equal to min");
     }
     return ThreadLocalRandom.current().nextLong(min, max + 1);
   }

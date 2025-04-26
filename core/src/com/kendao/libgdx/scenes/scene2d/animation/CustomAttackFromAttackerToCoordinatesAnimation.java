@@ -49,8 +49,8 @@ public class CustomAttackFromAttackerToCoordinatesAnimation extends CustomAttack
     super.addAction(Actions.sequence(
         Actions.run(() -> {
           super.setPosition(
-              super.getAttacker().getX() + (super.getAttacker().getWidth() / 2),
-              super.getAttacker().getY() + (super.getAttacker().getHeight() / 2)
+              super.getAttacker().getX() + (super.getAttacker().getWidth() / 2) - (super.getWidth() / 2),
+              super.getAttacker().getY() + (super.getAttacker().getHeight() / 2) - (super.getHeight() / 2)
           );
         }),
         Actions.fadeIn(0.2f), // mostrar

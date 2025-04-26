@@ -49,8 +49,8 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
 
   @Override
   public void execute() {
-    float originX = super.getAttacker().getX() + (super.getAttacker().getWidth() / 2);
-    float originY = super.getAttacker().getY() + (super.getAttacker().getHeight() / 2);
+    float originX = super.getAttacker().getX() + (super.getAttacker().getWidth() / 2) - (super.getWidth() / 2);
+    float originY = super.getAttacker().getY() + (super.getAttacker().getHeight() / 2) - (super.getHeight() / 2);
 
     float destinyX = originX + this.direction.getXMultiplier() * this.distance;
     float destinyY = originY + this.direction.getYMultiplier() * this.distance;

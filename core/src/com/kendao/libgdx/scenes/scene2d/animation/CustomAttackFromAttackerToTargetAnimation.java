@@ -37,14 +37,14 @@ public class CustomAttackFromAttackerToTargetAnimation extends CustomAttackAnima
 
     CustomCharacterImage firstTarget = (super.getTargets() == null || super.getTargets().isEmpty()) ? null : super.getTargets().values().iterator().next();
 
-    float targetX = (firstTarget == null) ? 0 : firstTarget.getX() + (firstTarget.getWidth() / 2);
-    float targetY = (firstTarget == null) ? 0 : firstTarget.getY() + (firstTarget.getHeight() / 2);
+    float targetX = (firstTarget == null) ? 0 : firstTarget.getX() + (firstTarget.getWidth() / 2) - (super.getWidth() / 2);
+    float targetY = (firstTarget == null) ? 0 : firstTarget.getY() + (firstTarget.getHeight() / 2) - (super.getHeight() / 2);
 
     super.addAction(Actions.sequence(
         Actions.run(() -> {
           super.setPosition(
-              super.getAttacker().getX() + (super.getAttacker().getWidth() / 2),
-              super.getAttacker().getY() + (super.getAttacker().getHeight() / 2)
+              super.getAttacker().getX() + (super.getAttacker().getWidth() / 2) - (super.getWidth() / 2),
+              super.getAttacker().getY() + (super.getAttacker().getHeight() / 2) - (super.getHeight() / 2)
           );
         }),
         Actions.fadeIn(0.2f), // mostrar
