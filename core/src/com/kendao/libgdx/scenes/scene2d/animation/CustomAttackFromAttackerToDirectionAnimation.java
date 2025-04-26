@@ -60,14 +60,14 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
       case E:
         destinyX += this.distance;
         break;
-      case O:
+      case W:
         destinyX -= this.distance;
         break;
       case NE:
         destinyX += this.distance;
         destinyY += this.distance;
         break;
-      case NO:
+      case NW:
         destinyX -= this.distance;
         destinyY += this.distance;
         break;
@@ -75,7 +75,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
         destinyX += this.distance;
         destinyY -= this.distance;
         break;
-      case SO:
+      case SW:
         destinyX -= this.distance;
         destinyY -= this.distance;
         break;
@@ -106,5 +106,5 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
     return CustomAttackTypes.ORIGIN_TO_DIRECTION;
   }
 
-  public enum Directions {N, S, E, O, NE, NO, SE, SO}
+  public enum Directions {N, S, E, W, NE, NW, SE, SW}
 }
