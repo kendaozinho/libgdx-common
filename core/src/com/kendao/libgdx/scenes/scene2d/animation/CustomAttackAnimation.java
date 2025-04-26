@@ -109,11 +109,11 @@ public abstract class CustomAttackAnimation extends CustomImage {
           thisY < targetY + targetHeight &&
           thisY + thisHeight > targetY;
 
-      // se atacou!
+      // atacou!
       if (overlaps) {
         target.wasAttacked(this.attacker, this);
         target.setCanAttack(false);
-        this.setDefaultPosition();
+        // this.setDefaultPosition();
       }
     }
   }

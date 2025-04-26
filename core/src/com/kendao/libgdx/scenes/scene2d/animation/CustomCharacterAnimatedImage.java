@@ -13,6 +13,8 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
 
+  private long hp = 0;
+  private long maxHp = 0;
   private Map<String, List<CustomAttackAnimation>> attacks;
 
   private String currentAnimation;
@@ -201,14 +203,14 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     if (this.attacks != null) {
       List<CustomAttackAnimation> attacks = this.attacks.get(attackId);
       if (attacks != null) {
-        this.beforeAttack();
+        this.setAttackAnimation();
 
         attacks.forEach(CustomAttackAnimation::execute);
       }
     }
   }
 
-  private void beforeAttack() {
+  private void setAttackAnimation() {
     for (String animation : this.animationOptions) {
       if (animation.equalsIgnoreCase("attack") || animation.equalsIgnoreCase("atk")) {
         this.setCurrentAnimation(animation);
@@ -217,10 +219,21 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     }
   }
 
-  private void afterAttack() {
+  private void setIdleAnimation() {
     for (String animation : this.animationOptions) {
       if (
           animation.equalsIgnoreCase("default") || animation.equalsIgnoreCase("idle") || animation.equalsIgnoreCase("normal")
+      ) {
+        this.setCurrentAnimation(animation);
+        break;
+      }
+    }
+  }
+
+  private void setDeathAnimation() {
+    for (String animation : this.animationOptions) {
+      if (
+          animation.equalsIgnoreCase("death")
       ) {
         this.setCurrentAnimation(animation);
         break;
@@ -271,9 +284,12 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
       // Atualiza o frame
       super.setDrawable(new TextureRegionDrawable(frames.get(this.currentFrame)));
 
-      if (animationFinished &&
-          (animationToUse.equalsIgnoreCase("attack") || animationToUse.equalsIgnoreCase("atk"))) {
-        this.afterAttack();
+      if (animationFinished) {
+        if (this.getHp() == 0 && this.getMaxHp() > 0) {
+          this.setDeathAnimation();
+        } else if (animationToUse.equalsIgnoreCase("attack") || animationToUse.equalsIgnoreCase("atk")) {
+          this.setIdleAnimation();
+        }
       }
     }
   }
@@ -318,5 +334,21 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
 
   public void setWaitToSwitch(boolean waitToSwitch) {
     this.waitToSwitch = waitToSwitch;
+  }
+
+  public long getHp() {
+    return this.hp;
+  }
+
+  public void setHp(long hp) {
+    this.hp = hp;
+  }
+
+  public long getMaxHp() {
+    return this.maxHp;
+  }
+
+  public void setMaxHp(long maxHp) {
+    this.maxHp = maxHp;
   }
 }
