@@ -40,10 +40,6 @@ public class CustomAttackBottomToTopAnimation extends CustomAttackAnimation {
 
   @Override
   public void execute() {
-    if (super.getAttacker().isDeath()) {
-      return;
-    }
-
     super.setPosition(super.getX(), -super.getHeight());
     super.addAction(
         Actions.moveTo(

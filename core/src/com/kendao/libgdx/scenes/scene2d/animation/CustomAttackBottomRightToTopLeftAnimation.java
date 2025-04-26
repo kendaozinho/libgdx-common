@@ -40,10 +40,6 @@ public class CustomAttackBottomRightToTopLeftAnimation extends CustomAttackAnima
 
   @Override
   public void execute() {
-    if (super.getAttacker().isDeath()) {
-      return;
-    }
-
     super.setPosition(
         ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth() + super.getWidth(),
         -(super.getHeight() / 2)

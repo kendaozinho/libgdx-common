@@ -44,10 +44,6 @@ public class CustomAttackFromAttackerToCoordinatesAnimation extends CustomAttack
 
   @Override
   public void execute() {
-    if (super.getAttacker().isDeath()) {
-      return;
-    }
-
     super.getColor().a = 0f; // Começa completamente transparente
 
     super.addAction(Actions.sequence(

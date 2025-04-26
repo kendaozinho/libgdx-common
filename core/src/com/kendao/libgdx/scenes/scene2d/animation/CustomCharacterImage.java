@@ -97,7 +97,7 @@ public abstract class CustomCharacterImage extends CustomImage {
   }
 
   public boolean attack(String attackId) {
-    if (this.attacks != null) {
+    if (this.attacks != null && !this.isDeath()) {
       List<CustomAttackAnimation> attacks = this.attacks.get(attackId);
       if (attacks != null) {
         attacks.forEach(CustomAttackAnimation::execute);

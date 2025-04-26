@@ -40,10 +40,6 @@ public class CustomAttackLeftToRightAnimation extends CustomAttackAnimation {
 
   @Override
   public void execute() {
-    if (super.getAttacker().isDeath()) {
-      return;
-    }
-
     super.setPosition(-super.getWidth(), super.getY());
     super.addAction(
         Actions.moveTo(

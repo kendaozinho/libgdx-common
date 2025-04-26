@@ -49,10 +49,6 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
 
   @Override
   public void execute() {
-    if (super.getAttacker().isDeath()) {
-      return;
-    }
-
     float originX = super.getAttacker().getX() + (super.getAttacker().getWidth() / 2) - (super.getWidth() / 2);
     float originY = super.getAttacker().getY() + (super.getAttacker().getHeight() / 2) - (super.getHeight() / 2);
 

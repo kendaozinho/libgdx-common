@@ -40,10 +40,6 @@ public class CustomAttackTopToBottomAnimation extends CustomAttackAnimation {
 
   @Override
   public void execute() {
-    if (super.getAttacker().isDeath()) {
-      return;
-    }
-
     super.setPosition(
         super.getX(), ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
     );
