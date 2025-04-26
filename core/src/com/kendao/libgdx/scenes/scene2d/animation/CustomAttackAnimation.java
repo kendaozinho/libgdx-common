@@ -95,6 +95,10 @@ public abstract class CustomAttackAnimation extends CustomImage {
     float thisHeight = super.getHeight();
 
     for (CustomCharacterImage target : this.targets.values()) {
+      if (!target.getCanAttack()) {
+        continue;
+      }
+
       float targetX = target.getX();
       float targetY = target.getY();
       float targetWidth = target.getWidth();

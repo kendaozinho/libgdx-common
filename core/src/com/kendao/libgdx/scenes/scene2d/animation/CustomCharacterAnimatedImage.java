@@ -8,7 +8,7 @@ import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
 import java.util.*;
 
-public class CustomCharacterAnimatedImage extends CustomCharacterImage {
+public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage {
   private final List<String> animationOptions;
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame

@@ -5,7 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomImage;
 
-public class CustomCharacterImage extends CustomImage {
+public abstract class CustomCharacterImage extends CustomImage {
+  private int ticksCooldown = 250;
+  private int ticksSinceLastAttack = 0;
+  private boolean canAttack = true;
+
   public CustomCharacterImage(Texture texture) {
     super(texture);
   }
@@ -18,8 +22,14 @@ public class CustomCharacterImage extends CustomImage {
     super(texture, x, y, width, height);
   }
 
-  public CustomCharacterImage(Texture texture, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
+  public CustomCharacterImage(Texture texture, int x, int y, int width, int height, int ticksCooldown) {
+    super(texture, x, y, width, height);
+    this.ticksCooldown = ticksCooldown;
+  }
+
+  public CustomCharacterImage(Texture texture, int x, int y, int width, int height, int ticksCooldown, int originAlignment, float amountInDegrees) {
     super(texture, x, y, width, height, originAlignment, amountInDegrees);
+    this.ticksCooldown = ticksCooldown;
   }
 
   public CustomCharacterImage(TextureRegion textureRegion) {
@@ -34,8 +44,14 @@ public class CustomCharacterImage extends CustomImage {
     super(textureRegion, x, y, width, height);
   }
 
-  public CustomCharacterImage(TextureRegion textureRegion, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
+  public CustomCharacterImage(TextureRegion textureRegion, int x, int y, int width, int height, int ticksCooldown) {
+    super(textureRegion, x, y, width, height);
+    this.ticksCooldown = ticksCooldown;
+  }
+
+  public CustomCharacterImage(TextureRegion textureRegion, int x, int y, int width, int height, int ticksCooldown, int originAlignment, float amountInDegrees) {
     super(textureRegion, x, y, width, height, originAlignment, amountInDegrees);
+    this.ticksCooldown = ticksCooldown;
   }
 
   public CustomCharacterImage(Color color) {
@@ -50,11 +66,32 @@ public class CustomCharacterImage extends CustomImage {
     super(color, x, y, width, height);
   }
 
-  public CustomCharacterImage(Color color, int x, int y, int width, int height, int originAlignment, float amountInDegrees) {
-    super(color, x, y, width, height, originAlignment, amountInDegrees);
+  public CustomCharacterImage(Color color, int x, int y, int width, int height, int ticksCooldown) {
+    super(color, x, y, width, height);
+    this.ticksCooldown = ticksCooldown;
   }
 
-  public void wasAttacked(CustomCharacterImage attacker, CustomAttackAnimation attack) {
-    // do nothing by default, override this method!
+  public CustomCharacterImage(Color color, int x, int y, int width, int height, int ticksCooldown, int originAlignment, float amountInDegrees) {
+    super(color, x, y, width, height, originAlignment, amountInDegrees);
+    this.ticksCooldown = ticksCooldown;
+  }
+
+  @Override
+  public void act(float delta) {
+    super.act(delta);
+
+    if (!this.canAttack) {
+      this.ticksSinceLastAttack++;
+      if (this.ticksSinceLastAttack >= this.ticksCooldown) {
+        this.ticksSinceLastAttack = 0;
+        this.canAttack = true;
+      }
+    }
+  }
+
+  public abstract void wasAttacked(CustomCharacterImage attacker, CustomAttackAnimation attack);
+
+  public boolean getCanAttack() {
+    return this.canAttack;
   }
 }
