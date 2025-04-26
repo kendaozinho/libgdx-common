@@ -15,7 +15,7 @@ public class CustomAttackSpecificCoordinatesAnimation extends CustomAttackAnimat
   public CustomAttackSpecificCoordinatesAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY) {
     super(texture, attacker, targets);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
 
     this.attackOriginX = attackOriginX;
     this.attackOriginY = attackOriginY;
@@ -26,7 +26,7 @@ public class CustomAttackSpecificCoordinatesAnimation extends CustomAttackAnimat
   public CustomAttackSpecificCoordinatesAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY, float durationInSeconds) {
     super(texture, attacker, targets, durationInSeconds);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
 
     this.attackOriginX = attackOriginX;
     this.attackOriginY = attackOriginY;
@@ -37,7 +37,7 @@ public class CustomAttackSpecificCoordinatesAnimation extends CustomAttackAnimat
   public CustomAttackSpecificCoordinatesAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY, float durationInSeconds, int damage) {
     super(texture, attacker, targets, durationInSeconds, damage);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
 
     this.attackOriginX = attackOriginX;
     this.attackOriginY = attackOriginY;
@@ -48,7 +48,7 @@ public class CustomAttackSpecificCoordinatesAnimation extends CustomAttackAnimat
   public CustomAttackSpecificCoordinatesAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, int attackOriginX, int attackOriginY, int attackDestinyX, int attackDestinyY, float durationInSeconds, int damage, CustomAttackEffects effect) {
     super(texture, attacker, targets, durationInSeconds, damage, effect);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
 
     this.attackOriginX = attackOriginX;
     this.attackOriginY = attackOriginY;
@@ -71,7 +71,7 @@ public class CustomAttackSpecificCoordinatesAnimation extends CustomAttackAnimat
         ),
         Actions.fadeOut(0.2f), // esconder
         Actions.run(() -> {
-          super.setPosition(-9999, -9999);
+          super.setDefaultPosition();
         })
     ));
   }

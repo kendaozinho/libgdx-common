@@ -14,7 +14,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance) {
     super(texture, attacker, targets);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
     this.direction = direction;
     this.distance = distance;
     super.setRotation(direction.getRotationAngle(), Align.center);
@@ -23,7 +23,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance, float durationInSeconds) {
     super(texture, attacker, targets, durationInSeconds);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
     this.direction = direction;
     this.distance = distance;
     super.setRotation(direction.getRotationAngle(), Align.center);
@@ -32,7 +32,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance, float durationInSeconds, int damage) {
     super(texture, attacker, targets, durationInSeconds, damage);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
     this.direction = direction;
     this.distance = distance;
     super.setRotation(direction.getRotationAngle(), Align.center);
@@ -41,7 +41,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance, float durationInSeconds, int damage, CustomAttackEffects effect) {
     super(texture, attacker, targets, durationInSeconds, damage, effect);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
     this.direction = direction;
     this.distance = distance;
     super.setRotation(direction.getRotationAngle(), Align.center);
@@ -67,7 +67,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
         ),
         Actions.fadeOut(0.2f), // esconder
         Actions.run(() -> {
-          super.setPosition(-9999, -9999);
+          super.setDefaultPosition();
         })
     ));
   }

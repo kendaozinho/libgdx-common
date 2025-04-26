@@ -10,25 +10,25 @@ public class CustomAttackFromAttackerToTargetAnimation extends CustomAttackAnima
   public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height) {
     super(texture, attacker, targets);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
   }
 
   public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, float durationInSeconds) {
     super(texture, attacker, targets, durationInSeconds);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
   }
 
   public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, float durationInSeconds, int damage) {
     super(texture, attacker, targets, durationInSeconds, damage);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
   }
 
   public CustomAttackFromAttackerToTargetAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, float durationInSeconds, int damage, CustomAttackEffects effect) {
     super(texture, attacker, targets, durationInSeconds, damage, effect);
     super.setSize(width, height);
-    super.setPosition(-9999, -9999);
+    super.setDefaultPosition();
   }
 
   @Override
@@ -54,7 +54,7 @@ public class CustomAttackFromAttackerToTargetAnimation extends CustomAttackAnima
         ),
         Actions.fadeOut(0.2f), // esconder
         Actions.run(() -> {
-          super.setPosition(-9999, -9999);
+          super.setDefaultPosition();
         })
     ));
   }
