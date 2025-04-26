@@ -1,30 +1,37 @@
 package com.kendao.libgdx.util;
 
 import java.math.BigDecimal;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class CustomNumberUtil {
   private CustomNumberUtil() {
   }
 
   /***
-   * Generate value between min value and max value (int);
+   * Generate random Integer between min and max (inclusive)
    */
   public static Integer getRandomValue(Integer min, Integer max) {
-    return min + (int) (new Random().nextDouble() * (max - min));
+    if (min >= max) {
+      throw new IllegalArgumentException("Max must be greater than min");
+    }
+    return ThreadLocalRandom.current().nextInt(min, max + 1);
   }
 
   /***
-   * Generate value between min value and max value (long);
+   * Generate random Long between min and max (inclusive)
    */
   public static Long getRandomValue(Long min, Long max) {
-    return min + (long) (new Random().nextDouble() * (max - min));
+    if (min >= max) {
+      throw new IllegalArgumentException("Max must be greater than min");
+    }
+    return ThreadLocalRandom.current().nextLong(min, max + 1);
   }
 
   /***
-   * Generate value between 0.01D and 100.0D;
+   * Generate random BigDecimal between 0.01 and 100.00 (inclusive)
    */
   public static BigDecimal getRandomPercentage() {
-    return BigDecimal.valueOf(Math.round((0.01D + Math.random() * (100.0D - 0.01D)) * 100.0) / 100.0);
+    double value = 0.01D + (100.00D - 0.01D) * ThreadLocalRandom.current().nextDouble();
+    return BigDecimal.valueOf(Math.round(value * 100.0) / 100.0);
   }
 }
