@@ -13,7 +13,7 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
 
-  private Map<String, CustomAttackAnimation> attacks;
+  private Map<String, List<CustomAttackAnimation>> attacks;
 
   private String currentAnimation;
   private String lastAnimation;
@@ -199,11 +199,11 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
 
   public void attack(String attackId) {
     if (this.attacks != null) {
-      CustomAttackAnimation attack = this.attacks.get(attackId);
-      if (attack != null) {
+      List<CustomAttackAnimation> attacks = this.attacks.get(attackId);
+      if (attacks != null) {
         this.beforeAttack();
 
-        attack.execute();
+        attacks.forEach(CustomAttackAnimation::execute);
       }
     }
   }
@@ -231,7 +231,7 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
   public void addStageActors(CustomStage stage) {
     stage.addActor(this);
     if (this.attacks != null) {
-      this.attacks.forEach((id, attack) -> stage.addActor(attack));
+      this.attacks.forEach((id, attacks) -> attacks.forEach(stage::addActor));
     }
   }
 
@@ -277,7 +277,7 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
       }
     }
   }
-  
+
   public List<String> getAnimationOptions() {
     return this.animationOptions;
   }
@@ -304,11 +304,11 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     return this.ticksPerFrame;
   }
 
-  public Map<String, CustomAttackAnimation> getAttacks() {
+  public Map<String, List<CustomAttackAnimation>> getAttacks() {
     return this.attacks;
   }
 
-  public void setAttacks(Map<String, CustomAttackAnimation> attacks) {
+  public void setAttacks(Map<String, List<CustomAttackAnimation>> attacks) {
     this.attacks = attacks;
   }
 
