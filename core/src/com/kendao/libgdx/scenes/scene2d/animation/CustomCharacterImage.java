@@ -3,11 +3,18 @@ package com.kendao.libgdx.scenes.scene2d.animation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.kendao.libgdx.scenes.scene2d.CustomStage;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomImage;
+
+import java.util.List;
+import java.util.Map;
 
 public abstract class CustomCharacterImage extends CustomImage {
   private int ticksCooldown = 180;
   private int ticksSinceLastAttack = 0;
+  private long hp = 0;
+  private long maxHp = 0;
+  private Map<String, List<CustomAttackAnimation>> attacks;
   private boolean canAttack = true;
 
   public CustomCharacterImage(Texture texture) {
@@ -89,7 +96,39 @@ public abstract class CustomCharacterImage extends CustomImage {
     }
   }
 
+  public boolean attack(String attackId) {
+    if (this.attacks != null) {
+      List<CustomAttackAnimation> attacks = this.attacks.get(attackId);
+      if (attacks != null) {
+        attacks.forEach(CustomAttackAnimation::execute);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void move(Directions direction, long quantity) {
+    if (direction == null || this.isDeath()) {
+      return;
+    }
+
+    float currentX = super.getX();
+    float currentY = super.getY();
+
+    float newX = currentX + (direction.getXMultiplier() * quantity);
+    float newY = currentY + (direction.getYMultiplier() * quantity);
+
+    super.setPosition(newX, newY);
+  }
+
   public abstract void wasAttacked(CustomCharacterImage attacker, CustomAttackAnimation attack);
+
+  public void addStageActors(CustomStage stage) {
+    stage.addActor(this);
+    if (this.attacks != null) {
+      this.attacks.forEach((id, attacks) -> attacks.forEach(stage::addActor));
+    }
+  }
 
   public void setTicksCooldown(int ticksCooldown) {
     this.ticksCooldown = ticksCooldown;
@@ -101,5 +140,33 @@ public abstract class CustomCharacterImage extends CustomImage {
 
   public void setCanAttack(boolean canAttack) {
     this.canAttack = canAttack;
+  }
+
+  public long getHp() {
+    return this.hp;
+  }
+
+  public void setHp(long hp) {
+    this.hp = hp;
+  }
+
+  public long getMaxHp() {
+    return this.maxHp;
+  }
+
+  public void setMaxHp(long maxHp) {
+    this.maxHp = maxHp;
+  }
+
+  public boolean isDeath() {
+    return this.getHp() <= 0 && this.getMaxHp() > 0;
+  }
+
+  public Map<String, List<CustomAttackAnimation>> getAttacks() {
+    return this.attacks;
+  }
+
+  public void setAttacks(Map<String, List<CustomAttackAnimation>> attacks) {
+    this.attacks = attacks;
   }
 }

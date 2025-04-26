@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.kendao.libgdx.dragonbones.dto.DragonBonesTextureDto;
-import com.kendao.libgdx.scenes.scene2d.CustomStage;
 
 import java.util.*;
 
@@ -12,10 +11,6 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
   private final List<String> animationOptions;
   private final Map<String, List<TextureRegion>> animationFrames;
   private final int ticksPerFrame; // how many renders to change the frame
-
-  private long hp = 0;
-  private long maxHp = 0;
-  private Map<String, List<CustomAttackAnimation>> attacks;
 
   private String currentAnimation;
   private String lastAnimation;
@@ -199,15 +194,15 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     return response;
   }
 
-  public void attack(String attackId) {
-    if (this.attacks != null) {
-      List<CustomAttackAnimation> attacks = this.attacks.get(attackId);
-      if (attacks != null) {
-        this.setAttackAnimation();
+  @Override
+  public boolean attack(String attackId) {
+    boolean attacked = super.attack(attackId);
 
-        attacks.forEach(CustomAttackAnimation::execute);
-      }
+    if (attacked) {
+      this.setAttackAnimation();
     }
+
+    return attacked;
   }
 
   private void setAttackAnimation() {
@@ -238,13 +233,6 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
         this.setCurrentAnimation(animation);
         break;
       }
-    }
-  }
-
-  public void addStageActors(CustomStage stage) {
-    stage.addActor(this);
-    if (this.attacks != null) {
-      this.attacks.forEach((id, attacks) -> attacks.forEach(stage::addActor));
     }
   }
 
@@ -285,7 +273,7 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
       super.setDrawable(new TextureRegionDrawable(frames.get(this.currentFrame)));
 
       if (animationFinished) {
-        if (this.getHp() == 0 && this.getMaxHp() > 0) {
+        if (super.isDeath()) {
           this.setDeathAnimation();
         } else if (animationToUse.equalsIgnoreCase("attack") || animationToUse.equalsIgnoreCase("atk")) {
           this.setIdleAnimation();
@@ -320,14 +308,6 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     return this.ticksPerFrame;
   }
 
-  public Map<String, List<CustomAttackAnimation>> getAttacks() {
-    return this.attacks;
-  }
-
-  public void setAttacks(Map<String, List<CustomAttackAnimation>> attacks) {
-    this.attacks = attacks;
-  }
-
   public boolean getWaitToSwitch() {
     return this.waitToSwitch;
   }
@@ -336,19 +316,4 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     this.waitToSwitch = waitToSwitch;
   }
 
-  public long getHp() {
-    return this.hp;
-  }
-
-  public void setHp(long hp) {
-    this.hp = hp;
-  }
-
-  public long getMaxHp() {
-    return this.maxHp;
-  }
-
-  public void setMaxHp(long maxHp) {
-    this.maxHp = maxHp;
-  }
 }

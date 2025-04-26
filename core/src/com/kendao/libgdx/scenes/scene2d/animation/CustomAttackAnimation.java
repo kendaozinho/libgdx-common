@@ -85,7 +85,7 @@ public abstract class CustomAttackAnimation extends CustomImage {
   }
 
   private void checkCollision() {
-    if (this.targets == null) {
+    if (this.targets == null || this.targets.isEmpty() || this.attacker.isDeath()) {
       return;
     }
 

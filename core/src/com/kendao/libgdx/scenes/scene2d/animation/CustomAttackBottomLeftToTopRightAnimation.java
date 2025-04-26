@@ -40,6 +40,10 @@ public class CustomAttackBottomLeftToTopRightAnimation extends CustomAttackAnima
 
   @Override
   public void execute() {
+    if (super.getAttacker().isDeath()) {
+      return;
+    }
+
     super.setPosition(
         -super.getWidth(),
         -(super.getHeight() / 2)
