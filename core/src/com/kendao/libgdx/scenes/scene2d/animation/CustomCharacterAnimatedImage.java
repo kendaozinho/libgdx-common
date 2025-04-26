@@ -79,6 +79,26 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     this.animationFrames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
   }
 
+  public CustomCharacterAnimatedImage(Texture spriteSheet, int cols, int rows, int x, int y, int width, int height, int frameQuantity, int ticksPerFrame, int ticksCooldown) {
+    super(
+        TextureRegion.split(
+            spriteSheet,
+            spriteSheet.getWidth() / cols,
+            spriteSheet.getHeight() / rows
+        )[0][0],
+        x, y,
+        width, height,
+        ticksCooldown
+    );
+
+    this.ticksPerFrame = ticksPerFrame;
+
+    this.animationOptions = Collections.singletonList("default");
+    this.currentAnimation = this.animationOptions.get(0);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = this.extractFrames(spriteSheet, cols, rows, frameQuantity);
+  }
+
   public CustomCharacterAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int ticksPerFrame) {
     super(
         TextureRegion.split(
@@ -108,6 +128,26 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
         )[0][0],
         x, y,
         width, height
+    );
+
+    this.ticksPerFrame = ticksPerFrame;
+
+    this.animationOptions = textureDto.getAnimationTypes();
+    this.currentAnimation = this.getDefaultAnimation(this.animationOptions);
+    this.lastAnimation = this.currentAnimation;
+    this.animationFrames = textureDto.getTextureRegionsByAnimationType(spriteSheet);
+  }
+
+  public CustomCharacterAnimatedImage(Texture spriteSheet, DragonBonesTextureDto textureDto, int x, int y, int width, int height, int ticksPerFrame, int ticksCooldown) {
+    super(
+        TextureRegion.split(
+            spriteSheet,
+            textureDto.getSubTexture().isEmpty() ? spriteSheet.getWidth() : (spriteSheet.getWidth() / textureDto.getSubTexture().get(0).getWidth()),
+            textureDto.getSubTexture().isEmpty() ? spriteSheet.getHeight() : (spriteSheet.getHeight() / textureDto.getSubTexture().get(0).getHeight())
+        )[0][0],
+        x, y,
+        width, height,
+        ticksCooldown
     );
 
     this.ticksPerFrame = ticksPerFrame;
