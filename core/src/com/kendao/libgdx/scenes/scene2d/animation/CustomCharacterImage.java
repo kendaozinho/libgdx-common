@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.kendao.libgdx.scenes.scene2d.ui.CustomImage;
 
 public abstract class CustomCharacterImage extends CustomImage {
-  private int ticksCooldown = 1800;
+  private int ticksCooldown = 180;
   private int ticksSinceLastAttack = 0;
   private boolean canAttack = true;
 
@@ -97,5 +97,9 @@ public abstract class CustomCharacterImage extends CustomImage {
 
   public boolean getCanAttack() {
     return this.canAttack;
+  }
+
+  public void setCanAttack(boolean canAttack) {
+    this.canAttack = canAttack;
   }
 }

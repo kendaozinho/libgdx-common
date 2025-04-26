@@ -111,6 +111,7 @@ public abstract class CustomAttackAnimation extends CustomImage {
 
       if (overlaps) {
         target.wasAttacked(this.attacker, this);
+        target.setCanAttack(false);
       }
     }
   }
