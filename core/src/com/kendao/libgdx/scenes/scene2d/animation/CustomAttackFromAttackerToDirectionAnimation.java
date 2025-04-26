@@ -3,6 +3,7 @@ package com.kendao.libgdx.scenes.scene2d.animation;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Align;
 
 import java.util.HashMap;
 
@@ -16,6 +17,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
     super.setPosition(-9999, -9999);
     this.direction = direction;
     this.distance = distance;
+    super.setRotation(direction.getRotationAngle(), Align.center);
   }
 
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance, float durationInSeconds) {
@@ -24,6 +26,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
     super.setPosition(-9999, -9999);
     this.direction = direction;
     this.distance = distance;
+    super.setRotation(direction.getRotationAngle(), Align.center);
   }
 
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance, float durationInSeconds, int damage) {
@@ -32,6 +35,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
     super.setPosition(-9999, -9999);
     this.direction = direction;
     this.distance = distance;
+    super.setRotation(direction.getRotationAngle(), Align.center);
   }
 
   public CustomAttackFromAttackerToDirectionAnimation(Texture texture, CustomCharacterImage attacker, HashMap<String, CustomCharacterImage> targets, int width, int height, Directions direction, float distance, float durationInSeconds, int damage, CustomAttackEffects effect) {
@@ -40,6 +44,7 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
     super.setPosition(-9999, -9999);
     this.direction = direction;
     this.distance = distance;
+    super.setRotation(direction.getRotationAngle(), Align.center);
   }
 
   @Override
@@ -105,6 +110,4 @@ public class CustomAttackFromAttackerToDirectionAnimation extends CustomAttackAn
   public CustomAttackTypes getType() {
     return CustomAttackTypes.ORIGIN_TO_DIRECTION;
   }
-
-  public enum Directions {N, S, E, W, NE, NW, SE, SW}
 }
