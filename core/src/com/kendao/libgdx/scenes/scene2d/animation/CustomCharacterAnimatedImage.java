@@ -201,14 +201,29 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
     if (this.attacks != null) {
       CustomAttackAnimation attack = this.attacks.get(attackId);
       if (attack != null) {
-        for (String animation : this.animationOptions) {
-          if (animation.equalsIgnoreCase("attack") || animation.equalsIgnoreCase("atk")) {
-            this.setCurrentAnimation(animation);
-            break;
-          }
-        }
+        this.beforeAttack();
 
         attack.execute();
+      }
+    }
+  }
+
+  private void beforeAttack() {
+    for (String animation : this.animationOptions) {
+      if (animation.equalsIgnoreCase("attack") || animation.equalsIgnoreCase("atk")) {
+        this.setCurrentAnimation(animation);
+        break;
+      }
+    }
+  }
+
+  private void afterAttack() {
+    for (String animation : this.animationOptions) {
+      if (
+          animation.equalsIgnoreCase("default") || animation.equalsIgnoreCase("idle") || animation.equalsIgnoreCase("normal")
+      ) {
+        this.setCurrentAnimation(animation);
+        break;
       }
     }
   }
@@ -239,19 +254,20 @@ public abstract class CustomCharacterAnimatedImage extends CustomCharacterImage 
 
     if (this.frameCounter >= this.ticksPerFrame) {
       this.frameCounter = 0;
-
       this.currentFrame++;
 
       if (this.currentFrame >= frames.size()) {
         this.currentFrame = 0;
 
-        // só troca se for pra esperar e chegou ao fim
-        if (this.waitToSwitch && !this.currentAnimation.equals(this.lastAnimation)) {
+        // Se terminou a animação, verifica se precisa trocar
+        if (this.getCurrentAnimation().equalsIgnoreCase("attack") || this.getCurrentAnimation().equalsIgnoreCase("atk")) {
+          afterAttack();
+        } else if (this.waitToSwitch && !this.currentAnimation.equals(this.lastAnimation)) {
           this.lastAnimation = this.currentAnimation;
         }
       }
 
-      // atualiza o frame
+      // Atualiza o frame
       super.setDrawable(new TextureRegionDrawable(frames.get(this.currentFrame)));
     }
   }
