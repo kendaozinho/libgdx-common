@@ -42,10 +42,15 @@ public class CustomAttackTopLeftToBottomRightAnimation extends CustomAttackAnima
   public void execute() {
     super.setPosition(
         -super.getWidth(),
-        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight() + (super.getHeight() / 2)
+        ((CustomGameListener) Gdx.app.getApplicationListener()).getFullHeight()
     );
     super.addAction(
-        Actions.moveTo(((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(), -(super.getHeight() / 2), super.getDurationInSeconds(), Interpolation.smooth)
+        Actions.moveTo(
+            ((CustomGameListener) Gdx.app.getApplicationListener()).getFullWidth(),
+            -super.getHeight(),
+            super.getDurationInSeconds(),
+            Interpolation.smooth
+        )
     );
   }
 

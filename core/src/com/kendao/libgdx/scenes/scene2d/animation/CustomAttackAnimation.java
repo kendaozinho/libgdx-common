@@ -95,7 +95,7 @@ public abstract class CustomAttackAnimation extends CustomImage {
     float thisHeight = super.getHeight();
 
     for (CustomCharacterImage target : this.targets.values()) {
-      if (!target.getCanAttack()) {
+      if (!target.getCanTakeDamage() || target.isDeath()) {
         continue;
       }
 
@@ -112,8 +112,13 @@ public abstract class CustomAttackAnimation extends CustomImage {
       // atacou!
       if (overlaps) {
         target.wasAttacked(this.attacker, this);
-        target.setCanAttack(false);
+
+        target.setCanTakeDamage(false);
         // this.setDefaultPosition();
+
+        if (target.isDeath()) {
+          target.wasKilled(this.attacker, this);
+        }
       }
     }
   }

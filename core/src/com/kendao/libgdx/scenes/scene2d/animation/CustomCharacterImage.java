@@ -15,7 +15,7 @@ public abstract class CustomCharacterImage extends CustomImage {
   private long hp = 0;
   private long maxHp = 0;
   private Map<String, List<CustomAttackAnimation>> attacks;
-  private boolean canAttack = true;
+  private boolean canTakeDamage = true;
 
   public CustomCharacterImage(Texture texture) {
     super(texture);
@@ -87,11 +87,13 @@ public abstract class CustomCharacterImage extends CustomImage {
   public void act(float delta) {
     super.act(delta);
 
-    if (!this.canAttack) {
+    if (!this.canTakeDamage) {
       this.ticksSinceLastAttack++;
       if (this.ticksSinceLastAttack >= this.ticksCooldown) {
         this.ticksSinceLastAttack = 0;
-        this.canAttack = true;
+        if (!this.isDeath()) {
+          this.canTakeDamage = true;
+        }
       }
     }
   }
@@ -123,6 +125,8 @@ public abstract class CustomCharacterImage extends CustomImage {
 
   public abstract void wasAttacked(CustomCharacterImage attacker, CustomAttackAnimation attack);
 
+  public abstract void wasKilled(CustomCharacterImage attacker, CustomAttackAnimation attack);
+
   public void addStageActors(CustomStage stage) {
     stage.addActor(this);
     if (this.attacks != null) {
@@ -134,12 +138,12 @@ public abstract class CustomCharacterImage extends CustomImage {
     this.ticksCooldown = ticksCooldown;
   }
 
-  public boolean getCanAttack() {
-    return this.canAttack;
+  public boolean getCanTakeDamage() {
+    return this.canTakeDamage;
   }
 
-  public void setCanAttack(boolean canAttack) {
-    this.canAttack = canAttack;
+  public void setCanTakeDamage(boolean canTakeDamage) {
+    this.canTakeDamage = canTakeDamage;
   }
 
   public long getHp() {
