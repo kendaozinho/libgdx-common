@@ -162,6 +162,11 @@ public abstract class CustomCharacterImage extends CustomImage {
     this.maxHp = maxHp;
   }
 
+  public void setHpAndMaxHp(long value) {
+    this.hp = value;
+    this.maxHp = value;
+  }
+
   public boolean isDeath() {
     return this.getHp() <= 0 && this.getMaxHp() > 0;
   }

@@ -38,4 +38,17 @@ public final class CustomStringUtil {
 
     return response.toString();
   }
+
+  public static boolean isNumber(String value) {
+    if (!CustomStringUtil.hasValue(value)) {
+      return false;
+    }
+
+    try {
+      Long.parseLong(value);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
 }
